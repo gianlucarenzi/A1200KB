@@ -5,12 +5,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1280"
+   width="1470.0693"
    height="362"
-   viewBox="0 0 1280 362"
+   viewBox="0 0 1470.0693 362"
    version="1.1"
    id="svg2102"
    sodipodi:docname="amiga-keyboard-a500-a1200.svg"
@@ -44,7 +43,7 @@
      id="namedview2104"
      showgrid="false"
      inkscape:zoom="1"
-     inkscape:cx="714.45384"
+     inkscape:cx="860.48478"
      inkscape:cy="146.50878"
      inkscape:window-x="2560"
      inkscape:window-y="28"
@@ -59,7 +58,7 @@
     <inkscape:grid
        id="grid1618"
        type="xygrid"
-       originx="-8.6498232"
+       originx="91.381115"
        originy="-13.439393" />
   </sodipodi:namedview>
   <style
@@ -86,36 +85,6 @@
          inkscape:connector-curvature="0" />
     </marker>
     <marker
-       inkscape:stockid="TriangleOutL"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="TriangleOutL"
-       style="overflow:visible"
-       inkscape:isstock="true">
-      <path
-         id="path1764"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="scale(0.8)"
-         inkscape:connector-curvature="0" />
-    </marker>
-    <marker
-       inkscape:stockid="TriangleOutM"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="TriangleOutM"
-       style="overflow:visible"
-       inkscape:isstock="true">
-      <path
-         id="path1767"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="scale(0.4)"
-         inkscape:connector-curvature="0" />
-    </marker>
-    <marker
        inkscape:stockid="TriangleInM"
        orient="auto"
        refY="0"
@@ -130,77 +99,6 @@
          transform="scale(-0.4)"
          inkscape:connector-curvature="0" />
     </marker>
-    <linearGradient
-       id="DCS">
-      <stop
-         offset="0%"
-         stop-color="black"
-         stop-opacity="0"
-         id="stop1080" />
-      <stop
-         offset="40%"
-         stop-color="black"
-         stop-opacity="0.1"
-         id="stop1082" />
-      <stop
-         offset="60%"
-         stop-color="black"
-         stop-opacity="0.1"
-         id="stop1084" />
-      <stop
-         offset="100%"
-         stop-color="black"
-         stop-opacity="0"
-         id="stop1086" />
-    </linearGradient>
-    <linearGradient
-       id="SPACE"
-       x1="0"
-       x2="0"
-       y1="0"
-       y2="1">
-      <stop
-         offset="0%"
-         stop-color="black"
-         stop-opacity="0.1"
-         id="stop1089" />
-      <stop
-         offset="20%"
-         stop-color="black"
-         stop-opacity="0.0"
-         id="stop1091" />
-      <stop
-         offset="40%"
-         stop-color="black"
-         stop-opacity="0.0"
-         id="stop1093" />
-      <stop
-         offset="100%"
-         stop-color="black"
-         stop-opacity="0.1"
-         id="stop1095" />
-    </linearGradient>
-    <radialGradient
-       id="DSA">
-      <stop
-         offset="0%"
-         stop-color="black"
-         stop-opacity="0.1"
-         id="stop1098" />
-      <stop
-         offset="10%"
-         stop-color="black"
-         stop-opacity="0.1"
-         id="stop1100" />
-      <stop
-         offset="100%"
-         stop-color="black"
-         stop-opacity="0"
-         id="stop1102" />
-    </radialGradient>
-    <radialGradient
-       id="SA"
-       xlink:href="#DSA" />
     <marker
        inkscape:stockid="TriangleInM"
        orient="auto"
@@ -212,21 +110,6 @@
       <path
          inkscape:connector-curvature="0"
          id="path1758-6"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="scale(-0.4)" />
-    </marker>
-    <marker
-       inkscape:stockid="TriangleInM"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="TriangleInM-3-5"
-       style="overflow:visible"
-       inkscape:isstock="true">
-      <path
-         inkscape:connector-curvature="0"
-         id="path1758-6-3"
          d="M 5.77,0 -2.88,5 V -5 Z"
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
          transform="scale(-0.4)" />
@@ -312,7 +195,7 @@
      id="layer1"
      inkscape:label="KEYBOARD"
      style="display:inline"
-     transform="translate(-8.6498232,-5.5606074)">
+     transform="translate(91.381117,-5.5606074)">
     <g
        transform="translate(9.1498232,6.0606074)"
        id="g2100">
@@ -4485,7 +4368,7 @@
      id="layer2"
      inkscape:label="Legend QWERTY"
      style="display:inline"
-     transform="translate(-8.6498232,-5.5606074)">
+     transform="translate(91.381117,-5.5606074)">
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;line-height:1.25;font-family:'Helvetica Neue';-inkscape-font-specification:'Helvetica Neue';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
@@ -5585,8 +5468,8 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Layout ROW"
-     style="display:none"
-     transform="translate(-8.6498232,-5.5606074)">
+     style="display:inline"
+     transform="translate(91.381117,-5.5606074)">
     <text
        id="text6348"
        y="42.675449"
@@ -5768,8 +5651,8 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Layout Sizes"
-     style="display:none"
-     transform="translate(-8.6498232,-5.5606074)">
+     style="display:inline"
+     transform="translate(91.381117,-5.5606074)">
     <text
        id="text5117-2"
        y="61.107697"
