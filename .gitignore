@@ -25,3 +25,4 @@ _autosave-*
 *.csv
 
 .DS_Store
+/A1200KB-fw/build/
