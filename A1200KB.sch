@@ -5,11 +5,11 @@ $Descr A2 23386 16535
 encoding utf-8
 Sheet 1 1
 Title "AMIGA 1200 KEYBOARD"
-Date ""
+Date "2022-01-14"
 Rev "1"
-Comp "ADAM EBERBACH"
-Comment1 ""
-Comment2 ""
+Comp "Original Concept by ADAM EBERBACH"
+Comment1 "Modified by RetroBit Lab"
+Comment2 "Gianluca Renzi"
 Comment3 ""
 Comment4 ""
 $EndDescr
@@ -415,7 +415,7 @@ U 1 1 5C706FFB
 P 14800 7700
 F 0 "K46" H 14800 8039 60  0000 C CNN
 F 1 "RETURN" H 14800 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_ISOEnter_PCB_3d" H 14800 7933 60  0001 C CNN
+F 2 "RetroBitLab:SW_Cherry_MX1A_ISOEnter_Rotated_PCB_3d" H 14800 7933 60  0001 C CNN
 F 3 "" H 14800 7700 60  0000 C CNN
 	1    14800 7700
 	1    0    0    -1  
@@ -2723,17 +2723,6 @@ F 3 "~" H 17410 12760 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole_Pad H16
-U 1 1 6238099B
-P 16415 12725
-F 0 "H16" H 16560 12745 50  0000 L CNN
-F 1 "MountingHole_Pad" H 16540 12725 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 16415 12725 50  0001 C CNN
-F 3 "~" H 16415 12725 50  0001 C CNN
-	1    16415 12725
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR0101
 U 1 1 623E1EAF
 P 14480 12210
@@ -2885,17 +2874,6 @@ F 1 "GND" V 16370 13270 50  0000 R CNN
 F 2 "" H 16410 13440 50  0001 C CNN
 F 3 "" H 16410 13440 50  0001 C CNN
 	1    16410 13440
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0117
-U 1 1 623E59EB
-P 16415 12825
-F 0 "#PWR0117" H 16415 12575 50  0001 C CNN
-F 1 "GND" V 16375 12655 50  0000 R CNN
-F 2 "" H 16415 12825 50  0001 C CNN
-F 3 "" H 16415 12825 50  0001 C CNN
-	1    16415 12825
 	0    1    1    0   
 $EndComp
 $Comp
