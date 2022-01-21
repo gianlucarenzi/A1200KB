@@ -91,6 +91,12 @@ void Error_Handler(void);
 #define ROW1_GPIO_Port GPIOB
 #define ROW2_Pin GPIO_PIN_2
 #define ROW2_GPIO_Port GPIOB
+#define ROW10_Pin GPIO_PIN_10
+#define ROW10_GPIO_Port GPIOB
+#define ROW11_Pin GPIO_PIN_12
+#define ROW11_GPIO_Port GPIOB
+#define ROW12_Pin GPIO_PIN_13
+#define ROW12_GPIO_Port GPIOB
 #define COL6_Pin GPIO_PIN_6
 #define COL6_GPIO_Port GPIOC
 #define COL7_Pin GPIO_PIN_7
@@ -115,8 +121,10 @@ void Error_Handler(void);
 #define ROW6_GPIO_Port GPIOB
 #define ROW7_Pin GPIO_PIN_7
 #define ROW7_GPIO_Port GPIOB
-#define RO_Pin GPIO_PIN_8
-#define RO_GPIO_Port GPIOB
+#define ROW8_Pin GPIO_PIN_8
+#define ROW8_GPIO_Port GPIOB
+#define ROW9_Pin GPIO_PIN_9
+#define ROW9_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

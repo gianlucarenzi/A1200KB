@@ -199,10 +199,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, KB_DAT_Pin|KB_CLK_Pin|KB_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, ROW0_Pin|ROW1_Pin|ROW2_Pin|GPIO_PIN_10
-                          |GPIO_PIN_12|GPIO_PIN_13|ROW3_Pin|ROW4_Pin
-                          |ROW5_Pin|ROW6_Pin|ROW7_Pin|RO_Pin
-                          |GPIO_PIN_9, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, ROW0_Pin|ROW1_Pin|ROW2_Pin|ROW10_Pin
+                          |ROW11_Pin|ROW12_Pin|ROW3_Pin|ROW4_Pin
+                          |ROW5_Pin|ROW6_Pin|ROW7_Pin|ROW8_Pin
+                          |ROW9_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : COL13_Pin COL14_Pin COL15_Pin COL0_Pin
                            COL1_Pin COL2_Pin COL3_Pin COL4_Pin
@@ -223,14 +223,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : ROW0_Pin ROW1_Pin ROW2_Pin PB10
-                           PB12 PB13 ROW3_Pin ROW4_Pin
-                           ROW5_Pin ROW6_Pin ROW7_Pin RO_Pin
-                           PB9 */
-  GPIO_InitStruct.Pin = ROW0_Pin|ROW1_Pin|ROW2_Pin|GPIO_PIN_10
-                          |GPIO_PIN_12|GPIO_PIN_13|ROW3_Pin|ROW4_Pin
-                          |ROW5_Pin|ROW6_Pin|ROW7_Pin|RO_Pin
-                          |GPIO_PIN_9;
+  /*Configure GPIO pins : ROW0_Pin ROW1_Pin ROW2_Pin ROW10_Pin
+                           ROW11_Pin ROW12_Pin ROW3_Pin ROW4_Pin
+                           ROW5_Pin ROW6_Pin ROW7_Pin ROW8_Pin
+                           ROW9_Pin */
+  GPIO_InitStruct.Pin = ROW0_Pin|ROW1_Pin|ROW2_Pin|ROW10_Pin
+                          |ROW11_Pin|ROW12_Pin|ROW3_Pin|ROW4_Pin
+                          |ROW5_Pin|ROW6_Pin|ROW7_Pin|ROW8_Pin
+                          |ROW9_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
