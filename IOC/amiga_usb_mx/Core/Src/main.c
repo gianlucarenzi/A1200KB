@@ -196,7 +196,8 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, KB_DAT_Pin|KB_CLK_Pin|KB_RST_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, KB_DAT_Pin|KB_CLK_Pin|KB_RST_Pin|LED_CAPS_LOCK_Pin
+                          |LED_NUM_LOCK_Pin|LED_SCROLL_LOCK_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, ROW0_Pin|ROW1_Pin|ROW2_Pin|ROW10_Pin
@@ -216,8 +217,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : KB_DAT_Pin KB_CLK_Pin KB_RST_Pin */
-  GPIO_InitStruct.Pin = KB_DAT_Pin|KB_CLK_Pin|KB_RST_Pin;
+  /*Configure GPIO pins : KB_DAT_Pin KB_CLK_Pin KB_RST_Pin LED_CAPS_LOCK_Pin
+                           LED_NUM_LOCK_Pin LED_SCROLL_LOCK_Pin */
+  GPIO_InitStruct.Pin = KB_DAT_Pin|KB_CLK_Pin|KB_RST_Pin|LED_CAPS_LOCK_Pin
+                          |LED_NUM_LOCK_Pin|LED_SCROLL_LOCK_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

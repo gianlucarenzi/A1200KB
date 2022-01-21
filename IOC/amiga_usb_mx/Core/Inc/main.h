@@ -105,6 +105,12 @@ void Error_Handler(void);
 #define COL8_GPIO_Port GPIOC
 #define COL9_Pin GPIO_PIN_9
 #define COL9_GPIO_Port GPIOC
+#define LED_CAPS_LOCK_Pin GPIO_PIN_8
+#define LED_CAPS_LOCK_GPIO_Port GPIOA
+#define LED_NUM_LOCK_Pin GPIO_PIN_9
+#define LED_NUM_LOCK_GPIO_Port GPIOA
+#define LED_SCROLL_LOCK_Pin GPIO_PIN_10
+#define LED_SCROLL_LOCK_GPIO_Port GPIOA
 #define COL10_Pin GPIO_PIN_10
 #define COL10_GPIO_Port GPIOC
 #define COL11_Pin GPIO_PIN_11
