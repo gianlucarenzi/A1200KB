@@ -187,10 +187,54 @@ static void MX_USART2_UART_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, KB_DAT_Pin|KB_CLK_Pin|KB_RST_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, ROW0_Pin|ROW1_Pin|ROW2_Pin|GPIO_PIN_10
+                          |GPIO_PIN_12|GPIO_PIN_13|ROW3_Pin|ROW4_Pin
+                          |ROW5_Pin|ROW6_Pin|ROW7_Pin|RO_Pin
+                          |GPIO_PIN_9, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : COL13_Pin COL14_Pin COL15_Pin COL0_Pin
+                           COL1_Pin COL2_Pin COL3_Pin COL4_Pin
+                           COL5_Pin COL6_Pin COL7_Pin COL8_Pin
+                           COL9_Pin COL10_Pin COL11_Pin COL12_Pin */
+  GPIO_InitStruct.Pin = COL13_Pin|COL14_Pin|COL15_Pin|COL0_Pin
+                          |COL1_Pin|COL2_Pin|COL3_Pin|COL4_Pin
+                          |COL5_Pin|COL6_Pin|COL7_Pin|COL8_Pin
+                          |COL9_Pin|COL10_Pin|COL11_Pin|COL12_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : KB_DAT_Pin KB_CLK_Pin KB_RST_Pin */
+  GPIO_InitStruct.Pin = KB_DAT_Pin|KB_CLK_Pin|KB_RST_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : ROW0_Pin ROW1_Pin ROW2_Pin PB10
+                           PB12 PB13 ROW3_Pin ROW4_Pin
+                           ROW5_Pin ROW6_Pin ROW7_Pin RO_Pin
+                           PB9 */
+  GPIO_InitStruct.Pin = ROW0_Pin|ROW1_Pin|ROW2_Pin|GPIO_PIN_10
+                          |GPIO_PIN_12|GPIO_PIN_13|ROW3_Pin|ROW4_Pin
+                          |ROW5_Pin|ROW6_Pin|ROW7_Pin|RO_Pin
+                          |GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 
