@@ -129,7 +129,7 @@ void SystemClock_Config(void)
 	/** Configure the main internal regulator output voltage
 	*/
 	__HAL_RCC_PWR_CLK_ENABLE();
-	__HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+	__HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
 	/** Initializes the RCC Oscillators according to the specified parameters
 	* in the RCC_OscInitTypeDef structure.
 	*/
@@ -203,35 +203,24 @@ static void MX_GPIO_Init(void)
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
 
 	/* GPIO Ports Clock Enable */
-	__HAL_RCC_GPIOE_CLK_ENABLE();
-	__HAL_RCC_GPIOH_CLK_ENABLE();
 	__HAL_RCC_GPIOC_CLK_ENABLE();
+	__HAL_RCC_GPIOH_CLK_ENABLE();
 	__HAL_RCC_GPIOA_CLK_ENABLE();
-	__HAL_RCC_GPIOD_CLK_ENABLE();
+	__HAL_RCC_GPIOB_CLK_ENABLE();
 
-	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(LED_CAPS_LOCK_Port, LED_CAPS_LOCK_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(LED_NUM_LOCK_Port, LED_NUM_LOCK_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(LED_SCROLL_LOCK_Port, LED_SCROLL_LOCK_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(LED_COMPOSE_Port, LED_COMPOSE_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(LED_KANA_Port, LED_KANA_Pin, GPIO_PIN_SET);
-
-	/*Configure GPIO pin : K0_Pin Configuration 1-Atari - 0-Amiga */
-	GPIO_InitStruct.Pin = K0_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_PULLUP;
-	HAL_GPIO_Init(K0_GPIO_Port, &GPIO_InitStruct);
+	/*Configure GPIO pin Output Level. All leds are HIGH ACTIVE!*/
+	HAL_GPIO_WritePin(LED_CAPS_LOCK_GPIO_Port, LED_CAPS_LOCK_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_NUM_LOCK_GPIO_Port, LED_NUM_LOCK_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_SCROLL_LOCK_GPIO_Port, LED_SCROLL_LOCK_Pin, GPIO_PIN_RESET);
 
 	/*Configure GPIO pin : LEDS MUST BE IN THE SAME PORT! */
 	GPIO_InitStruct.Pin = 
 		LED_CAPS_LOCK_Pin |
 		LED_NUM_LOCK_Pin |
-		LED_SCROLL_LOCK_Pin |
-		LED_COMPOSE_Pin |
-		LED_KANA_Pin;
+		LED_SCROLL_LOCK_Pin;
 
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(LEDS_GPIO_Port, &GPIO_InitStruct);
 
@@ -239,23 +228,22 @@ static void MX_GPIO_Init(void)
 	 * using them anyway, just to have a single firmware for more PCBs
 	 * Write ONCE, Use EVERYWHERE */
 
-	/*Configure GPIO pin : KB_DAT_Pin */
-	GPIO_InitStruct.Pin = KB_DAT_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(KB_DAT_GPIO_Port, &GPIO_InitStruct);
-
-	/*Configure GPIO pins : KB_RST_Pin KB_CLK_Pin */
+	/*Configure GPIO pins : KB_RST_Pin KB_CLK_Pin KB_DAT_Pin */
 	GPIO_InitStruct.Pin = KB_RST_Pin;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(KB_RST_GPIO_Port, &GPIO_InitStruct);
 	GPIO_InitStruct.Pin = KB_CLK_Pin;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(KB_CLK_GPIO_Port, &GPIO_InitStruct);
+	GPIO_InitStruct.Pin = KB_DAT_Pin;
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	HAL_GPIO_Init(KB_DAT_GPIO_Port, &GPIO_InitStruct);
 }
 
 /* USER CODE BEGIN 4 */

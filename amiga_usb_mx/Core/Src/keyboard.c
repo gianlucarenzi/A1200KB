@@ -29,6 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "matrix.h"
 #include "hook.h"
 #include "host.h"
+#include "amiga_protocol.h"
 
 static int debuglevel = DBG_INFO;
 
@@ -100,9 +101,11 @@ void keyboard_task(void)
 					keyevent_t e = (keyevent_t){
 						.key = (keypos_t){ .row = r, .col = c },
 #ifdef __ATARI__
+#warning "Atari Keyboard has a negative logic!"
 						// As today, Atari Keyboard has a negative logic! :-/
 						.pressed = !(matrix_row & col_mask),
 #else
+#warning "Amiga Keyboard has a positive logic!"
 						.pressed = (matrix_row & col_mask),
 #endif
 						.time = (timer_read() | 1) /* time should not be 0 */

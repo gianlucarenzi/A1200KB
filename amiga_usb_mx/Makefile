@@ -106,6 +106,7 @@ ifeq ($(PLATFORM),AMIGA)
 	C_DEFS += -D__AMIGA__
 	C_SOURCES += \
 		Core/Src/amiga_config.c \
+		Core/Src/amiga_protocol.c \
 		
 endif
 

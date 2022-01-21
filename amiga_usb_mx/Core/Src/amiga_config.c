@@ -9,18 +9,19 @@
 #include "host_driver.h"
 #include "usbd_hid.h"
 #include "usb_device.h"
+#include "amiga_protocol.h"
 
 /* Here we can use USB and a couple of led:
  * the main led (usable for reporting errors
  * the caps lock led, the num lock led and others
  */
 
-uint8_t amiga_keyboard_leds(void);
-void amiga_send_keyboard(report_keyboard_t *report);
+uint8_t usb_keyboard_leds(void);
+void usb_send_keyboard(report_keyboard_t *report);
 
 host_driver_t usbdriver = {
-	amiga_keyboard_leds,
-	amiga_send_keyboard,
+	usb_keyboard_leds,
+	usb_send_keyboard,
 	NULL, // void (*send_mouse)(report_mouse_t *);
 	NULL, // void (*send_system)(uint16_t);
 	NULL, // (*send_consumer)(uint16_t);
@@ -33,21 +34,44 @@ static int debuglevel = DBG_INFO;
 #define KC_SPARE_2 KC_NO
 #define KC_SPARE_3 KC_NO
 
+	/*
+	 * This keyboard layout needs a specific layout. It must be done
+	 * in Linux with X11, Windows or MacOS specific.
+	 * 
+	 * 
+	 * Layer 0: Default Layer
+	 *  ,---.     ,------------------------.   ,-------------------------.
+	 *  |Esc|     | F1 | F2 | F3 | F4 | F5 |   | F6 | F7 | F8 | F9 | F10 |
+	 *  `---.     `------------------------.   `-------------------------.
+	 *
+	 * ,--------------------------------------------------------------.    ,-----. ,-----.      ,---------------.
+	 * |  `  |  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|  \| BS |    | DEL | | HELP|      | ( | ) | / | * |
+	 * |--------------------------------------------------------------|    `-----. `-----.      `---------------| 
+	 * |Tab    |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P| [ | ] |  RET |                         | 7 | 8 | 9 | - |
+	 * |----------------------------------------------------------+   |         ,----.          `---------------| 
+	 * |Ctrl| CAPS|  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|   |   |         | UP |          | 4 | 5 | 6 | + |  
+	 * |--------------------------------------------------------------|    ,----+----+----.     `---------------|
+	 * | Shift |   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|  Shift   |    |LFT |DOWN| RGT|     | 1 | 2 | 3 | E |
+	 * `--------------------------------------------------------------'    `--------------'     `------------ N |
+	 *     | LAlt| LGUI|   |     Space        |   | RGUI| RAlt |                                |   0   | . | T |
+	 *     `---------------------------------------------------'                                `---------------'
+	 */
+
 const uint8_t keymaps[][KEYBOARD_ROWS][KEYBOARD_COLUMNS] = {
 	[0] = {
-		{ KC_ESC,     KC_KP_LPAREN, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_KP_RPAREN, KC_F6,   KC_PSLS, KC_F7,   KC_F8,      KC_F9,      KC_F10,  KC_HELP,  KC_NO },
-		{ KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,    KC_EQL,     KC_BSLS, KC_UP,    KC_NO },
-		{ KC_TAB,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,    KC_RBRC,    KC_ENT,  KC_LEFT,  KC_NO },
-		{ KC_CAPS,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,    KC_SPARE_1, KC_DEL,  KC_RIGHT, KC_NO },
-		{ KC_SPARE_2, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_SPARE_3, KC_SPC,     KC_BSPC, KC_DOWN,  KC_NO },
-		{ KC_PAST,    KC_PPLS, KC_P9,   KC_P6,   KC_P3,   KC_PCMM, KC_P8,   KC_P5,   KC_P2,   KC_PENT, KC_P7,   KC_P4,      KC_P1,      KC_P0,   KC_PMNS,  KC_NO },
-		{ KC_NO,    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,    KC_NO, KC_NO,  KC_RSFT },
-		{ KC_NO,    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,    KC_NO, KC_NO,  KC_RALT },
-		{ KC_NO,    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,    KC_NO, KC_NO,  KC_RGUI },
-		{ KC_NO,    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,    KC_NO, KC_NO,  KC_LCTRL },
-		{ KC_NO,    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,    KC_NO, KC_NO,  KC_LSFT },
-		{ KC_NO,    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,    KC_NO, KC_NO,  KC_LALT },
-		{ KC_NO,    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,    KC_NO, KC_NO,  KC_LGUI },
+		{ KC_ESC,     KC_KP_LPAREN,  KC_F1,  KC_F2,  KC_F3,  KC_F4,    KC_F5,  KC_KP_RPAREN,  KC_F6,    KC_PSLS,  KC_F7,    KC_F8,       KC_F9,      KC_F10,   KC_HELP,  KC_NO },
+		{ KC_GRV,     KC_1,          KC_2,   KC_3,   KC_4,   KC_5,     KC_6,   KC_7,          KC_8,     KC_9,     KC_0,     KC_MINS,     KC_EQL,     KC_BSLS,  KC_UP,    KC_NO },
+		{ KC_TAB,     KC_Q,          KC_W,   KC_E,   KC_R,   KC_T,     KC_Y,   KC_U,          KC_I,     KC_O,     KC_P,     KC_LBRC,     KC_RBRC,    KC_ENT,   KC_LEFT,  KC_NO },
+		{ KC_CAPS,    KC_A,          KC_S,   KC_D,   KC_F,   KC_G,     KC_H,   KC_J,          KC_K,     KC_L,     KC_SCLN,  KC_QUOT,     KC_SPARE_1, KC_DEL,   KC_RIGHT, KC_NO },
+		{ KC_SPARE_2, KC_Z,          KC_X,   KC_C,   KC_V,   KC_B,     KC_N,   KC_M,          KC_COMM,  KC_DOT,   KC_SLSH,  KC_SPARE_3,  KC_SPC,     KC_BSPC,  KC_DOWN,  KC_NO },
+		{ KC_PAST,    KC_PPLS,       KC_P9,  KC_P6,  KC_P3,  KC_PCMM,  KC_P8,  KC_P5,         KC_P2,    KC_PENT,  KC_P7,    KC_P4,       KC_P1,      KC_P0,    KC_PMNS,  KC_NO },
+		{ KC_NO,      KC_NO,         KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,  KC_NO,         KC_NO,    KC_NO,    KC_NO,    KC_NO,       KC_NO,      KC_NO,    KC_NO,    KC_RSFT },
+		{ KC_NO,      KC_NO,         KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,  KC_NO,         KC_NO,    KC_NO,    KC_NO,    KC_NO,       KC_NO,      KC_NO,    KC_NO,    KC_RALT },
+		{ KC_NO,      KC_NO,         KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,  KC_NO,         KC_NO,    KC_NO,    KC_NO,    KC_NO,       KC_NO,      KC_NO,    KC_NO,    KC_RGUI },
+		{ KC_NO,      KC_NO,         KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,  KC_NO,         KC_NO,    KC_NO,    KC_NO,    KC_NO,       KC_NO,      KC_NO,    KC_NO,    KC_LCTRL },
+		{ KC_NO,      KC_NO,         KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,  KC_NO,         KC_NO,    KC_NO,    KC_NO,    KC_NO,       KC_NO,      KC_NO,    KC_NO,    KC_LSFT },
+		{ KC_NO,      KC_NO,         KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,  KC_NO,         KC_NO,    KC_NO,    KC_NO,    KC_NO,       KC_NO,      KC_NO,    KC_NO,    KC_LALT },
+		{ KC_NO,      KC_NO,         KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,  KC_NO,         KC_NO,    KC_NO,    KC_NO,    KC_NO,       KC_NO,      KC_NO,    KC_NO,    KC_LGUI },
 	},
 };
 
@@ -88,7 +112,7 @@ gpioPort_t lut_col[ KEYBOARD_COLUMNS ] = {
 
 static uint8_t leds = 0;
 
-uint8_t amiga_keyboard_leds(void)
+uint8_t usb_keyboard_leds(void)
 {
 	return leds;
 }
@@ -106,7 +130,7 @@ action_t keymap_fn_to_action(uint8_t keycode)
 /* From Middlewares Initialization Stuff... */
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
-void amiga_send_keyboard(report_keyboard_t *report)
+void usb_send_keyboard(report_keyboard_t *report)
 {
 	int i;
 	unsigned char * ptr = (unsigned char *) report;
@@ -130,9 +154,7 @@ void USBD_HID_GetReport(uint8_t * report, int len)
 	// D0: NUM lock
 	// D1: CAPS lock
 	// D2: SCROLL lock
-	// D3: Compose
-	// D4: Kana
-	const char * LED[5] = {"NUM lock", "CAPS lock", "SCROLL lock", "Compose", "Kana", };
+	const char * LED[3] = {"NUM lock", "CAPS lock", "SCROLL lock", };
 
 	int i;
 	unsigned char * ptr = (unsigned char *) report;
@@ -159,7 +181,7 @@ void USBD_HID_GetReport(uint8_t * report, int len)
 	leds = *(report);
 }
 
-void hook_matrix_change(keyevent_t event, void *caller)
+void hook_matrix_change(keyevent_t event)
 {
 	/*
 	 * https://github.com/tmk/tmk_keyboard/blob/6271878a021fcf578b71e2b7e97cd43786efa7dd/tmk_core/common/action.c#L45
@@ -169,19 +191,19 @@ void hook_matrix_change(keyevent_t event, void *caller)
 	DBG_N("AMIGA KEYMAP[%d, %d] = value %d (hex) 0x%02x\r\n", event.key.row, event.key.col,
 			keymaps[0][event.key.row][event.key.col],
 			keymaps[0][event.key.row][event.key.col]);
+	/* Now we can send the keyevent to the Amiga Protocol layer */
+	amiga_protocol_send(event);
 }
 
 void hook_keyboard_leds_change(uint8_t led_status)
 {
 	DBG_N("Called: %d\r\n", led_status);
 
-	/* ATARI KEYBOARD HAS 6 LEDS:
+	/* AMIGA KEYBOARD HAS 6 LEDS:
 	 * Power Supply LED (Hardwired to 5V)
 	 * D0: NUM lock
 	 * D1: CAPS lock
 	 * D2: SCROLL lock
-	 * D3: Compose
-	 * D4: Kana
 	 */
 
 	if (led_status & (1 << 0))
@@ -199,13 +221,4 @@ void hook_keyboard_leds_change(uint8_t led_status)
 	else
 		LED_SCROLL_LOCK_OFF();
 
-	if (led_status & (1 << 3))
-		LED_COMPOSE_ON();
-	else
-		LED_COMPOSE_OFF();
-
-	if (led_status & (1 << 4))
-		LED_KANA_ON();
-	else
-		LED_KANA_OFF();
 }
