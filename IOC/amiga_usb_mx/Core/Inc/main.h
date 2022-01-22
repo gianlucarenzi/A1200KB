@@ -75,6 +75,8 @@ void Error_Handler(void);
 #define DEBUG_TX_GPIO_Port GPIOA
 #define DEBUG_RX_Pin GPIO_PIN_3
 #define DEBUG_RX_GPIO_Port GPIOA
+#define LED_POWER_Pin GPIO_PIN_4
+#define LED_POWER_GPIO_Port GPIOA
 #define KB_DAT_Pin GPIO_PIN_5
 #define KB_DAT_GPIO_Port GPIOA
 #define KB_CLK_Pin GPIO_PIN_6
