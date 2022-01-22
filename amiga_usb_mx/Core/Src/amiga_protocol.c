@@ -10,6 +10,7 @@
 #include "amiga_protocol.h"
 #include "debug.h"
 #include "main.h" // For GPIO pins definition
+#include "hook.h"
 
 static int debuglevel = DBG_INFO;
 
@@ -234,6 +235,8 @@ static int debuglevel = DBG_INFO;
 #define KEY_RIGHT_GUI                          0xE7
 
 #define KEYCODE_TAB_SIZE      0x70 /* da 0x00 a 0x6F */
+
+static uint8_t leds = 0;
 
 static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
 {
@@ -620,7 +623,7 @@ static const uint8_t asciiscancode[KEYCODE_TAB_SIZE][2] =
 
 	After releasing KCLK, the keyboard jumps to its start-up code (internal
 	RESET).  This will initialize the keyboard in the same way as cold
-	 power-on .
+	power-on .
 
  **/
 
@@ -634,9 +637,10 @@ static unsigned char capslk = 0;
 static unsigned char numlk = 0;
 static unsigned char scrolllk = 0;
 
-static void amikb_direction(kbd_dir dir);
-static uint8_t amiga_keycode_send(uint8_t code, int press);
+//static void amikb_direction(kbd_dir dir);
+//static uint8_t amiga_keycode_send(uint8_t code, int press);
 
+/* Local functions */
 static uint8_t scancode_to_amiga(uint8_t lkey)
 {
 	uint8_t i = 0, keyvalue = lkey;
@@ -674,57 +678,6 @@ static uint8_t ascii_to_scancode(uint8_t ascii)
 	DBG_N("Exit with: 0x%02x ScanCode\r\n", keyvalue);
 	return keyvalue;
 }
-// **************************
-void amiga_protocol_init(void)
-{
-	uint8_t AMIGA_INITPOWER = 0xFD; //11111101
-	uint8_t AMIGA_TERMPOWER = 0xFE; //11111110
-
-	DBG_N("Enter\r\n");
-
-	// De-assert nRESET for Amiga...
-	amiga_protocol_reset();
-
-	amikb_direction(DAT_OUTPUT); // Default
-
-	mdelay(1000);              // wait for sync
-	amiga_keycode_send((uint8_t) AMIGA_INITPOWER, 0); // send "initiate power-up"
-	udelay(200);
-	amiga_keycode_send((uint8_t) AMIGA_TERMPOWER, 0); // send "terminate power-up"
-
-	DBG_N("Exit\r\n");
-}
-
-static int keyboard_is_present = 0;
-void amikb_ready(int isready)
-{
-	keyboard_is_present = isready;
-}
-
-static void amiga_gpio_init(void)
-{
-	GPIO_InitTypeDef GPIO_InitStruct;
-
-	DBG_N("Enter\r\n");
-
-	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin( KB_AMIGA_GPIO_Port,
-		KB_CLK_Pin |
-		KB_DAT_Pin |
-		KB_RST_Pin, GPIO_PIN_SET);
-
-	/*Configure GPIO pins : KB_CLK_Pin KB_DAT_Pin KB_RST_Pin */
-	GPIO_InitStruct.Pin = KB_CLK_Pin | KB_DAT_Pin | KB_RST_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(KB_AMIGA_GPIO_Port, &GPIO_InitStruct);
-
-	/*Leave Amiga in RESET mode (LOW) until the keyboard is ready */
-	HAL_GPIO_WritePin(KB_AMIGA_GPIO_Port, KB_RST_Pin, GPIO_PIN_RESET); // Clear KB_RST pin
-
-	DBG_N("Exit\r\n");
-}
 
 static void amikb_direction(kbd_dir dir)
 {
@@ -757,53 +710,6 @@ static void amikb_direction(kbd_dir dir)
 	HAL_GPIO_Init(KB_AMIGA_GPIO_Port, &GPIO_InitStruct);
 
 	DBG_N("Exit\r\n");
-}
-
-void amiga_protocol_send( keyevent_t event)
-{
-	/* CTRL-LGUI-RGUI == RESET AMIGA
-	 * CTRL-ALT-DEL   == RESET x86
-	 */
-	static int ctrl_pressed = 0;
-	static int lgui_pressed = 0;
-	static int rgui_pressed = 0;
-	static int lalt_pressed = 0;
-	static int del_pressed  = 0;
-	uint8_t scancode = keymaps[0][event.key.row][event.key.col];
-
-	// Scan each report to find a group of keys pressed/released
-	uint8_t leds;
-	uint8_t amiga_scancode = scancode_to_amiga(scancode);
-	leds = amiga_keycode_send(amiga_scancode, event.pressed );
-	// Now we can check if there is a special combination for invoking a
-	// reset
-	switch( scancode )
-	{
-		case KC_LCTRL:
-			if (event.pressed ) ctrl_pressed = 1;
-			else ctrl_pressed = 0;
-			break;
-		case KC_LGUI:
-			if (event.pressed ) lgui_pressed = 1;
-			else lgui_pressed = 0;
-			break;
-		case KC_RGUI:
-			if (event.pressed ) rgui_pressed = 1;
-			else rgui_pressed = 0;
-			break;
-		default:
-			break;
-	}
-
-	if (ctrl_pressed && lgui_pressed && rgui_pressed)
-	{
-		/* invoke a amiga reset */
-		/* blink some leds */
-		/* reset all leds and status */
-		leds = 0;
-	}
-	// Now the leds can be modified
-	hook_keyboard_leds_change(leds);
 }
 
 static uint8_t amiga_keycode_send(uint8_t keycode, int press)
@@ -1003,7 +909,76 @@ static uint8_t amiga_keycode_send(uint8_t keycode, int press)
 	return rval;
 }
 
-// **************************
+static void amiga_do_reset(void)
+{
+	/* LIT all LEDS */
+	LED_CAPS_LOCK_ON();
+	LED_SCROLL_LOCK_ON();
+	LED_NUM_LOCK_ON();
+
+	/* invoke an Amiga reset */
+	amiga_protocol_reset(); // This will lockup system for 600msec
+
+	LED_CAPS_LOCK_OFF();
+	LED_SCROLL_LOCK_OFF();
+	LED_NUM_LOCK_OFF();
+
+	leds = 0;
+	/* Re-establish the communication protocol to the Amiga System */
+	amiga_protocol_init();
+}
+
+/* **** GLOBAL FUNCTIONS ***** */
+
+/*
+ * This is done after the pins are alrerady configured. It must be done
+ * in main() and after an Amiga Reset
+ */
+void amiga_protocol_init(void)
+{
+	uint8_t AMIGA_INITPOWER = 0xFD; //11111101
+	uint8_t AMIGA_TERMPOWER = 0xFE; //11111110
+
+	DBG_N("Enter\r\n");
+
+	// De-assert nRESET for Amiga...
+	amiga_protocol_reset();
+
+	amikb_direction(DAT_OUTPUT); // Default
+
+	mdelay(1000);              // wait for sync
+	amiga_keycode_send((uint8_t) AMIGA_INITPOWER, 0); // send "initiate power-up"
+	udelay(200);
+	amiga_keycode_send((uint8_t) AMIGA_TERMPOWER, 0); // send "terminate power-up"
+
+	DBG_N("Exit\r\n");
+}
+
+void amiga_gpio_init(void)
+{
+	GPIO_InitTypeDef GPIO_InitStruct;
+
+	DBG_N("Enter\r\n");
+
+	/*Configure GPIO pin Output Level */
+	HAL_GPIO_WritePin( KB_AMIGA_GPIO_Port,
+		KB_CLK_Pin |
+		KB_DAT_Pin, GPIO_PIN_SET);
+
+	/* Keep Amiga in RESET */
+	HAL_GPIO_WritePin( KB_AMIGA_GPIO_Port,
+		KB_RST_Pin, GPIO_PIN_RESET);
+
+	/*Configure GPIO pins : KB_CLK_Pin KB_DAT_Pin KB_RST_Pin */
+	GPIO_InitStruct.Pin = KB_CLK_Pin | KB_DAT_Pin | KB_RST_Pin;
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	HAL_GPIO_Init(KB_AMIGA_GPIO_Port, &GPIO_InitStruct);
+
+	DBG_N("Exit\r\n");
+}
+
 void amiga_protocol_reset(void)
 {
 	amikb_direction(DAT_OUTPUT);
@@ -1020,6 +995,79 @@ void amiga_protocol_reset(void)
 	scrolllk = 0;
 	DBG_N("Exit\r\n");
 }
+
+void amiga_protocol_send(keyevent_t event)
+{
+	/*
+	 * CTRL-LGUI-RGUI == RESET AMIGA for 500msec
+	 * 
+	 * CTRL-[R/L]ALT-DEL   == RESET x86
+	 */
+	static int ctrl_pressed = 0;
+	static int lgui_pressed = 0;
+	static int rgui_pressed = 0;
+	static int lalt_pressed = 0;
+	static int ralt_pressed = 0;
+	static int del_pressed  = 0;
+
+	uint8_t leds;
+
+	uint8_t scancode = keymaps[0][event.key.row][event.key.col];
+
+	// Scan each report to find a group of keys pressed/released
+	uint8_t amiga_scancode = scancode_to_amiga(scancode);
+
+	/* Send to Amiga the correct scancode and returns the LED status */
+	leds = amiga_keycode_send(amiga_scancode, event.pressed );
+
+	// Now we can check if there is a special combination for invoking a
+	// reset
+	switch( scancode )
+	{
+		case KC_LCTRL:
+			if (event.pressed) ctrl_pressed = 1;
+			else ctrl_pressed = 0;
+			break;
+		case KC_LGUI:
+			if (event.pressed) lgui_pressed = 1;
+			else lgui_pressed = 0;
+			break;
+		case KC_RGUI:
+			if (event.pressed) rgui_pressed = 1;
+			else rgui_pressed = 0;
+			break;
+		case KC_LALT:
+			if (event.pressed) lalt_pressed = 1;
+			else lalt_pressed = 0;
+			break;
+		case KC_RALT:
+			if (event.pressed) ralt_pressed = 1;
+			else ralt_pressed = 0;
+			break;
+		case KC_DEL:
+			if (event.pressed) del_pressed = 1;
+			else del_pressed = 0;
+		default:
+			break;
+	}
+
+	if (ctrl_pressed && lgui_pressed && rgui_pressed)
+	{
+		amiga_do_reset();
+	}
+	else
+	if (ctrl_pressed && del_pressed)
+	{
+		if (lalt_pressed || ralt_pressed)
+		{
+			amiga_do_reset();
+		}
+	}
+
+	// Now the leds can be modified
+	hook_keyboard_leds_change(leds);
+}
+
 
 // ****************************
 bool amiga_protocol_is_reset(void)
