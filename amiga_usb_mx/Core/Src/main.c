@@ -102,12 +102,14 @@ static void MX_GPIO_Init(void)
 	HAL_GPIO_WritePin(LED_CAPS_LOCK_GPIO_Port, LED_CAPS_LOCK_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(LED_NUM_LOCK_GPIO_Port, LED_NUM_LOCK_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(LED_SCROLL_LOCK_GPIO_Port, LED_SCROLL_LOCK_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_POWER_GPIO_Port, LED_POWER_Pin, GPIO_PIN_RESET);
 
 	/*Configure GPIO pin : LEDS MUST BE IN THE SAME PORT! */
 	GPIO_InitStruct.Pin = 
 		LED_CAPS_LOCK_Pin |
 		LED_NUM_LOCK_Pin |
-		LED_SCROLL_LOCK_Pin;
+		LED_SCROLL_LOCK_Pin |
+		LED_POWER_Pin;
 
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_PULLUP;
@@ -248,6 +250,8 @@ int main(void)
 	MX_USB_DEVICE_Init();
 
 	host_set_driver(&usbdriver);
+
+	LED_POWER_ON();
 
 	DBG_V("KEYBOARD TYPE: " KEYBOARD_INTERFACE "\r\n");
 
