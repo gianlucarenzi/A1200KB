@@ -125,18 +125,12 @@ void Error_Handler(void);
 #define LEDS_GPIO_Port GPIOA
 
 extern void led_toggle(void);
-#define LED_CAPS_LOCK_OFF()         do { HAL_GPIO_WritePin(LED_CAPS_LOCK_GPIO_Port, LED_CAPS_LOCK_Pin, GPIO_PIN_SET); } while (0)
-#define LED_CAPS_LOCK_ON()          do { HAL_GPIO_WritePin(LED_CAPS_LOCK_GPIO_Port, LED_CAPS_LOCK_Pin, GPIO_PIN_RESET); } while (0)
-#define LED_CAPS_LOCK_TGL()         do { led_toggle(); } while (0)
-
-#define LED_ON  LED_CAPS_LOCK_ON
-#define LED_OFF LED_CAPS_LOCK_OFF
-#define LED_TGL LED_CAPS_LOCK_TGL
-
-#define LED_NUM_LOCK_OFF()         do { HAL_GPIO_WritePin(LED_NUM_LOCK_GPIO_Port, LED_NUM_LOCK_Pin, GPIO_PIN_SET); } while (0)
-#define LED_NUM_LOCK_ON()          do { HAL_GPIO_WritePin(LED_NUM_LOCK_GPIO_Port, LED_NUM_LOCK_Pin, GPIO_PIN_RESET); } while (0)
-#define LED_SCROLL_LOCK_OFF()      do { HAL_GPIO_WritePin(LED_SCROLL_LOCK_GPIO_Port, LED_SCROLL_LOCK_Pin, GPIO_PIN_SET); } while (0)
-#define LED_SCROLL_LOCK_ON()       do { HAL_GPIO_WritePin(LED_SCROLL_LOCK_GPIO_Port, LED_SCROLL_LOCK_Pin, GPIO_PIN_RESET); } while (0)
+#define LED_CAPS_LOCK_OFF()   do { HAL_GPIO_WritePin(LED_CAPS_LOCK_GPIO_Port, LED_CAPS_LOCK_Pin, GPIO_PIN_SET); } while (0)
+#define LED_CAPS_LOCK_ON()    do { HAL_GPIO_WritePin(LED_CAPS_LOCK_GPIO_Port, LED_CAPS_LOCK_Pin, GPIO_PIN_RESET); } while (0)
+#define LED_NUM_LOCK_OFF()    do { HAL_GPIO_WritePin(LED_NUM_LOCK_GPIO_Port, LED_NUM_LOCK_Pin, GPIO_PIN_SET); } while (0)
+#define LED_NUM_LOCK_ON()     do { HAL_GPIO_WritePin(LED_NUM_LOCK_GPIO_Port, LED_NUM_LOCK_Pin, GPIO_PIN_RESET); } while (0)
+#define LED_SCROLL_LOCK_OFF() do { HAL_GPIO_WritePin(LED_SCROLL_LOCK_GPIO_Port, LED_SCROLL_LOCK_Pin, GPIO_PIN_SET); } while (0)
+#define LED_SCROLL_LOCK_ON()  do { HAL_GPIO_WritePin(LED_SCROLL_LOCK_GPIO_Port, LED_SCROLL_LOCK_Pin, GPIO_PIN_RESET); } while (0)
 
 #ifdef __cplusplus
 }
