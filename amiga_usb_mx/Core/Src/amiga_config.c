@@ -40,21 +40,25 @@ static int debuglevel = DBG_INFO;
 	 * 
 	 * 
 	 * Layer 0: Default Layer
-	 *  ,---.     ,------------------------.   ,-------------------------.
-	 *  |Esc|     | F1 | F2 | F3 | F4 | F5 |   | F6 | F7 | F8 | F9 | F10 |
-	 *  `---.     `------------------------.   `-------------------------.
+	 * 
+	 * ,---.     ,------------------------.   ,-------------------------.
+	 * |Esc|     | F1 | F2 | F3 | F4 | F5 |   | F6 | F7 | F8 | F9 | F10 |
+	 * `---.     `------------------------.   `-------------------------.
 	 *
 	 * ,--------------------------------------------------------------.    ,-----. ,-----.      ,---------------.
 	 * |  `  |  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|  \| BS |    | DEL | | HELP|      | ( | ) | / | * |
 	 * |--------------------------------------------------------------|    `-----. `-----.      `---------------| 
 	 * |Tab    |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P| [ | ] |  RET |                         | 7 | 8 | 9 | - |
 	 * |----------------------------------------------------------+   |         ,----.          `---------------| 
-	 * |Ctrl| CAPS|  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|   |   |         | UP |          | 4 | 5 | 6 | + |  
+	 * |Ctrl| CAPS|  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '| BL|   |         | UP |          | 4 | 5 | 6 | + |  
 	 * |--------------------------------------------------------------|    ,----+----+----.     `---------------|
-	 * | Shift |   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|  Shift   |    |LFT |DOWN| RGT|     | 1 | 2 | 3 | E |
+	 * | Shift | BL|  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|  Shift   |    |LFT |DOWN| RGT|     | 1 | 2 | 3 | E |
 	 * `--------------------------------------------------------------'    `--------------'     `------------ N |
 	 *     | LAlt| LGUI|   |     Space        |   | RGUI| RAlt |                                |   0   | . | T |
 	 *     `---------------------------------------------------'                                `---------------'
+	 *
+	 * BL = spare blank keys (not used in Standard International Mode)
+	 * 
 	 */
 
 const uint8_t keymaps[][KEYBOARD_ROWS][KEYBOARD_COLUMNS] = {
@@ -112,6 +116,15 @@ gpioPort_t lut_col[ KEYBOARD_COLUMNS ] = {
 
 static uint8_t leds = 0;
 
+/* MASK of leds:
+ * D7 D6 D5 D4 D3 D2 D1 D0
+ * -----------------------
+ * 
+ * D0: NUM LOCK
+ * D1: CAPS LOCK
+ * D2: SCROLL LOCK
+ * D3..D7 = not used
+ */
 uint8_t usb_keyboard_leds(void)
 {
 	return leds;
@@ -150,7 +163,7 @@ void USBD_HID_GetReport(uint8_t * report, int len)
 {
 	// see from http://www.microchip.com/forums/m433757.aspx
 	// report[0] is the report id
-	// report[1] is the led bit filed
+	// report[1] is the led bit field
 	// D0: NUM lock
 	// D1: CAPS lock
 	// D2: SCROLL lock
@@ -191,6 +204,7 @@ void hook_matrix_change(keyevent_t event)
 	DBG_N("AMIGA KEYMAP[%d, %d] = value %d (hex) 0x%02x\r\n", event.key.row, event.key.col,
 			keymaps[0][event.key.row][event.key.col],
 			keymaps[0][event.key.row][event.key.col]);
+
 	/* Now we can send the keyevent to the Amiga Protocol layer */
 	amiga_protocol_send(event);
 }
@@ -199,8 +213,8 @@ void hook_keyboard_leds_change(uint8_t led_status)
 {
 	DBG_N("Called: %d\r\n", led_status);
 
-	/* AMIGA KEYBOARD HAS 6 LEDS:
-	 * Power Supply LED (Hardwired to 5V)
+	/* AMIGA KEYBOARD HAS 3 LEDS:
+	 * Power Supply LED (Hardwired to 5V but not present in a standard layout)
 	 * D0: NUM lock
 	 * D1: CAPS lock
 	 * D2: SCROLL lock
