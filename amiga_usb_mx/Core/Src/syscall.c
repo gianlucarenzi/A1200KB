@@ -46,28 +46,43 @@ int _write(int file, char *data, int len)
 	return 0;
 }
 
-/**
-static uint32_t timertick_start_ms = 0;
-void timer_start(void)
+#ifndef ArraySize
+	#define ArraySize(a)	(sizeof(a) / sizeof(a[0]))
+#endif
+	
+static uint32_t timer[8];
+static int timer_idx = 0;
+
+int stimer_create(void)
+{
+	timer_idx++;
+	if (timer_idx < ArraySize(timer))
+	{
+		timer[ timer_idx ] = 0;
+		return timer_idx;
+	}
+	return -1;
+}
+
+void stimer_start(int timr)
 {
 	// When timer starts get the realtime system tick
-	timertick_start_ms = HAL_GetTick();
+	timer[timr] = HAL_GetTick();
 }
 
 // Returns 0 if it is too early otherwise returns 1, i.e. time is elapsed
-int timer_elapsed(uint32_t msec)
+int stimer_elapsed(int timr, uint32_t msec)
 {
 	int retval;
 	uint32_t ticks = HAL_GetTick();
 
-	if (ticks < (timertick_start_ms + msec))
+	if (ticks < (timer[timr] + msec))
 		retval = 0;
 	else
 		retval = 1;
 
 	return retval;
 }
-**/
 
 // I hate this delay because they are clockspeed dependent!!!
 #define delayUS_ASM(us) do {\
