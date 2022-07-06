@@ -2457,13 +2457,13 @@ Wire Wire Line
 $Comp
 L AmigaComponents:MX-1U-MX_Alps_Hybrids K98
 U 1 1 61E691AB
-P 5920 11670
-F 0 "K98" H 5920 12009 60  0000 C CNN
-F 1 "SUPER" H 5920 11903 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 5920 11903 60  0001 C CNN
-F 3 "" H 5920 11670 60  0000 C CNN
-	1    5920 11670
-	1    0    0    -1  
+P 5680 11680
+F 0 "K98" H 5695 11195 60  0000 C CNN
+F 1 "SUPER" H 5680 11305 60  0000 C CNN
+F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 5680 11913 60  0001 C CNN
+F 3 "" H 5680 11680 60  0000 C CNN
+	1    5680 11680
+	-1   0    0    1   
 $EndComp
 $Comp
 L AmigaComponents:MX-1U-MX_Alps_Hybrids K97
@@ -2500,8 +2500,6 @@ F 3 "" H 6555 11645 60  0000 C CNN
 $EndComp
 Wire Wire Line
 	6775 10250 14575 10250
-Wire Wire Line
-	6275 10875 6275 11270
 Connection ~ 6275 10875
 Wire Wire Line
 	6775 10675 6775 11270
@@ -2530,22 +2528,6 @@ Wire Wire Line
 Connection ~ 6430 11820
 Wire Wire Line
 	6430 11820 6530 11820
-Wire Wire Line
-	5895 11845 5795 11845
-Wire Wire Line
-	5795 11845 5795 12080
-Wire Wire Line
-	5795 12080 6430 12080
-Connection ~ 6430 12080
-Wire Wire Line
-	6095 11645 6205 11645
-Wire Wire Line
-	6205 11645 6205 11270
-Wire Wire Line
-	6205 11270 6275 11270
-Connection ~ 6275 11270
-Wire Wire Line
-	6275 11270 6275 11820
 $Comp
 L Mechanical:MountingHole_Pad H1
 U 1 1 6231C039
@@ -2904,26 +2886,421 @@ U 61EC24E4
 F0 " MCU_Controller" 50
 F1 "MCU_Controller.sch" 50
 $EndSheet
-$Comp
-L AmigaComponents:STM32F401-DK U1
-U 1 1 625C017D
-P 10265 13545
-F 0 "U1" H 11400 13600 50  0000 L CNN
-F 1 "STM32F401-DK" H 11400 13500 50  0000 L CNN
-F 2 "RetroBitLab:STM32F401-DK" H 10515 14195 50  0001 C CNN
-F 3 "" H 10515 14195 50  0001 C CNN
-	1    10265 13545
-	1    0    0    -1  
-$EndComp
-$Comp
-L AmigaComponents:STM32F401-DK U?
-U 1 1 61F4DD88
-P 10325 13545
-F 0 "U?" H 11460 13600 50  0000 L CNN
-F 1 "STM32F401-DK" H 11460 13500 50  0000 L CNN
-F 2 "RetroBitLab:STM32F401-DK" H 10575 14195 50  0001 C CNN
-F 3 "" H 10575 14195 50  0001 C CNN
-	1    10325 13545
-	1    0    0    -1  
-$EndComp
+Wire Wire Line
+	6275 10875 6275 11505
+Wire Wire Line
+	5705 11505 6275 11505
+Connection ~ 6275 11505
+Wire Wire Line
+	6275 11505 6275 11820
+Wire Wire Line
+	5505 11705 5385 11705
+Wire Wire Line
+	5385 11705 5385 12195
+Wire Wire Line
+	5385 12195 7500 12195
+Wire Wire Line
+	7500 12195 7500 11660
+Connection ~ 7500 11660
+Text Label 6370 1335 3    50   ~ 0
+1
+Text Label 6270 1335 3    50   ~ 0
+2
+Text Label 6170 1335 3    50   ~ 0
+3
+Text Label 6070 1335 3    50   ~ 0
+4
+Text Label 5970 1335 3    50   ~ 0
+5
+Text Label 5870 1335 3    50   ~ 0
+6
+Text Label 5770 1335 3    50   ~ 0
+7
+Text Label 5670 1335 3    50   ~ 0
+8
+Text Label 5570 1335 3    50   ~ 0
+9
+Text Label 5470 1335 3    50   ~ 0
+10
+Text Label 5370 1335 3    50   ~ 0
+11
+Text Label 5270 1335 3    50   ~ 0
+12
+Text Label 5170 1335 3    50   ~ 0
+13
+Text Label 5070 1335 3    50   ~ 0
+14
+Text Label 4970 1335 3    50   ~ 0
+15
+Text Label 4870 1335 3    50   ~ 0
+16
+Text Label 4770 1335 3    50   ~ 0
+17
+Text Label 4670 1335 3    50   ~ 0
+18
+Text Label 4570 1335 3    50   ~ 0
+19
+Text Label 4470 1335 3    50   ~ 0
+20
+Text Label 4370 1335 3    50   ~ 0
+21
+Text Label 4270 1335 3    50   ~ 0
+22
+Text Label 4170 1335 3    50   ~ 0
+23
+Text Label 4070 1335 3    50   ~ 0
+24
+Text Label 3970 1335 3    50   ~ 0
+25
+Text Label 3870 1335 3    50   ~ 0
+26
+Text Label 3770 1335 3    50   ~ 0
+27
+Text Label 3670 1335 3    50   ~ 0
+28
+Text Label 3570 1335 3    50   ~ 0
+29
+Text Label 3470 1335 3    50   ~ 0
+30
+Text Label 3370 1335 3    50   ~ 0
+31
+Text GLabel 6375 1050 1    50   Input ~ 0
+1
+Text GLabel 6275 1050 1    50   Input ~ 0
+2
+Text GLabel 6175 1050 1    50   Input ~ 0
+3
+Text GLabel 6075 1050 1    50   Input ~ 0
+4
+Text GLabel 5975 1050 1    50   Input ~ 0
+5
+Text GLabel 5875 1050 1    50   Input ~ 0
+6
+Text GLabel 5775 1050 1    50   Input ~ 0
+7
+Text GLabel 5675 1050 1    50   Input ~ 0
+8
+Text GLabel 5575 1050 1    50   Input ~ 0
+9
+Text GLabel 5475 1050 1    50   Input ~ 0
+10
+Text GLabel 5375 1050 1    50   Input ~ 0
+11
+Text GLabel 5275 1050 1    50   Input ~ 0
+12
+Text GLabel 5175 1050 1    50   Input ~ 0
+13
+Text GLabel 5075 1050 1    50   Input ~ 0
+14
+Text GLabel 4975 1050 1    50   Input ~ 0
+15
+Text GLabel 4875 1050 1    50   Input ~ 0
+16
+Text GLabel 4775 1050 1    50   Input ~ 0
+17
+Text GLabel 4675 1050 1    50   Input ~ 0
+18
+Text GLabel 4575 1050 1    50   Input ~ 0
+19
+Text GLabel 4475 1050 1    50   Input ~ 0
+20
+Text GLabel 4375 1050 1    50   Input ~ 0
+21
+Text GLabel 4275 1050 1    50   Input ~ 0
+22
+Text GLabel 4175 1050 1    50   Input ~ 0
+23
+Text GLabel 4075 1050 1    50   Input ~ 0
+24
+Text GLabel 3975 1050 1    50   Input ~ 0
+25
+Text GLabel 3875 1050 1    50   Input ~ 0
+26
+Text GLabel 3775 1050 1    50   Input ~ 0
+27
+Text GLabel 3675 1050 1    50   Input ~ 0
+28
+Text GLabel 3575 1050 1    50   Input ~ 0
+29
+Text GLabel 3475 1050 1    50   Input ~ 0
+30
+Text GLabel 3375 1050 1    50   Input ~ 0
+31
+Wire Wire Line
+	6375 1050 6375 1335
+Wire Wire Line
+	6375 1335 6370 1335
+Wire Wire Line
+	6275 1335 6270 1335
+Wire Wire Line
+	6275 1050 6275 1335
+Wire Wire Line
+	6175 1050 6175 1335
+Wire Wire Line
+	6175 1335 6170 1335
+Wire Wire Line
+	6075 1050 6075 1335
+Wire Wire Line
+	6075 1335 6070 1335
+Wire Wire Line
+	5975 1050 5975 1335
+Wire Wire Line
+	5975 1335 5970 1335
+Wire Wire Line
+	5875 1050 5875 1335
+Wire Wire Line
+	5875 1335 5870 1335
+Wire Wire Line
+	5775 1050 5775 1335
+Wire Wire Line
+	5775 1335 5770 1335
+Wire Wire Line
+	5675 1050 5675 1335
+Wire Wire Line
+	5675 1335 5670 1335
+Wire Wire Line
+	5575 1050 5575 1335
+Wire Wire Line
+	5575 1335 5570 1335
+Wire Wire Line
+	5475 1050 5475 1335
+Wire Wire Line
+	5475 1335 5470 1335
+Wire Wire Line
+	5375 1050 5375 1335
+Wire Wire Line
+	5375 1335 5370 1335
+Wire Wire Line
+	5275 1050 5275 1335
+Wire Wire Line
+	5275 1335 5270 1335
+Wire Wire Line
+	5175 1050 5175 1335
+Wire Wire Line
+	5175 1335 5170 1335
+Wire Wire Line
+	5075 1050 5075 1335
+Wire Wire Line
+	5075 1335 5070 1335
+Wire Wire Line
+	4975 1050 4975 1335
+Wire Wire Line
+	4975 1335 4970 1335
+Wire Wire Line
+	4875 1050 4875 1335
+Wire Wire Line
+	4875 1335 4870 1335
+Wire Wire Line
+	4775 1050 4775 1335
+Wire Wire Line
+	4775 1335 4770 1335
+Wire Wire Line
+	4675 1050 4675 1335
+Wire Wire Line
+	4675 1335 4670 1335
+Wire Wire Line
+	4575 1050 4575 1335
+Wire Wire Line
+	4575 1335 4570 1335
+Wire Wire Line
+	4475 1050 4475 1335
+Wire Wire Line
+	4475 1335 4470 1335
+Wire Wire Line
+	4375 1050 4375 1335
+Wire Wire Line
+	4375 1335 4370 1335
+Wire Wire Line
+	4275 1335 4270 1335
+Wire Wire Line
+	4275 1050 4275 1335
+Wire Wire Line
+	4175 1050 4175 1335
+Wire Wire Line
+	4175 1335 4170 1335
+Wire Wire Line
+	4075 1050 4075 1335
+Wire Wire Line
+	4075 1335 4070 1335
+Wire Wire Line
+	3375 1050 3375 1335
+Wire Wire Line
+	3375 1335 3370 1335
+Wire Wire Line
+	3475 1050 3475 1335
+Wire Wire Line
+	3475 1335 3470 1335
+Wire Wire Line
+	3575 1050 3575 1335
+Wire Wire Line
+	3575 1335 3570 1335
+Wire Wire Line
+	3675 1050 3675 1335
+Wire Wire Line
+	3675 1335 3670 1335
+Wire Wire Line
+	3775 1050 3775 1335
+Wire Wire Line
+	3775 1335 3770 1335
+Wire Wire Line
+	3875 1050 3875 1335
+Wire Wire Line
+	3875 1335 3870 1335
+Wire Wire Line
+	3975 1050 3975 1335
+Wire Wire Line
+	3975 1335 3970 1335
+Text Notes 4105 1605 0    59   ~ 0
+From LOCAL Nets to GLOBAL Nets
+Wire Notes Line
+	6505 765  6505 1675
+Wire Notes Line
+	6505 1675 3135 1675
+Wire Notes Line
+	3135 765  3135 1675
+Wire Notes Line
+	3135 765  6505 765 
+NoConn ~ 9800 1150
+Text GLabel 5370 14705 1    59   Input ~ 0
+CAPSLOCK_LED
+Text GLabel 2370 15030 3    50   Input ~ 0
+1
+Text GLabel 2470 15030 3    50   Input ~ 0
+2
+Text GLabel 2570 15030 3    50   Input ~ 0
+3
+Text GLabel 2670 15030 3    50   Input ~ 0
+4
+Text GLabel 2770 15030 3    50   Input ~ 0
+5
+Text GLabel 2870 15030 3    50   Input ~ 0
+6
+Text GLabel 2970 15030 3    50   Input ~ 0
+7
+Text GLabel 3070 15030 3    50   Input ~ 0
+8
+Text GLabel 3170 15030 3    50   Input ~ 0
+9
+Text GLabel 3270 15030 3    50   Input ~ 0
+10
+Text GLabel 3370 15030 3    50   Input ~ 0
+11
+Text GLabel 3470 15030 3    50   Input ~ 0
+12
+Text GLabel 3570 15030 3    50   Input ~ 0
+13
+Text GLabel 3670 15030 3    50   Input ~ 0
+14
+Text GLabel 3770 15030 3    50   Input ~ 0
+15
+Text GLabel 3870 15030 3    50   Input ~ 0
+16
+Text GLabel 3970 15030 3    50   Input ~ 0
+17
+Text GLabel 4070 15030 3    50   Input ~ 0
+18
+Text GLabel 4170 15030 3    50   Input ~ 0
+19
+Text GLabel 4270 15030 3    50   Input ~ 0
+20
+Text GLabel 4370 15030 3    50   Input ~ 0
+21
+Text GLabel 4470 15030 3    50   Input ~ 0
+22
+Text GLabel 4570 15030 3    50   Input ~ 0
+23
+Text GLabel 4670 15030 3    50   Input ~ 0
+24
+Text GLabel 4770 15030 3    50   Input ~ 0
+25
+Text GLabel 4870 15030 3    50   Input ~ 0
+26
+Text GLabel 4970 15030 3    50   Input ~ 0
+27
+Text GLabel 5070 15030 3    50   Input ~ 0
+28
+Text GLabel 5170 15030 3    50   Input ~ 0
+29
+Text GLabel 5270 15030 3    50   Input ~ 0
+30
+Text GLabel 5370 15030 3    50   Input ~ 0
+31
+Text GLabel 3170 14705 1    59   Input ~ 0
+VCC_5V
+Wire Wire Line
+	3170 15030 3170 14705
+Wire Wire Line
+	5370 15030 5370 14705
+Text GLabel 3770 14985 1    50   Input ~ 0
+COL1
+Text GLabel 3870 14985 1    50   Input ~ 0
+COL2
+Text GLabel 3970 14985 1    50   Input ~ 0
+COL3
+Text GLabel 4070 14985 1    50   Input ~ 0
+COL4
+Text GLabel 4170 14985 1    50   Input ~ 0
+COL5
+Text GLabel 4270 14985 1    50   Input ~ 0
+COL6
+Text GLabel 4370 14985 1    50   Input ~ 0
+COL7
+Text GLabel 4470 14985 1    50   Input ~ 0
+COL8
+Text GLabel 3980 13845 1    50   Input ~ 0
+COL9
+Text GLabel 3880 13845 1    50   Input ~ 0
+COL10
+Text GLabel 3780 13845 1    50   Input ~ 0
+COL11
+Text GLabel 3680 13845 1    50   Input ~ 0
+COL12
+Text GLabel 3580 13845 1    50   Input ~ 0
+COL13
+Text GLabel 3480 13845 1    50   Input ~ 0
+COL14
+Text GLabel 3380 13845 1    50   Input ~ 0
+COL15
+Text GLabel 1130 13715 0    50   Input ~ 0
+ROW1
+Text GLabel 1130 13815 0    50   Input ~ 0
+ROW2
+Text GLabel 1130 13915 0    50   Input ~ 0
+ROW3
+Text GLabel 1130 14015 0    50   Input ~ 0
+ROW4
+Text GLabel 1130 14115 0    50   Input ~ 0
+ROW5
+Text GLabel 1130 14215 0    50   Input ~ 0
+ROW6
+Text GLabel 1130 14315 0    50   Input ~ 0
+ROW7
+Text GLabel 1130 14415 0    50   Input ~ 0
+ROW8
+Text GLabel 1130 14515 0    50   Input ~ 0
+ROW9
+Text GLabel 1130 14615 0    50   Input ~ 0
+ROW10
+Text GLabel 1130 14715 0    50   Input ~ 0
+ROW11
+Text GLabel 1130 14815 0    50   Input ~ 0
+ROW12
+Text GLabel 1130 14915 0    50   Input ~ 0
+ROW13
+Wire Wire Line
+	3770 14985 3770 15030
+Wire Wire Line
+	3870 14985 3870 15030
+Wire Wire Line
+	3970 14985 3970 15030
+Wire Wire Line
+	4070 14985 4070 15030
+Wire Wire Line
+	4170 14985 4170 15030
+Wire Wire Line
+	4270 14985 4270 15030
+Wire Wire Line
+	4370 14985 4370 15030
+Wire Wire Line
+	4470 14985 4470 15030
 $EndSCHEMATC
