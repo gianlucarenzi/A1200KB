@@ -214,7 +214,7 @@ void SystemClock_Config(void)
   */
 int main(void)
 {
-	_write_ready(SYSCALL_NOTREADY); // printf is not functional here
+	_write_ready(SYSCALL_NOTREADY, &huart2); // printf is not functional here
 
 	/* MCU Configuration--------------------------------------------------------*/
 
@@ -232,7 +232,7 @@ int main(void)
 	MX_GPIO_Init();
 
 	MX_USART2_UART_Init();
-	_write_ready(SYSCALL_READY); // printf is functional from now on...
+	_write_ready(SYSCALL_READY, &huart2); // printf is functional from now on...
 
 	banner();
 
