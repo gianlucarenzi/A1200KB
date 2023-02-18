@@ -1,37 +1,26 @@
 #include <errno.h>
 #include <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
 #include "syscall.h"
-#include <stm32f4xx_ll_usart.h>
+#include <stm32f4xx_hal.h> // per HAL_StatusTypeDef
 #include "debug.h"
 
 static t_syscall_status uart_initialize = SYSCALL_NOTREADY;
+static UART_HandleTypeDef *uart = NULL;
 static int debuglevel = DBG_ERROR;
 
-void _write_ready(t_syscall_status rdy)
+void _write_ready(t_syscall_status rdy, UART_HandleTypeDef *ptr)
 {
-	uart_initialize = rdy;
-}
-
-static inline void usart_write_byte(uint8_t c)
-{
-	/* Wait for TXE flag to be raised */
-	while (!LL_USART_IsActiveFlag_TXE(USART1))
-		;;
-
-	LL_USART_ClearFlag_TC(USART1);
-
-	LL_USART_TransmitData8(USART1, c);
-}
-
-static inline void usart_write_buffer(uint8_t *buff, int len)
-{
-	int tx;
-	for (tx = 0; tx < len; tx++)
-		usart_write_byte(*(buff + tx));
+	if (ptr != NULL)
+	{
+		uart_initialize = rdy;
+		uart = ptr;
+	}
 }
 
 int _write(int file, char *data, int len)
 {
+	HAL_StatusTypeDef status = HAL_OK - 1;
+
 	if ((file != STDOUT_FILENO) && (file != STDERR_FILENO))
 	{
 		errno = EBADF;
@@ -40,48 +29,22 @@ int _write(int file, char *data, int len)
 
 	if (uart_initialize == SYSCALL_READY)
 	{
-		usart_write_buffer((uint8_t *)data, len);
+		if (uart != NULL)
+		{
+			// arbitrary timeout 1000
+			status = HAL_UART_Transmit(uart, (uint8_t*)data, len, 1000);
+		}
 	}
 
-	return 0;
+	// return # of bytes written - as best we can tell
+	return (status == HAL_OK ? len : 0);
 }
 
-#ifndef ArraySize
-	#define ArraySize(a)	(sizeof(a) / sizeof(a[0]))
-#endif
-	
-static uint32_t timer[8];
-static int timer_idx = 0;
-
-int stimer_create(void)
-{
-	timer_idx++;
-	if (timer_idx < ArraySize(timer))
-	{
-		timer[ timer_idx ] = 0;
-		return timer_idx;
-	}
-	return -1;
-}
-
-void stimer_start(int timr)
+static uint32_t timertick_start_ms = 0;
+void timer_start(void)
 {
 	// When timer starts get the realtime system tick
-	timer[timr] = HAL_GetTick();
-}
-
-// Returns 0 if it is too early otherwise returns 1, i.e. time is elapsed
-int stimer_elapsed(int timr, uint32_t msec)
-{
-	int retval;
-	uint32_t ticks = HAL_GetTick();
-
-	if (ticks < (timer[timr] + msec))
-		retval = 0;
-	else
-		retval = 1;
-
-	return retval;
+	timertick_start_ms = HAL_GetTick();
 }
 
 // I hate this delay because they are clockspeed dependent!!!
