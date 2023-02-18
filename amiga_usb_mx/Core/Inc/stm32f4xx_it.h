@@ -77,6 +77,14 @@ uint32_t timer_read32(void);
 uint16_t timer_elapsed(uint16_t last);
 uint32_t timer_elapsed32(uint32_t last);
 
+/* Global symbols, defined by GNU linker script */
+extern uint32_t *__bootflash_start;
+extern uint32_t *__bootflash_end;
+extern uint32_t *__appflash_start;
+extern uint32_t *__appflash_end;
+extern uint32_t *__ram_start;
+extern uint32_t *__ram_end;
+
 /* USER CODE END EFP */
 
 #ifdef __cplusplus
