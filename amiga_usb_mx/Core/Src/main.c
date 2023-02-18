@@ -32,41 +32,18 @@
 /* External storage classes */
 extern USBD_HandleTypeDef hUsbDeviceFS;
 extern host_driver_t usbdriver;
-extern void bootloader_jump(void);
 
 /* Internal functions */
 static UART_HandleTypeDef huart2;
-static int debuglevel = DBG_VERBOSE;
+static int debuglevel = DBG_INFO;
 
-/* Private function prototypes -----------------------------------------------*/
-//static void SystemClock_Config(void);
-//static void MX_GPIO_Init(void);
-//static void MX_USART2_UART_Init(void);
+#define KEYBOARD_INTERFACE "AMIGA COMMODORE COMPUTERS"
+static const char *fwBuild = "v0.1rc BUILD: " __TIME__ "-" __DATE__;
 
-#if defined(__ATARI__)
-#	define KEYBOARD_INTERFACE "ATARI XL/XE"
-#elif defined(__AMIGA__)
-#	define KEYBOARD_INTERFACE "AMIGA COMMODORE COMPUTERS"
-#else
-#	error "NO PLATFORM DEFINED"
-#endif
-
-/**
-  * @brief USART2 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_USART2_UART_Init(void)
+static void MX_USART2_UART_Init(int baudrate)
 {
-	/* USER CODE BEGIN USART2_Init 0 */
-
-	/* USER CODE END USART2_Init 0 */
-
-	/* USER CODE BEGIN USART2_Init 1 */
-
-	/* USER CODE END USART2_Init 1 */
 	huart2.Instance = USART2;
-	huart2.Init.BaudRate = 115200;
+	huart2.Init.BaudRate = baudrate;
 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
 	huart2.Init.StopBits = UART_STOPBITS_1;
 	huart2.Init.Parity = UART_PARITY_NONE;
@@ -77,17 +54,8 @@ static void MX_USART2_UART_Init(void)
 	{
 		Error_Handler();
 	}
-	/* USER CODE BEGIN USART2_Init 2 */
-
-	/* USER CODE END USART2_Init 2 */
-
 }
 
-/**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
 static void MX_GPIO_Init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -102,14 +70,14 @@ static void MX_GPIO_Init(void)
 	HAL_GPIO_WritePin(LED_CAPS_LOCK_GPIO_Port, LED_CAPS_LOCK_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(LED_NUM_LOCK_GPIO_Port, LED_NUM_LOCK_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(LED_SCROLL_LOCK_GPIO_Port, LED_SCROLL_LOCK_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(LED_POWER_GPIO_Port, LED_POWER_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_ACT_GPIO_Port, LED_ACT_Pin, GPIO_PIN_RESET);
 
 	/*Configure GPIO pin : LEDS MUST BE IN THE SAME PORT! */
 	GPIO_InitStruct.Pin = 
 		LED_CAPS_LOCK_Pin |
 		LED_NUM_LOCK_Pin |
 		LED_SCROLL_LOCK_Pin |
-		LED_POWER_Pin;
+		LED_ACT_Pin;
 
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_PULLUP;
@@ -138,25 +106,22 @@ static void MX_GPIO_Init(void)
 	HAL_GPIO_Init(KB_DAT_GPIO_Port, &GPIO_InitStruct);
 }
 
-/**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
 void Error_Handler(void)
 {
-	/* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
 	__disable_irq();
 	while (1)
 	{
 	}
-	/* USER CODE END Error_Handler_Debug */
 }
 
 static void banner(void)
 {
-	DBG_I("STM32 KEYBOARD CORE INTERFACE BOARD for " KEYBOARD_INTERFACE "\r\n");
-	DBG_I("(C) RetroBit Lab 2022 written by Gianluca Renzi <icjtqr@gmail.com>\r\n");
+	printf("\r\n\r\n" ANSI_BLUE "TMK BASED KEYBOARD CORE INTERFACE BOARD for " KEYBOARD_INTERFACE ANSI_RESET "\r\n");
+	printf(ANSI_YELLOW);
+	printf("FWVER: %s", fwBuild);
+	printf(ANSI_RESET "\r\n");
+	printf("\r\n\n");
 }
 
 __weak void bootloader_jump(void)
@@ -165,10 +130,6 @@ __weak void bootloader_jump(void)
 	while (1);
 }
 
-/**
-  * @brief System Clock Configuration
-  * @retval None
-  */
 void SystemClock_Config(void)
 {
 	RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -208,10 +169,6 @@ void SystemClock_Config(void)
 	}
 }
 
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
 	_write_ready(SYSCALL_NOTREADY, &huart2); // printf is not functional here
@@ -224,40 +181,36 @@ int main(void)
 	/* Configure the system clock */
 	SystemClock_Config();
 
-	/* USER CODE BEGIN SysInit */
-
-	/* USER CODE END SysInit */
-
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 
-	MX_USART2_UART_Init();
+	/* Initialize all pins to talk with Amiga Hardware and keeps the Amiga
+	 * in a RESET state until the system is ready to communicate with
+	 * all peripherals as early as possible...
+	 */
+	amiga_gpio_init();
+
+	MX_USART2_UART_Init(115200);
 	_write_ready(SYSCALL_READY, &huart2); // printf is functional from now on...
 
 	banner();
 
-	/* Initialize all pin to talk with Amiga Hardware and keeps the Amiga
-	 * in a RESET state until the system is ready to communicate with
-	 * all peripherals...
-	 */
-	amiga_gpio_init();
+	MX_USB_DEVICE_Init();
+
+	host_set_driver(&usbdriver);
+
+	DBG_V("KEYBOARD TYPE: " KEYBOARD_INTERFACE " CORE DRIVER RUNNING\r\n");
+
+	keyboard_init();
+
+	/* Now it's time to activate Amiga hardware */
 
 	/* This is for handshaking with the motherboard (if it's present)
 	 * and ready.
 	 */
 	amiga_protocol_init();
 
-	MX_USB_DEVICE_Init();
-
-	host_set_driver(&usbdriver);
-
-	LED_POWER_ON();
-
-	DBG_V("KEYBOARD TYPE: " KEYBOARD_INTERFACE "\r\n");
-
-	keyboard_init();
-
-	/* Now it's time to activate Amiga hardware */
+	LED_ACT_ON();
 
 	for(;;)
 	{
@@ -279,6 +232,9 @@ void assert_failed(uint8_t *file, uint32_t line)
 	/* USER CODE BEGIN 6 */
 	/* User can add his own implementation to report the file name and line number,
 		ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+	printf("FULL ASSERT: Wrong parametrers value: file %s on line %d\r\n", file, line);
+	while (1)
+		;
 	/* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
