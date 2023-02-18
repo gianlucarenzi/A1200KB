@@ -54,7 +54,7 @@ static int debuglevel = DBG_INFO;
 	 * |--------------------------------------------------------------|    ,----+----+----.     `---------------|
 	 * | Shift | BL|  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|  Shift   |    |LFT |DOWN| RGT|     | 1 | 2 | 3 | E |
 	 * `--------------------------------------------------------------'    `--------------'     `------------ N |
-	 *     | LAlt| LGUI|   |     Space        |   | RGUI| RAlt |                                |   0   | . | T |
+	 *     | LAlt| LGUI|   |       Space      |   | RGUI| RAlt |                                |   0   | . | T |
 	 *     `---------------------------------------------------'                                `---------------'
 	 *
 	 * BL = spare blank keys (not used in Standard International Mode)
