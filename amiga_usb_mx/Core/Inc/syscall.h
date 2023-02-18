@@ -10,12 +10,8 @@ typedef enum {
 	SYSCALL_READY,
 } t_syscall_status;
 
-extern void _write_ready(t_syscall_status rdy);
+extern void _write_ready(t_syscall_status rdy, UART_HandleTypeDef *ptr);
 extern int _write(int file, char *data, int len);
-extern int stimer_create(void);
-extern void stimer_start(int timer);
-extern int stimer_elapsed(int timer, uint32_t msec);
-
 /**
  * blocking functions!
  **/
