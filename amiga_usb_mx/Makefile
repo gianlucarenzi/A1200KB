@@ -14,7 +14,6 @@
 # target
 ######################################
 TARGET = matrix_key_usb
-PLATFORM ?= AMIGA
 
 ######################################
 # building variables
@@ -102,20 +101,11 @@ ASM_SOURCES =  \
 	startup_stm32f401xc.s
 
 
-ifeq ($(PLATFORM),AMIGA)
-	C_DEFS += -D__AMIGA__
-	C_SOURCES += \
-		Core/Src/amiga_config.c \
-		Core/Src/amiga_protocol.c \
+C_DEFS += -D__AMIGA__
+C_SOURCES += \
+	Core/Src/amiga_config.c \
+	Core/Src/amiga_protocol.c \
 		
-endif
-
-ifeq ($(PLATFORM),ATARI)
-	C_DEFS += -D__ATARI__
-	C_SOURCES += \
-		Core/Src/atari_config.c \
-		
-endif
 
 #######################################
 # binaries
