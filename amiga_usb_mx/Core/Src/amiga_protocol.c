@@ -1,3 +1,11 @@
+/**
+ * Amiga housekeeping as MPU.
+ * Written by Gianluca Renzi R.G.
+ * License for this code: LGPLv3
+ * Please refer to this license at GNU Web Site
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * 
+ **/
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -234,8 +242,16 @@ static int debuglevel = DBG_INFO;
 #define KEY_RIGHTALT                           0xE6
 #define KEY_RIGHT_GUI                          0xE7
 
-#define KEYCODE_TAB_SIZE      0x70 /* da 0x00 a 0x6F */
+/* 
+ * Custom defined codes, just to be sure the table is scan from the
+ * beginning to the end, without a duplicate
+ */
+#define KEY_LMOUSE_BUTTON                      0xE8
+#define KEY_RMOUSE_BUTTON                      0xE9
+#define KEY_MMOUSE_BUTTON                      0xEA
 
+
+#define KEYCODE_TAB_SIZE      121
 static uint8_t leds = 0;
 
 static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
@@ -243,6 +259,8 @@ static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
  	// SCANCODE USB to AMIGA
  	// --------------------------------------------------------------
  	// Need the real scancode by testing all keys on a real keyboard.
+ 	// --------------------------------------------------------------
+ 	// Keycodes from: https://wiki.amigaos.net/wiki/Keymap_Library
  	// --------------------------------------------------------------
 	{KEY_GRAVE_ACCENT_AND_TILDE, 0x00 }, // ~
 	{KEY_1_EXCLAMATION_MARK,     0x01 }, // 1!
@@ -258,6 +276,7 @@ static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
 	{KEY_MINUS_UNDERSCORE,       0x0B }, // -_
 	{KEY_EQUAL_PLUS,             0x0C }, // +=
 	{KEY_BACKSLASH_VERTICAL_BAR, 0x0D }, // |
+	{KEY_INTERNATIONAL3,         0x0E }, // Intl 3 Yen
 	{KEY_KEYPAD_0_INSERT,        0x0F }, // NUM 0
 	{KEY_Q,                      0x10 }, // Q
 	{KEY_W,                      0x11 }, // W
@@ -271,6 +290,7 @@ static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
 	{KEY_P,                      0x19 }, // P
 	{KEY_OBRACKET_AND_OBRACE,    0x1A }, // [{
 	{KEY_CBRACKET_AND_CBRACE,    0x1B }, // }]
+	{KEY_INTERNATIONAL5,         0x1C }, // undefined Intl 5
 	{KEY_KEYPAD_1_END,           0x1D }, // NUM 1
 	{KEY_KEYPAD_2_DOWN_ARROW,    0x1E }, // NUM 2
 	{KEY_KEYPAD_3_PAGEDN,        0x1F }, // NUM 3
@@ -285,11 +305,12 @@ static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
 	{KEY_L,                      0x28 }, // L
 	{KEY_SEMICOLON_COLON,        0x29 }, // :;
 	{KEY_SINGLE_AND_DOUBLE_QUOTE,0x2A }, // "'
-	{KEY_ENTER,                  0x44 }, // <Enter>
+	{KEY_INTERNATIONAL1,         0x2B }, // undefined Intl 1
+	{KEY_INTERNATIONAL4,         0x2C }, // undefined Intl 4
 	{KEY_KEYPAD_4_LEFT_ARROW,    0x2D }, // NUM 4
 	{KEY_KEYPAD_5,               0x2E }, // NUM 5
 	{KEY_KEYPAD_6_RIGHT_ARROW,   0x2F }, // NUM 6
-	{KEY_INTERNATIONAL2,         0x30 }, // <SHIFT> international?
+	{KEY_INTERNATIONAL2,         0x30 }, // <SHIFT> international? Intl 2
 	{KEY_Z,                      0x31 }, // Z
 	{KEY_X,                      0x32 }, // X
 	{KEY_C,                      0x33 }, // C
@@ -298,20 +319,26 @@ static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
 	{KEY_N,                      0x36 }, // N
 	{KEY_M,                      0x37 }, // M
 	{KEY_COMMA_AND_LESS,         0x38 }, // <,
-	{KEY_KEYPAD_COMMA,           0x38 }, // NUM ,
 	{KEY_DOT_GREATER,            0x39 }, // >.
 	{KEY_SLASH_QUESTION,         0x3A }, // ?/
+	{KEY_INTERNATIONAL6,         0x3B }, // undefined Intl 6
+	{KEY_KEYPAD_DECIMAL_SEPARATOR_DELETE, 0x3C }, // KEYPAD '.'
 	{KEY_KEYPAD_7_HOME,          0x3D }, // NUM 7
 	{KEY_KEYPAD_8_UP_ARROW,      0x3E }, // NUM 8
 	{KEY_KEYPAD_9_PAGEUP,        0x3F }, // NUM 9
 	{KEY_SPACEBAR,               0x40 }, // SPACE
 	{KEY_BACKSPACE,              0x41 }, // BACKSPACE
 	{KEY_TAB,                    0x42 }, // TAB
-	{KEY_KEYPAD_ENTER,           0x43 }, // ENTER
-	{KEY_RETURN,                 0x2B }, // RETURN
+	{KEY_ENTER,                  0x43 }, // ENTER
+	{KEY_RETURN,                 0x43 }, // RETURN
+	{KEY_KEYPAD_ENTER,           0x44 }, // NUM Enter
 	{KEY_ESCAPE,                 0x45 }, // ESC
 	{KEY_DELETE,                 0x46 }, // DEL
+	{KEY_INSERT,                 0x47 }, // INS (usually undefined)
+	{KEY_PAGEUP,                 0x48 }, // PAGEUP (usually undefined)
+	{KEY_PAGEDOWN,               0x49 }, // PAGEDOWN (usually undefined)
 	{KEY_KEYPAD_MINUS,           0x4A }, // NUM -
+	{KEY_F11,                    0x4B }, // F11
 	{KEY_UPARROW,                0x4C }, // CURSOR U
 	{KEY_DOWNARROW,              0x4D }, // CURSOR D
 	{KEY_RIGHTARROW,             0x4E }, // CURSOR R
@@ -326,36 +353,36 @@ static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
 	{KEY_F8,                     0x57 }, // F8
 	{KEY_F9,                     0x58 }, // F9
 	{KEY_F10,                    0x59 }, // F10
+	{KEY_KEYPAD_OPARENTHESIS,    0x5A }, // NUM (
+	{KEY_KEYPAD_CPARENTHESIS,    0x5B }, // NUM )
 	{KEY_KEYPAD_SLASH,           0x5C }, // /
 	{KEY_KEYPAD_ASTERIKS,        0x5D }, // NUM *
 	{KEY_KEYPAD_PLUS,            0x5E }, // NUM +
-	{KEY_F12,                    0x5F }, // HELP
+	{KEY_SCROLL_LOCK,            0x5F }, // HELP (ScrollLock)
+	{KEY_APPLICATION,            0x5F }, // APP - HELP
 	{KEY_LEFTSHIFT,              0x60 }, // LSHIFT
 	{KEY_RIGHTSHIFT,             0x61 }, // RSHIFT
 	{KEY_CAPS_LOCK,              0x62 }, // CAPS
 	{KEY_LEFTCONTROL,            0x63 }, // LCTRL
+	{KEY_RIGHTCONTROL,           0x63 }, // RCTRL
 	{KEY_LEFTALT,                0x64 }, // LALT
 	{KEY_RIGHTALT,               0x65 }, // RALT
 	{KEY_LEFT_GUI,               0x66 }, // LWIN
 	{KEY_RIGHT_GUI,              0x67 }, // RWIN
-	{KEY_APPLICATION,            0x5F }, // APP - HELP
-	{KEY_KEYPAD_DECIMAL_SEPARATOR_DELETE, 0x3C }, // KEYPAD '.'
-	{KEY_KEYPAD_NUM_LOCK_AND_CLEAR, 0x68 }, // NUMLOCK & CLEAR
-	{KEY_PRINTSCREEN,            0x0E }, // SPARE
-	{KEY_SCROLL_LOCK,            0x1C }, // SPARE
-	{KEY_PAUSE,                  0x2C }, // SPARE
-	{KEY_HOME,                   0x3B }, // SPARE
-	{KEY_PAGEUP,                 0x3F }, // PGUP
-	{KEY_PAGEDOWN,               0x1F }, // PGDOWN
-	{KEY_END1,                   0x49 }, // SPARE
-	{KEY_INSERT,                 0x4B }, // SPARE
-	{KEY_NONE,                   0x5B }, // SPARE
-	{KEY_NONE,                   0x6A }, // SPARE
-	{KEY_NONE,                   0x6B }, // SPARE
-	{KEY_NONE,                   0x6C }, // SPARE
-	{KEY_NONE,                   0x6D }, // SPARE
-	{KEY_NONE,                   0x6E }, // SPARE
-	{KEY_NONE,                   0x6F }, // SPARE
+	{KEY_LMOUSE_BUTTON,          0x68 }, // LMOUSE BUTTON
+	{KEY_RMOUSE_BUTTON,          0x69 }, // RMOUSE BUTTON
+	{KEY_MMOUSE_BUTTON,          0x6A }, // MMOUSE BUTTON
+	{KEY_MENU,                   0x6B }, // MENU, GUI, COMPOSE (mappable to RAmiga in Firmware)
+	{KEY_KEYPAD_COMMA,           0x6C }, // Brazil NP . (named "Keypad ," in USB specs)
+	{KEY_PRINTSCREEN,            0x6D }, // PrintScreen/SysReq (mappable to Help in Firmware)
+	{KEY_SYSREQ,                 0x6E }, // BREAK
+	{KEY_F12,                    0x6F }, // F12
+	{KEY_HOME,                   0x70 }, // HOME
+	{KEY_END1,                   0x71 }, // END
+	{KEY_STOP,                   0x72 }, // STOP/CD32 Blue Stop, CDTV Stop, Port 0 Blue
+	{KEY_PAUSE,                  0x73 }, // Play/Pause CD32 Grey Play/Pause CDTV Play/Pause Port 0 Blue
+	{KEY_VOLUME_UP,              0x74 }, // Prev Track CDTV << REV
+	{KEY_VOLUME_DOWN,            0x75 }, // Next Track CDTV >> FF
 };
 
 static const uint8_t asciiscancode[KEYCODE_TAB_SIZE][2] =
@@ -464,6 +491,15 @@ static const uint8_t asciiscancode[KEYCODE_TAB_SIZE][2] =
 	{KEY_RIGHTALT,               ' ' }, // RALT
 	{KEY_LEFT_GUI,               ' ' }, // LWIN
 	{KEY_RIGHT_GUI,              ' ' }, // RWIN
+	{KEY_NONE,                   ' ' }, // STUB
+	{KEY_NONE,                   ' ' }, // STUB
+	{KEY_NONE,                   ' ' }, // STUB
+	{KEY_NONE,                   ' ' }, // STUB
+	{KEY_NONE,                   ' ' }, // STUB
+	{KEY_NONE,                   ' ' }, // STUB
+	{KEY_NONE,                   ' ' }, // STUB
+	{KEY_NONE,                   ' ' }, // STUB
+	{KEY_NONE,                   ' ' }, // STUB
 	{KEY_NONE,                   ' ' }, // STUB
 	{KEY_NONE,                   ' ' }, // STUB
 	{KEY_NONE,                   ' ' }, // STUB
@@ -610,9 +646,9 @@ static const uint8_t asciiscancode[KEYCODE_TAB_SIZE][2] =
 	   +-------+-------+-------+-------+-------+-------+-------+
 
 	About Hard Reset.
-	   -----------------
-	   Hard Reset happens after  Reset Warning . Valid for all keyboards
-	   except the Amiga 500.
+	-----------------
+	Hard Reset happens after  Reset Warning . Valid for all keyboards
+	except the Amiga 500.
 
 	The keyboard Hard Resets the Amiga by pulling KCLK low and starting a 500
 	millisecond timer.   When one or more of the keys is released and 500
@@ -637,10 +673,13 @@ static unsigned char capslk = 0;
 static unsigned char numlk = 0;
 static unsigned char scrolllk = 0;
 
-//static void amikb_direction(kbd_dir dir);
-//static uint8_t amiga_keycode_send(uint8_t code, int press);
-
 /* Local functions */
+static uint8_t scancode_to_amiga(uint8_t lkey);
+static uint8_t ascii_to_scancode(uint8_t ascii);
+static void amikb_direction(kbd_dir dir);
+static uint8_t amiga_keycode_send(uint8_t keycode, int press);
+static void amiga_do_reset(void);
+
 static uint8_t scancode_to_amiga(uint8_t lkey)
 {
 	uint8_t i = 0, keyvalue = lkey;
@@ -678,7 +717,7 @@ static uint8_t ascii_to_scancode(uint8_t ascii)
 	DBG_N("Exit with: 0x%02x ScanCode\r\n", keyvalue);
 	return keyvalue;
 }
-
+// **************************
 static void amikb_direction(kbd_dir dir)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
@@ -711,6 +750,61 @@ static void amikb_direction(kbd_dir dir)
 
 	DBG_N("Exit\r\n");
 }
+
+void amikb_startup(void)
+{
+	uint8_t AMIGA_INITPOWER = 0xFD; //11111101
+	uint8_t AMIGA_TERMPOWER = 0xFE; //11111110
+
+	DBG_N("Enter\r\n");
+
+	// De-assert nRESET for Amiga...
+	amiga_protocol_reset();
+
+	amikb_direction(DAT_OUTPUT); // Default
+
+	mdelay(1000);              // wait for sync
+	amiga_keycode_send((uint8_t) AMIGA_INITPOWER, 0); // send "initiate power-up"
+	udelay(200);
+	amiga_keycode_send((uint8_t) AMIGA_TERMPOWER, 0); // send "terminate power-up"
+
+	DBG_N("Exit\r\n");
+}
+
+static int keyboard_is_present = 0;
+void amikb_ready(int isready)
+{
+	keyboard_is_present = isready;
+}
+
+void amikb_gpio_init(void)
+{
+	GPIO_InitTypeDef GPIO_InitStruct;
+
+	DBG_N("Enter\r\n");
+
+	/* GPIO Port A Clock Enable for Amiga Protocol Pins */
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+
+	/*Configure GPIO pin Output Level */
+	HAL_GPIO_WritePin(KB_AMIGA_GPIO_Port,
+		KB_CLK_Pin |
+		KB_DAT_Pin  |
+		KB_RST_Pin, GPIO_PIN_SET);
+
+	/*Configure GPIO pins : KBD_CLOCK_Pin KBD_DATA_Pin KBD_RESET_Pin */
+	GPIO_InitStruct.Pin = KB_CLK_Pin | KB_DAT_Pin | KB_RST_Pin;
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	HAL_GPIO_Init(KB_AMIGA_GPIO_Port, &GPIO_InitStruct);
+
+	// Lasciamo l'Amiga in RESET finche' non parte la macchina a stati
+	HAL_GPIO_WritePin(KB_AMIGA_GPIO_Port, KB_RST_Pin, GPIO_PIN_RESET); // Clear KBD_RESET pin
+
+	DBG_N("Exit\r\n");
+}
+
 
 static uint8_t amiga_keycode_send(uint8_t keycode, int press)
 {
@@ -898,9 +992,27 @@ static uint8_t amiga_keycode_send(uint8_t keycode, int press)
 	DBG_N("DATA AND CLOCK AS INPUTS. WAITING FOR SYNC FROM CPU\r\n");
 	amikb_direction( DAT_INPUT );
 
+#ifdef REAL_AMIKEYBOARD_SYNC
+	{
+		int hshakepulse_us = 143;
+		int sync;
+		for (;;)
+		{
+			sync = HAL_GPIO_ReadPin(GPIOC, KBD_DATA_Pin);
+			if (sync == 0 || hshakepulse_us == 0)
+				break;
+			hshakepulse_us--;
+			udelay(1);
+		}
+		if (hshakepulse_us == 0)
+		{
+			DBG_E("CPU KEYBOARD SYNC not received within 143usec!\r\n");
+		}
+	}
+#else
 	// This can slow down the speed of typing... ????
-	mdelay(143);	// handshake wait 143msec
-
+	udelay(143);	// handshake wait 143msec
+#endif
 	// The following instructions should be useless as the port has been configured as input few
 	// lines above... :-/
 	HAL_GPIO_WritePin(KB_AMIGA_GPIO_Port, KB_DAT_Pin,  GPIO_PIN_SET); // Set KB_DATA pin
