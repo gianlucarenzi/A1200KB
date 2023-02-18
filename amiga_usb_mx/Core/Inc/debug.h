@@ -118,11 +118,6 @@ extern debug_config_t debug_config;
 		printf("%s " type " (%s): " fmt, __FILE__, __func__, ## args); \
 	}
 
-#define printRaw_E(type, fmt, args...) \
-	{\
-		printf("%s " type " (%s): " fmt, __FILE__, __func__, ## args); \
-	}
-
 #define DBG_N(fmt, args...) \
   { if (debuglevel >= DBG_NOISY) {\
 		printf(ANSI_YELLOW); \
@@ -150,7 +145,7 @@ extern debug_config_t debug_config;
 #define DBG_E(fmt, args...) \
   { \
 	printf(ANSI_RED); \
-	printRaw_E("Err", fmt, ## args); \
+	printRaw("ERR", fmt, ## args); \
 	printf(ANSI_RESET); \
   }
 
