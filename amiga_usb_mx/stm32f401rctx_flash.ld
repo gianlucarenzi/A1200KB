@@ -58,11 +58,16 @@ _estack = 0x20010000;    /* end of RAM */
 _Min_Heap_Size = 0x200;      /* required amount of heap  */
 _Min_Stack_Size = 0x400; /* required amount of stack */
 
+_BOOTLOADER_SIZE_ = 16K;
+_MCU_FLASH_SIZE_ = 256K;
+_MCU_RAM_SIZE_ = 64K;
+
 /* Specify the memory areas */
 MEMORY
 {
-RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 64K
-FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 256K
+	BOOT (rx)	: ORIGIN = 0x08000000, LENGTH = _BOOTLOADER_SIZE_
+	FLASH (rx)	: ORIGIN = 0x08000000 + _BOOTLOADER_SIZE_, LENGTH = _MCU_FLASH_SIZE_ - _BOOTLOADER_SIZE_
+	RAM (xrw)	: ORIGIN = 0x20000000, LENGTH = _MCU_RAM_SIZE_
 }
 
 /* Define output sections */
@@ -186,4 +191,11 @@ SECTIONS
   .ARM.attributes 0 : { *(.ARM.attributes) }
 }
 
+/* Global symbols. May be used by code */
 
+__bootflash_start = ORIGIN(BOOT);
+__bootflash_end = ORIGIN(BOOT) + LENGTH(BOOT);
+__appflash_start = ORIGIN(FLASH);
+__appflash_end = ORIGIN(FLASH) + LENGTH(FLASH);
+__ram_start = ORIGIN(RAM);
+__ram_end = ORIGIN(RAM) + LENGTH(RAM);
