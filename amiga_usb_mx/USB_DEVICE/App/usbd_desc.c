@@ -61,21 +61,15 @@
   * @brief Private defines.
   * @{
   */
-#ifdef __AMIGA__
-	#define PID_STRING_FS "Amiga Keyboard HID"
-#endif
-#ifdef __ATARI__
-	#define PID_STRING_FS "Atari XL/XE Keyboard HID"
-#endif
-#define USBD_VID     1155
-#define USBD_LANGID_STRING     1033
-#define USBD_MANUFACTURER_STRING     "RetroBitLab"
-#define USBD_PID_FS     22315
-#define USBD_PRODUCT_STRING_FS     PID_STRING_FS
-#define USBD_CONFIGURATION_STRING_FS     "HID Config"
-#define USBD_INTERFACE_STRING_FS     "HID Interface"
+#define USBD_VID						0x0201
+#define USBD_LANGID_STRING				1033
+#define USBD_MANUFACTURER_STRING		"Commodore Braunschweig"
+#define USBD_PID_FS     				0x7F00
+#define USBD_PRODUCT_STRING_FS			"Commodore Amiga USB Keyboard"
+#define USBD_CONFIGURATION_STRING_FS	"HID Config"
+#define USBD_INTERFACE_STRING_FS		"HID Interface"
 
-#define USB_SIZ_BOS_DESC            0x0C
+#define USB_SIZ_BOS_DESC				0x0C
 
 /* USER CODE BEGIN PRIVATE_DEFINES */
 
