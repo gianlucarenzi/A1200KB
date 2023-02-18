@@ -100,14 +100,8 @@ void keyboard_task(void)
 				if (matrix_change & col_mask) {
 					keyevent_t e = (keyevent_t){
 						.key = (keypos_t){ .row = r, .col = c },
-#ifdef __ATARI__
-#warning "Atari Keyboard has a negative logic!"
-						// As today, Atari Keyboard has a negative logic! :-/
-						.pressed = !(matrix_row & col_mask),
-#else
-#warning "Amiga Keyboard has a positive logic!"
+						#warning "Amiga Keyboard has a positive logic!"
 						.pressed = (matrix_row & col_mask),
-#endif
 						.time = (timer_read() | 1) /* time should not be 0 */
 					};
 					action_exec(e);
