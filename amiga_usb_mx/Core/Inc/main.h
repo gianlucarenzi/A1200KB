@@ -121,7 +121,7 @@ void Error_Handler(void);
 #define LED_SCROLL_LOCK_Pin GPIO_PIN_10
 #define LED_SCROLL_LOCK_GPIO_Port GPIOA
 
-#define LED_POWER_Pin GPIO_PIN_4
+#define LED_POWER_Pin GPIO_PIN_0
 #define LED_POWER_GPIO_Port GPIOA
 
 /* All leds must be defined in the same port! */
