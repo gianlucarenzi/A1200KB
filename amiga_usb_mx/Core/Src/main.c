@@ -171,8 +171,6 @@ void SystemClock_Config(void)
 
 int main(void)
 {
-	int reset_active_ms = AMIGA_RESET_TIMEOUT_MS;
-
 	_write_ready(SYSCALL_NOTREADY, &huart2); // printf is not functional here
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -220,25 +218,6 @@ int main(void)
 	for(;;)
 	{
 		keyboard_task();
-		/* Check for any RST assert from Amiga hardware */
-		if (amiga_protocol_is_reset())
-		{
-			/* need to check if there is a running nRESET!
-			 * It is a reset if it is more than 300ms!
-			 */
-			reset_active_ms--;
-			if (reset_active_ms < 1)
-			{
-				DBG_E("AMIGA PROTOCOL RESET ASSERT. Restart Communication with the motherboard\n\r");
-				amiga_protocol_init();
-				reset_active_ms = AMIGA_RESET_TIMEOUT_MS;
-			}
-		}
-		else
-		{
-			/* If there is no nRESET asserted, reload the timer count */
-			reset_active_ms = AMIGA_RESET_TIMEOUT_MS;
-		}
 	}
 }
 
