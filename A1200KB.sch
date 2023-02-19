@@ -1,960 +1,972 @@
 EESchema Schematic File Version 4
+LIBS:A1200KB-cache
 EELAYER 30 0
 EELAYER END
 $Descr A2 23386 16535
 encoding utf-8
-Sheet 1 2
+Sheet 1 1
 Title "AMIGA 1200 KEYBOARD"
-Date "2022-01-14"
+Date ""
 Rev "1"
-Comp "Original Concept by ADAM EBERBACH"
-Comment1 "Modified by RetroBit Lab"
-Comment2 "Gianluca Renzi"
+Comp "ADAM EBERBACH"
+Comment1 ""
+Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K2
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K2
 U 1 1 5C7001B7
 P 2500 5700
 F 0 "K2" H 2500 6039 60  0000 C CNN
 F 1 "F1" H 2500 5933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 2500 5933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 2500 5933 60  0001 C CNN
 F 3 "" H 2500 5700 60  0000 C CNN
 	1    2500 5700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K3
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K3
 U 1 1 5C70020E
 P 3700 5700
 F 0 "K3" H 3700 6039 60  0000 C CNN
 F 1 "F2" H 3700 5933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 3700 5933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 3700 5933 60  0001 C CNN
 F 3 "" H 3700 5700 60  0000 C CNN
 	1    3700 5700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K4
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K4
 U 1 1 5C70038E
 P 4800 5700
 F 0 "K4" H 4800 6039 60  0000 C CNN
 F 1 "F3" H 4800 5933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 4800 5933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 4800 5933 60  0001 C CNN
 F 3 "" H 4800 5700 60  0000 C CNN
 	1    4800 5700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K5
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K5
 U 1 1 5C7003FE
 P 5900 5700
 F 0 "K5" H 5900 6039 60  0000 C CNN
 F 1 "F4" H 5900 5933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 5900 5933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 5900 5933 60  0001 C CNN
 F 3 "" H 5900 5700 60  0000 C CNN
 	1    5900 5700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K6
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K6
 U 1 1 5C700470
 P 7000 5700
 F 0 "K6" H 7000 6039 60  0000 C CNN
 F 1 "F5" H 7000 5933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 7000 5933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 7000 5933 60  0001 C CNN
 F 3 "" H 7000 5700 60  0000 C CNN
 	1    7000 5700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K8
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K8
 U 1 1 5C700A92
 P 10400 5700
 F 0 "K8" H 10400 6039 60  0000 C CNN
 F 1 "F7" H 10400 5933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 10400 5933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 10400 5933 60  0001 C CNN
 F 3 "" H 10400 5700 60  0000 C CNN
 	1    10400 5700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K9
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K9
 U 1 1 5C700F05
 P 11600 5700
 F 0 "K9" H 11600 6039 60  0000 C CNN
 F 1 "F8" H 11600 5933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 11600 5933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 11600 5933 60  0001 C CNN
 F 3 "" H 11600 5700 60  0000 C CNN
 	1    11600 5700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K10
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K10
 U 1 1 5C700FC5
 P 12800 5700
 F 0 "K10" H 12800 6039 60  0000 C CNN
 F 1 "F9" H 12800 5933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 12800 5933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 12800 5933 60  0001 C CNN
 F 3 "" H 12800 5700 60  0000 C CNN
 	1    12800 5700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K11
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K11
 U 1 1 5C701092
 P 14000 5700
 F 0 "K11" H 14000 6039 60  0000 C CNN
 F 1 "F10" H 14000 5933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 14000 5933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 14000 5933 60  0001 C CNN
 F 3 "" H 14000 5700 60  0000 C CNN
 	1    14000 5700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.5U-MX_Alps_Hybrids K28
+L A1200KB-rescue:MX-1.5U-MX_Alps_Hybrids K28
 U 1 1 5C701DEC
 P 17500 6700
 F 0 "K28" H 17500 7039 60  0000 C CNN
 F 1 "HELP" H 17500 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.50u_PCB_3d" H 17500 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.5U-NoLED" H 17500 6933 60  0001 C CNN
 F 3 "" H 17500 6700 60  0000 C CNN
 	1    17500 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-2.75U-MX_Alps_Hybrids K82
+L A1200KB-rescue:MX-2.75U-MX_Alps_Hybrids K82
 U 1 1 5C702218
 P 13300 9700
 F 0 "K82" H 13300 10039 60  0000 C CNN
 F 1 "R.SHIFT" H 13300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_2.75u_PCB_3d" H 13300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-2.75U-NoLED" H 13300 9933 60  0001 C CNN
 F 3 "" H 13300 9700 60  0000 C CNN
 	1    13300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.5U-MX_Alps_Hybrids K12
+L A1200KB-rescue:MX-1.5U-MX_Alps_Hybrids K12
 U 1 1 5C703BFE
 P 1300 6700
 F 0 "K12" H 1300 7039 60  0000 C CNN
 F 1 "TILDE" H 1300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.50u_PCB_3d" H 1300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.5U-NoLED" H 1300 6933 60  0001 C CNN
 F 3 "" H 1300 6700 60  0000 C CNN
 	1    1300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K13
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K13
 U 1 1 5C703C04
 P 2300 6700
 F 0 "K13" H 2300 7039 60  0000 C CNN
 F 1 "1" H 2300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 2300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 2300 6933 60  0001 C CNN
 F 3 "" H 2300 6700 60  0000 C CNN
 	1    2300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K14
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K14
 U 1 1 5C703C0A
 P 3300 6700
 F 0 "K14" H 3300 7039 60  0000 C CNN
 F 1 "2" H 3300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 3300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 3300 6933 60  0001 C CNN
 F 3 "" H 3300 6700 60  0000 C CNN
 	1    3300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K16
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K16
 U 1 1 5C703C16
 P 5300 6700
 F 0 "K16" H 5300 7039 60  0000 C CNN
 F 1 "4" H 5300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 5300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 5300 6933 60  0001 C CNN
 F 3 "" H 5300 6700 60  0000 C CNN
 	1    5300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K17
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K17
 U 1 1 5C703C1C
 P 6300 6700
 F 0 "K17" H 6300 7039 60  0000 C CNN
 F 1 "5" H 6300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 6300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 6300 6933 60  0001 C CNN
 F 3 "" H 6300 6700 60  0000 C CNN
 	1    6300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K18
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K18
 U 1 1 5C703C22
 P 7300 6700
 F 0 "K18" H 7300 7039 60  0000 C CNN
 F 1 "6" H 7300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 7300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 7300 6933 60  0001 C CNN
 F 3 "" H 7300 6700 60  0000 C CNN
 	1    7300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K19
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K19
 U 1 1 5C703C28
 P 8300 6700
 F 0 "K19" H 8300 7039 60  0000 C CNN
 F 1 "7" H 8300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 8300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 8300 6933 60  0001 C CNN
 F 3 "" H 8300 6700 60  0000 C CNN
 	1    8300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K20
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K20
 U 1 1 5C703C2E
 P 9300 6700
 F 0 "K20" H 9300 7039 60  0000 C CNN
 F 1 "8" H 9300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 9300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 9300 6933 60  0001 C CNN
 F 3 "" H 9300 6700 60  0000 C CNN
 	1    9300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K21
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K21
 U 1 1 5C703C34
 P 10300 6700
 F 0 "K21" H 10300 7039 60  0000 C CNN
 F 1 "9" H 10300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 10300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 10300 6933 60  0001 C CNN
 F 3 "" H 10300 6700 60  0000 C CNN
 	1    10300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K22
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K22
 U 1 1 5C703C3A
 P 11300 6700
 F 0 "K22" H 11300 7039 60  0000 C CNN
 F 1 "0" H 11300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 11300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 11300 6933 60  0001 C CNN
 F 3 "" H 11300 6700 60  0000 C CNN
 	1    11300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K23
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K23
 U 1 1 5C703C40
 P 12300 6700
 F 0 "K23" H 12300 7039 60  0000 C CNN
 F 1 "MINUS" H 12300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 12300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 12300 6933 60  0001 C CNN
 F 3 "" H 12300 6700 60  0000 C CNN
 	1    12300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K24
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K24
 U 1 1 5C703C46
 P 13300 6700
 F 0 "K24" H 13300 7039 60  0000 C CNN
 F 1 "PLUS" H 13300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 13300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 13300 6933 60  0001 C CNN
 F 3 "" H 13300 6700 60  0000 C CNN
 	1    13300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K25
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K25
 U 1 1 5C703C4C
 P 14300 6700
 F 0 "K25" H 14300 7039 60  0000 C CNN
 F 1 "PIPE" H 14300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 14300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 14300 6933 60  0001 C CNN
 F 3 "" H 14300 6700 60  0000 C CNN
 	1    14300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-2U-MX_Alps_Hybrids K33
+L A1200KB-rescue:MX-2U-MX_Alps_Hybrids K33
 U 1 1 5C706FAD
 P 1300 7700
 F 0 "K33" H 1300 8039 60  0000 C CNN
 F 1 "TAB" H 1300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 1300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-2U-NoLED" H 1300 7933 60  0001 C CNN
 F 3 "" H 1300 7700 60  0000 C CNN
 	1    1300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K34
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K34
 U 1 1 5C706FB3
 P 2300 7700
 F 0 "K34" H 2300 8039 60  0000 C CNN
 F 1 "Q" H 2300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 2300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 2300 7933 60  0001 C CNN
 F 3 "" H 2300 7700 60  0000 C CNN
 	1    2300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K35
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K35
 U 1 1 5C706FB9
 P 3300 7700
 F 0 "K35" H 3300 8039 60  0000 C CNN
 F 1 "W" H 3300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 3300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 3300 7933 60  0001 C CNN
 F 3 "" H 3300 7700 60  0000 C CNN
 	1    3300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K37
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K37
 U 1 1 5C706FC5
 P 5300 7700
 F 0 "K37" H 5300 8039 60  0000 C CNN
 F 1 "R" H 5300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 5300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 5300 7933 60  0001 C CNN
 F 3 "" H 5300 7700 60  0000 C CNN
 	1    5300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K38
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K38
 U 1 1 5C706FCB
 P 6300 7700
 F 0 "K38" H 6300 8039 60  0000 C CNN
 F 1 "T" H 6300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 6300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 6300 7933 60  0001 C CNN
 F 3 "" H 6300 7700 60  0000 C CNN
 	1    6300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K39
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K39
 U 1 1 5C706FD1
 P 7300 7700
 F 0 "K39" H 7300 8039 60  0000 C CNN
 F 1 "Y" H 7300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 7300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 7300 7933 60  0001 C CNN
 F 3 "" H 7300 7700 60  0000 C CNN
 	1    7300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K40
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K40
 U 1 1 5C706FD7
 P 8300 7700
 F 0 "K40" H 8300 8039 60  0000 C CNN
 F 1 "U" H 8300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 8300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 8300 7933 60  0001 C CNN
 F 3 "" H 8300 7700 60  0000 C CNN
 	1    8300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K41
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K41
 U 1 1 5C706FDD
 P 9300 7700
 F 0 "K41" H 9300 8039 60  0000 C CNN
 F 1 "I" H 9300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 9300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 9300 7933 60  0001 C CNN
 F 3 "" H 9300 7700 60  0000 C CNN
 	1    9300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K42
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K42
 U 1 1 5C706FE3
 P 10300 7700
 F 0 "K42" H 10300 8039 60  0000 C CNN
 F 1 "O" H 10300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 10300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 10300 7933 60  0001 C CNN
 F 3 "" H 10300 7700 60  0000 C CNN
 	1    10300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K43
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K43
 U 1 1 5C706FE9
 P 11300 7700
 F 0 "K43" H 11300 8039 60  0000 C CNN
 F 1 "P" H 11300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 11300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 11300 7933 60  0001 C CNN
 F 3 "" H 11300 7700 60  0000 C CNN
 	1    11300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K44
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K44
 U 1 1 5C706FEF
 P 12300 7700
 F 0 "K44" H 12300 8039 60  0000 C CNN
 F 1 "L.CURLY" H 12300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 12300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 12300 7933 60  0001 C CNN
 F 3 "" H 12300 7700 60  0000 C CNN
 	1    12300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K45
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K45
 U 1 1 5C706FF5
 P 13300 7700
 F 0 "K45" H 13300 8039 60  0000 C CNN
 F 1 "R.CURLY" H 13300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 13300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 13300 7933 60  0001 C CNN
 F 3 "" H 13300 7700 60  0000 C CNN
 	1    13300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-ISO-MX_Alps_Hybrids K46
+L A1200KB-rescue:MX-ISO-MX_Alps_Hybrids K46
 U 1 1 5C706FFB
 P 14800 7700
 F 0 "K46" H 14800 8039 60  0000 C CNN
 F 1 "RETURN" H 14800 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_ISOEnter_Rotated_PCB_3d" H 14800 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-ISO" H 14800 7933 60  0001 C CNN
 F 3 "" H 14800 7700 60  0000 C CNN
 	1    14800 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K83
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K83
 U 1 1 5C707001
 P 16000 9700
 F 0 "K83" H 16000 10039 60  0000 C CNN
 F 1 "LEFT" H 16000 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 16000 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 16000 9933 60  0001 C CNN
 F 3 "" H 16000 9700 60  0000 C CNN
 	1    16000 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K52
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K52
 U 1 1 5C8AE443
 P 2300 8700
 F 0 "K52" H 2300 9039 60  0000 C CNN
 F 1 "CAPSLOCK" H 2300 8933 60  0000 C CNN
-F 2 "RetroBitLab:MXOnly-1U" H 2300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U" H 2300 8933 60  0001 C CNN
 F 3 "" H 2300 8700 60  0000 C CNN
 	1    2300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K53
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K53
 U 1 1 5C8AE449
 P 3300 8700
 F 0 "K53" H 3300 9039 60  0000 C CNN
 F 1 "A" H 3300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 3300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 3300 8933 60  0001 C CNN
 F 3 "" H 3300 8700 60  0000 C CNN
 	1    3300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K55
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K55
 U 1 1 5C8AE455
 P 5300 8700
 F 0 "K55" H 5300 9039 60  0000 C CNN
 F 1 "D" H 5300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 5300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 5300 8933 60  0001 C CNN
 F 3 "" H 5300 8700 60  0000 C CNN
 	1    5300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K56
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K56
 U 1 1 5C8AE45B
 P 6300 8700
 F 0 "K56" H 6300 9039 60  0000 C CNN
 F 1 "F" H 6300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 6300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 6300 8933 60  0001 C CNN
 F 3 "" H 6300 8700 60  0000 C CNN
 	1    6300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K57
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K57
 U 1 1 5C8AE461
 P 7300 8700
 F 0 "K57" H 7300 9039 60  0000 C CNN
 F 1 "G" H 7300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 7300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 7300 8933 60  0001 C CNN
 F 3 "" H 7300 8700 60  0000 C CNN
 	1    7300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K58
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K58
 U 1 1 5C8AE467
 P 8300 8700
 F 0 "K58" H 8300 9039 60  0000 C CNN
 F 1 "H" H 8300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 8300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 8300 8933 60  0001 C CNN
 F 3 "" H 8300 8700 60  0000 C CNN
 	1    8300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K59
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K59
 U 1 1 5C8AE46D
 P 9300 8700
 F 0 "K59" H 9300 9039 60  0000 C CNN
 F 1 "J" H 9300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 9300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 9300 8933 60  0001 C CNN
 F 3 "" H 9300 8700 60  0000 C CNN
 	1    9300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K60
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K60
 U 1 1 5C8AE473
 P 10300 8700
 F 0 "K60" H 10300 9039 60  0000 C CNN
 F 1 "K" H 10300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 10300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 10300 8933 60  0001 C CNN
 F 3 "" H 10300 8700 60  0000 C CNN
 	1    10300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K61
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K61
 U 1 1 5C8AE479
 P 11300 8700
 F 0 "K61" H 11300 9039 60  0000 C CNN
 F 1 "L" H 11300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 11300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 11300 8933 60  0001 C CNN
 F 3 "" H 11300 8700 60  0000 C CNN
 	1    11300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K62
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K62
 U 1 1 5C8AE47F
 P 12300 8700
 F 0 "K62" H 12300 9039 60  0000 C CNN
 F 1 "COLON" H 12300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 12300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 12300 8933 60  0001 C CNN
 F 3 "" H 12300 8700 60  0000 C CNN
 	1    12300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K63
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K63
 U 1 1 5C8AE485
 P 13300 8700
 F 0 "K63" H 13300 9039 60  0000 C CNN
 F 1 "\"" H 13300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 13300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 13300 8933 60  0001 C CNN
 F 3 "" H 13300 8700 60  0000 C CNN
 	1    13300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.5U-MX_Alps_Hybrids K27
+L A1200KB-rescue:MX-1.5U-MX_Alps_Hybrids K27
 U 1 1 5C8AE491
 P 16500 6700
 F 0 "K27" H 16500 7039 60  0000 C CNN
 F 1 "DEL" H 16500 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.50u_PCB_3d" H 16500 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.5U-NoLED" H 16500 6933 60  0001 C CNN
 F 3 "" H 16500 6700 60  0000 C CNN
 	1    16500 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K85
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K85
 U 1 1 5C8AE497
 P 18000 9700
 F 0 "K85" H 18000 10039 60  0000 C CNN
 F 1 "RIGHT" H 18000 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 18000 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 18000 9933 60  0001 C CNN
 F 3 "" H 18000 9700 60  0000 C CNN
 	1    18000 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K51
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K51
 U 1 1 5C8AE49D
 P 1300 8700
 F 0 "K51" H 1300 9039 60  0000 C CNN
 F 1 "CTRL" H 1300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 1300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 1300 8933 60  0001 C CNN
 F 3 "" H 1300 8700 60  0000 C CNN
 	1    1300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K72
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K72
 U 1 1 5C8BA85E
 P 3300 9700
 F 0 "K72" H 3300 10039 60  0000 C CNN
 F 1 "Z" H 3300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 3300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 3300 9933 60  0001 C CNN
 F 3 "" H 3300 9700 60  0000 C CNN
 	1    3300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K74
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K74
 U 1 1 5C8BA86A
 P 5300 9700
 F 0 "K74" H 5300 10039 60  0000 C CNN
 F 1 "C" H 5300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 5300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 5300 9933 60  0001 C CNN
 F 3 "" H 5300 9700 60  0000 C CNN
 	1    5300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K75
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K75
 U 1 1 5C8BA870
 P 6300 9700
 F 0 "K75" H 6300 10039 60  0000 C CNN
 F 1 "V" H 6300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 6300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 6300 9933 60  0001 C CNN
 F 3 "" H 6300 9700 60  0000 C CNN
 	1    6300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K76
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K76
 U 1 1 5C8BA876
 P 7300 9700
 F 0 "K76" H 7300 10039 60  0000 C CNN
 F 1 "B" H 7300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 7300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 7300 9933 60  0001 C CNN
 F 3 "" H 7300 9700 60  0000 C CNN
 	1    7300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K77
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K77
 U 1 1 5C8BA87C
 P 8300 9700
 F 0 "K77" H 8300 10039 60  0000 C CNN
 F 1 "N" H 8300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 8300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 8300 9933 60  0001 C CNN
 F 3 "" H 8300 9700 60  0000 C CNN
 	1    8300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K78
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K78
 U 1 1 5C8BA882
 P 9300 9700
 F 0 "K78" H 9300 10039 60  0000 C CNN
 F 1 "M" H 9300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 9300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 9300 9933 60  0001 C CNN
 F 3 "" H 9300 9700 60  0000 C CNN
 	1    9300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K80
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K80
 U 1 1 5C8BA888
 P 11300 9700
 F 0 "K80" H 11300 10039 60  0000 C CNN
 F 1 "L.CROC" H 11300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 11300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 11300 9933 60  0001 C CNN
 F 3 "" H 11300 9700 60  0000 C CNN
 	1    11300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K79
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K79
 U 1 1 5C8BA88E
 P 10300 9700
 F 0 "K79" H 10300 10039 60  0000 C CNN
 F 1 "R.CROC" H 10300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 10300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 10300 9933 60  0001 C CNN
 F 3 "" H 10300 9700 60  0000 C CNN
 	1    10300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K81
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K81
 U 1 1 5C8BA894
 P 12300 9700
 F 0 "K81" H 12300 10039 60  0000 C CNN
 F 1 "QUESTION" H 12300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 12300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 12300 9933 60  0001 C CNN
 F 3 "" H 12300 9700 60  0000 C CNN
 	1    12300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K26
+L A1200KB-rescue:MX-7U-MX_Alps_Hybrids K92
+U 1 1 5C8BA8A0
+P 6500 10700
+F 0 "K92" H 6500 11039 60  0000 C CNN
+F 1 "SPACE" H 6500 10933 60  0000 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-7U-NoLED" H 6500 10933 60  0001 C CNN
+F 3 "" H 6500 10700 60  0000 C CNN
+	1    6500 10700
+	1    0    0    -1  
+$EndComp
+$Comp
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K26
 U 1 1 5C8BA8A6
 P 15300 6700
 F 0 "K26" H 15300 7039 60  0000 C CNN
 F 1 "BS" H 15300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 15300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 15300 6933 60  0001 C CNN
 F 3 "" H 15300 6700 60  0000 C CNN
 	1    15300 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K84
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K84
 U 1 1 5C8BA8AC
 P 17000 9700
 F 0 "K84" H 17000 10039 60  0000 C CNN
 F 1 "DOWN" H 17000 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 17000 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 17000 9933 60  0001 C CNN
 F 3 "" H 17000 9700 60  0000 C CNN
 	1    17000 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.75U-MX_Alps_Hybrids K70
+L A1200KB-rescue:MX-1.75U-MX_Alps_Hybrids K70
 U 1 1 5C8BA8B2
 P 1300 9700
 F 0 "K70" H 1300 10039 60  0000 C CNN
 F 1 "L.SHIFT" H 1300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.75u_PCB_3d" H 1300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.75U-NoLED" H 1300 9933 60  0001 C CNN
 F 3 "" H 1300 9700 60  0000 C CNN
 	1    1300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K49
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K49
 U 1 1 5C8C4823
 P 21200 7700
 F 0 "K49" H 21200 8039 60  0000 C CNN
 F 1 "NUM_9" H 21200 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 21200 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 21200 7933 60  0001 C CNN
 F 3 "" H 21200 7700 60  0000 C CNN
 	1    21200 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K68
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K68
 U 1 1 5C8C4829
 P 21200 8700
 F 0 "K68" H 21200 9039 60  0000 C CNN
 F 1 "NUM_6" H 21200 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 21200 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 21200 8933 60  0001 C CNN
 F 3 "" H 21200 8700 60  0000 C CNN
 	1    21200 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K88
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K88
 U 1 1 5C8C482F
 P 21200 9700
 F 0 "K88" H 21200 10039 60  0000 C CNN
 F 1 "NUM_3" H 21200 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 21200 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 21200 9933 60  0001 C CNN
 F 3 "" H 21200 9700 60  0000 C CNN
 	1    21200 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K96
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K96
 U 1 1 5C8C4835
 P 21200 10700
 F 0 "K96" H 21200 11039 60  0000 C CNN
 F 1 "NUM_DECIMAL" H 21200 10933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 21200 10933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 21200 10933 60  0001 C CNN
 F 3 "" H 21200 10700 60  0000 C CNN
 	1    21200 10700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K48
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K48
 U 1 1 5C8C483B
 P 20200 7700
 F 0 "K48" H 20200 8039 60  0000 C CNN
 F 1 "NUM_8" H 20200 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 20200 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 20200 7933 60  0001 C CNN
 F 3 "" H 20200 7700 60  0000 C CNN
 	1    20200 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K67
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K67
 U 1 1 5C8C4841
 P 20200 8700
 F 0 "K67" H 20200 9039 60  0000 C CNN
 F 1 "NUM_5" H 20200 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 20200 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 20200 8933 60  0001 C CNN
 F 3 "" H 20200 8700 60  0000 C CNN
 	1    20200 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K87
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K87
 U 1 1 5C8C4847
 P 20200 9700
 F 0 "K87" H 20200 10039 60  0000 C CNN
 F 1 "NUM_2" H 20200 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 20200 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 20200 9933 60  0001 C CNN
 F 3 "" H 20200 9700 60  0000 C CNN
 	1    20200 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-2U-MX_Alps_Hybrids K89
+L A1200KB-rescue:MX-2U-MX_Alps_Hybrids K89
 U 1 1 5C8C484D
 P 22200 10100
 F 0 "K89" H 22200 10439 60  0000 C CNN
 F 1 "NUM_ENTER" H 22200 10333 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_2.00u_Vertical_PCB_3d" H 22200 10333 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-2U-NoLED" H 22200 10333 60  0001 C CNN
 F 3 "" H 22200 10100 60  0000 C CNN
 	1    22200 10100
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K47
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K47
 U 1 1 5C8C4853
 P 19200 7700
 F 0 "K47" H 19200 8039 60  0000 C CNN
 F 1 "NUM_7" H 19200 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 19200 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 19200 7933 60  0001 C CNN
 F 3 "" H 19200 7700 60  0000 C CNN
 	1    19200 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K66
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K66
 U 1 1 5C8C4859
 P 19200 8700
 F 0 "K66" H 19200 9039 60  0000 C CNN
 F 1 "NUM_4" H 19200 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 19200 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 19200 8933 60  0001 C CNN
 F 3 "" H 19200 8700 60  0000 C CNN
 	1    19200 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K86
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K86
 U 1 1 5C8C485F
 P 19200 9700
 F 0 "K86" H 19200 10039 60  0000 C CNN
 F 1 "NUM_1" H 19200 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 19200 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 19200 9933 60  0001 C CNN
 F 3 "" H 19200 9700 60  0000 C CNN
 	1    19200 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-2U-MX_Alps_Hybrids K95
+L A1200KB-rescue:MX-2U-MX_Alps_Hybrids K95
 U 1 1 5C8C4865
 P 19700 10700
 F 0 "K95" H 19700 11039 60  0000 C CNN
 F 1 "NUM_0" H 19700 10933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_2.00u_PCB_3d" H 19700 10933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-2U-NoLED" H 19700 10933 60  0001 C CNN
 F 3 "" H 19700 10700 60  0000 C CNN
 	1    19700 10700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K50
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K50
 U 1 1 5C8C486B
 P 22200 7700
 F 0 "K50" H 22200 8039 60  0000 C CNN
 F 1 "NUM_MINUS" H 22200 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 22200 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 22200 7933 60  0001 C CNN
 F 3 "" H 22200 7700 60  0000 C CNN
 	1    22200 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K91
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K91
 U 1 1 5C93F696
 P 2900 10700
 F 0 "K91" H 2900 11039 60  0000 C CNN
 F 1 "L.AMIGA" H 2900 10933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 2900 10933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 2900 10933 60  0001 C CNN
 F 3 "" H 2900 10700 60  0000 C CNN
 	1    2900 10700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K71
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K71
 U 1 1 5C9FD949
 P 2300 9700
 F 0 "K71" H 2300 10039 60  0000 C CNN
 F 1 "L.BLANK" H 2300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 2300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 2300 9933 60  0001 C CNN
 F 3 "" H 2300 9700 60  0000 C CNN
 	1    2300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K31
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K31
 U 1 1 5CA60B25
 P 21200 6700
 F 0 "K31" H 21200 7039 60  0000 C CNN
 F 1 "NUM_DIV" H 21200 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 21200 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 21200 6933 60  0001 C CNN
 F 3 "" H 21200 6700 60  0000 C CNN
 	1    21200 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K30
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K30
 U 1 1 5CA628C4
 P 20200 6700
 F 0 "K30" H 20200 7039 60  0000 C CNN
 F 1 "NUM_)" H 20200 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 20200 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 20200 6933 60  0001 C CNN
 F 3 "" H 20200 6700 60  0000 C CNN
 	1    20200 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K29
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K29
 U 1 1 5CA6394E
 P 19200 6700
 F 0 "K29" H 19200 7039 60  0000 C CNN
 F 1 "NUM_(" H 19200 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 19200 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 19200 6933 60  0001 C CNN
 F 3 "" H 19200 6700 60  0000 C CNN
 	1    19200 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K69
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K69
 U 1 1 5CA67D7B
 P 22200 8700
 F 0 "K69" H 22200 9039 60  0000 C CNN
 F 1 "NUM_PLUS" H 22200 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 22200 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 22200 8933 60  0001 C CNN
 F 3 "" H 22200 8700 60  0000 C CNN
 	1    22200 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K94
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K94
 U 1 1 5C703C58
 P 13700 10700
 F 0 "K94" H 13700 11039 60  0000 C CNN
 F 1 "R.ALT" H 13700 10933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 13700 10933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 13700 10933 60  0001 C CNN
 F 3 "" H 13700 10700 60  0000 C CNN
 	1    13700 10700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K93
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K93
 U 1 1 5C707007
 P 12700 10700
 F 0 "K93" H 12700 11039 60  0000 C CNN
 F 1 "R.AMIGA" H 12700 10933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 12700 10933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 12700 10933 60  0001 C CNN
 F 3 "" H 12700 10700 60  0000 C CNN
 	1    12700 10700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K1
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K1
 U 1 1 5C6EAD3A
 P 1250 5700
 F 0 "K1" H 1250 6039 60  0000 C CNN
 F 1 "ESC" V 1084 5600 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" V 1250 5933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" V 1250 5933 60  0001 C CNN
 F 3 "" H 1250 5700 60  0000 C CNN
 	1    1250 5700
 	1    0    0    -1  
@@ -965,95 +977,95 @@ U 1 1 5C9D8FBB
 P 8200 950
 F 0 "J1" V 8365 880 50  0000 C CNN
 F 1 "Conn_01x32_Female" V 8274 880 50  0000 C CNN
-F 2 "RetroBitLab:MOLEX-FFC-1.25mm-RA-52044-3245" H 8200 950 50  0001 C CNN
+F 2 "Connector_FFC-FPC:FFC-1.25mm-RA-5204403245" H 8200 950 50  0001 C CNN
 F 3 "~" H 8200 950 50  0001 C CNN
 	1    8200 950 
 	0    -1   -1   0   
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K32
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K32
 U 1 1 5CA5EDCB
 P 22200 6700
 F 0 "K32" H 22200 7039 60  0000 C CNN
 F 1 "NUM_MULT" H 22200 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 22200 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 22200 6933 60  0001 C CNN
 F 3 "" H 22200 6700 60  0000 C CNN
 	1    22200 6700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K65
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K65
 U 1 1 5C703C52
 P 17000 8700
 F 0 "K65" H 17000 9039 60  0000 C CNN
 F 1 "UP" H 17000 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 17000 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 17000 8933 60  0001 C CNN
 F 3 "" H 17000 8700 60  0000 C CNN
 	1    17000 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K64
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K64
 U 1 1 5C9F4ADB
 P 14300 8700
 F 0 "K64" H 14300 9039 60  0000 C CNN
 F 1 "R.BLANK" H 14300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 14300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 14300 8933 60  0001 C CNN
 F 3 "" H 14300 8700 60  0000 C CNN
 	1    14300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K7
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K7
 U 1 1 5C700906
 P 9200 5700
 F 0 "K7" H 9200 6039 60  0000 C CNN
 F 1 "F6" H 9200 5933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 9200 5933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 9200 5933 60  0001 C CNN
 F 3 "" H 9200 5700 60  0000 C CNN
 	1    9200 5700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K73
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K73
 U 1 1 5C8BA864
 P 4300 9700
 F 0 "K73" H 4300 10039 60  0000 C CNN
 F 1 "X" H 4300 9933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 4300 9933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 4300 9933 60  0001 C CNN
 F 3 "" H 4300 9700 60  0000 C CNN
 	1    4300 9700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K54
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K54
 U 1 1 5C8AE44F
 P 4300 8700
 F 0 "K54" H 4300 9039 60  0000 C CNN
 F 1 "S" H 4300 8933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 4300 8933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 4300 8933 60  0001 C CNN
 F 3 "" H 4300 8700 60  0000 C CNN
 	1    4300 8700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K36
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K36
 U 1 1 5C706FBF
 P 4300 7700
 F 0 "K36" H 4300 8039 60  0000 C CNN
 F 1 "E" H 4300 7933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 4300 7933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 4300 7933 60  0001 C CNN
 F 3 "" H 4300 7700 60  0000 C CNN
 	1    4300 7700
 	1    0    0    -1  
 $EndComp
 $Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K15
+L A1200KB-rescue:MX-1U-MX_Alps_Hybrids K15
 U 1 1 5C703C10
 P 4300 6700
 F 0 "K15" H 4300 7039 60  0000 C CNN
 F 1 "3" H 4300 6933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 4300 6933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1U-NoLED" H 4300 6933 60  0001 C CNN
 F 3 "" H 4300 6700 60  0000 C CNN
 	1    4300 6700
 	1    0    0    -1  
@@ -2099,6 +2111,8 @@ Wire Wire Line
 Wire Wire Line
 	6775 10675 6775 10250
 Wire Wire Line
+	6775 10250 14575 10250
+Wire Wire Line
 	14575 10250 14575 8675
 Wire Wire Line
 	14575 8675 14475 8675
@@ -2283,12 +2297,12 @@ Wire Wire Line
 Wire Wire Line
 	2175 10675 2075 10675
 $Comp
-L AmigaComponents:MX-1.25U-MX_Alps_Hybrids K90
+L A1200KB-rescue:MX-1.25U-MX_Alps_Hybrids K90
 U 1 1 5C8C4871
 P 1900 10700
 F 0 "K90" H 1900 11039 60  0000 C CNN
 F 1 "L.ALT" H 1900 10933 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.25u_PCB_3d" H 1900 10933 60  0001 C CNN
+F 2 "MX_Alps_Hybrid:MXOnly-1.25U-NoLED" H 1900 10933 60  0001 C CNN
 F 3 "" H 1900 10700 60  0000 C CNN
 	1    1900 10700
 	1    0    0    -1  
@@ -2454,853 +2468,4 @@ Wire Wire Line
 Connection ~ 7650 6200
 Wire Wire Line
 	7650 6200 7650 10100
-$Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K98
-U 1 1 61E691AB
-P 5680 11680
-F 0 "K98" H 5695 11195 60  0000 C CNN
-F 1 "SUPER" H 5680 11305 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 5680 11913 60  0001 C CNN
-F 3 "" H 5680 11680 60  0000 C CNN
-	1    5680 11680
-	-1   0    0    1   
-$EndComp
-$Comp
-L AmigaComponents:MX-1U-MX_Alps_Hybrids K97
-U 1 1 61E696D0
-P 7195 11685
-F 0 "K97" H 7195 12024 60  0000 C CNN
-F 1 "MENU" H 7195 11918 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_1.00u_PCB_3d" H 7195 11918 60  0001 C CNN
-F 3 "" H 7195 11685 60  0000 C CNN
-	1    7195 11685
-	1    0    0    -1  
-$EndComp
-$Comp
-L AmigaComponents:MX-7U-MX_Alps_Hybrids K92
-U 1 1 5C8BA8A0
-P 6500 10700
-F 0 "K92" H 6500 11039 60  0000 C CNN
-F 1 "SPACE 7U" H 6500 10933 60  0000 C CNN
-F 2 "RetroBitLab:MXOnly-7U-NoSwitch" H 6500 10933 60  0001 C CNN
-F 3 "" H 6500 10700 60  0000 C CNN
-	1    6500 10700
-	1    0    0    -1  
-$EndComp
-$Comp
-L AmigaComponents:MX-7U-MX_Alps_Hybrids K99
-U 1 1 62030DF3
-P 6555 11645
-F 0 "K99" H 6555 11984 60  0000 C CNN
-F 1 "SPACE 9U" H 6555 11878 60  0000 C CNN
-F 2 "RetroBitLab:SW_Cherry_MX1A_9u_PCB_3d" H 6555 11878 60  0001 C CNN
-F 3 "" H 6555 11645 60  0000 C CNN
-	1    6555 11645
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	6775 10250 14575 10250
-Connection ~ 6275 10875
-Wire Wire Line
-	6775 10675 6775 11270
-Wire Wire Line
-	6775 11620 6730 11620
-Connection ~ 6775 10675
-Wire Wire Line
-	7370 11660 7500 11660
-Wire Wire Line
-	7500 11660 7500 11270
-Wire Wire Line
-	7500 11270 6775 11270
-Connection ~ 6775 11270
-Wire Wire Line
-	6775 11270 6775 11620
-Wire Wire Line
-	6430 12080 7120 12080
-Wire Wire Line
-	7120 12080 7120 11860
-Wire Wire Line
-	7120 11860 7170 11860
-Wire Wire Line
-	6275 11820 6430 11820
-Wire Wire Line
-	6430 12080 6430 11820
-Connection ~ 6430 11820
-Wire Wire Line
-	6430 11820 6530 11820
-$Comp
-L Mechanical:MountingHole_Pad H1
-U 1 1 6231C039
-P 14480 12110
-F 0 "H1" H 14600 12120 50  0000 L CNN
-F 1 "MountingHole_Pad" H 14605 12110 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 14480 12110 50  0001 C CNN
-F 3 "~" H 14480 12110 50  0001 C CNN
-	1    14480 12110
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H5
-U 1 1 6231F00B
-P 14480 12430
-F 0 "H5" H 14600 12460 50  0000 L CNN
-F 1 "MountingHole_Pad" H 14605 12430 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 14480 12430 50  0001 C CNN
-F 3 "~" H 14480 12430 50  0001 C CNN
-	1    14480 12430
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H9
-U 1 1 6231FC75
-P 14480 12700
-F 0 "H9" H 14600 12750 50  0000 L CNN
-F 1 "MountingHole_Pad" H 14605 12700 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 14480 12700 50  0001 C CNN
-F 3 "~" H 14480 12700 50  0001 C CNN
-	1    14480 12700
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H13
-U 1 1 6231FE0C
-P 14475 13010
-F 0 "H13" H 14600 13020 50  0000 L CNN
-F 1 "MountingHole_Pad" H 14600 13010 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 14475 13010 50  0001 C CNN
-F 3 "~" H 14475 13010 50  0001 C CNN
-	1    14475 13010
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H17
-U 1 1 6231FF82
-P 14480 13320
-F 0 "H17" H 14600 13340 50  0000 L CNN
-F 1 "MountingHole_Pad" H 14605 13320 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 14480 13320 50  0001 C CNN
-F 3 "~" H 14480 13320 50  0001 C CNN
-	1    14480 13320
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H3
-U 1 1 62320714
-P 15480 12150
-F 0 "H3" H 15600 12200 50  0000 L CNN
-F 1 "MountingHole_Pad" H 15605 12150 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 15480 12150 50  0001 C CNN
-F 3 "~" H 15480 12150 50  0001 C CNN
-	1    15480 12150
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H7
-U 1 1 6232075A
-P 15480 12470
-F 0 "H7" H 15600 12490 50  0000 L CNN
-F 1 "MountingHole_Pad" H 15605 12470 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 15480 12470 50  0001 C CNN
-F 3 "~" H 15480 12470 50  0001 C CNN
-	1    15480 12470
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H11
-U 1 1 62320764
-P 15480 12740
-F 0 "H11" H 15600 12780 50  0000 L CNN
-F 1 "MountingHole_Pad" H 15605 12740 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 15480 12740 50  0001 C CNN
-F 3 "~" H 15480 12740 50  0001 C CNN
-	1    15480 12740
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H15
-U 1 1 6232076E
-P 15475 13050
-F 0 "H15" H 15600 13100 50  0000 L CNN
-F 1 "MountingHole_Pad" H 15600 13050 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 15475 13050 50  0001 C CNN
-F 3 "~" H 15475 13050 50  0001 C CNN
-	1    15475 13050
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H19
-U 1 1 62320778
-P 15480 13360
-F 0 "H19" H 15600 13370 50  0000 L CNN
-F 1 "MountingHole_Pad" H 15605 13360 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 15480 13360 50  0001 C CNN
-F 3 "~" H 15480 13360 50  0001 C CNN
-	1    15480 13360
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H2
-U 1 1 623808DD
-P 16410 12130
-F 0 "H2" H 16550 12160 50  0000 L CNN
-F 1 "MountingHole_Pad" H 16535 12130 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 16410 12130 50  0001 C CNN
-F 3 "~" H 16410 12130 50  0001 C CNN
-	1    16410 12130
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H6
-U 1 1 62380955
-P 16410 12450
-F 0 "H6" H 16550 12500 50  0000 L CNN
-F 1 "MountingHole_Pad" H 16535 12450 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 16410 12450 50  0001 C CNN
-F 3 "~" H 16410 12450 50  0001 C CNN
-	1    16410 12450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H14
-U 1 1 62380969
-P 16405 13030
-F 0 "H14" H 16550 13060 50  0000 L CNN
-F 1 "MountingHole_Pad" H 16530 13030 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 16405 13030 50  0001 C CNN
-F 3 "~" H 16405 13030 50  0001 C CNN
-	1    16405 13030
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H18
-U 1 1 62380973
-P 16410 13340
-F 0 "H18" H 16550 13380 50  0000 L CNN
-F 1 "MountingHole_Pad" H 16535 13340 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 16410 13340 50  0001 C CNN
-F 3 "~" H 16410 13340 50  0001 C CNN
-	1    16410 13340
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H8
-U 1 1 62380987
-P 17410 12490
-F 0 "H8" H 17550 12530 50  0000 L CNN
-F 1 "MountingHole_Pad" H 17535 12490 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 17410 12490 50  0001 C CNN
-F 3 "~" H 17410 12490 50  0001 C CNN
-	1    17410 12490
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H12
-U 1 1 62380991
-P 17410 12760
-F 0 "H12" H 17550 12770 50  0000 L CNN
-F 1 "MountingHole_Pad" H 17535 12760 50  0001 L CNN
-F 2 "MountingHole:MountingHole_3mm_Pad" H 17410 12760 50  0001 C CNN
-F 3 "~" H 17410 12760 50  0001 C CNN
-	1    17410 12760
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0101
-U 1 1 623E1EAF
-P 14480 12210
-F 0 "#PWR0101" H 14480 11960 50  0001 C CNN
-F 1 "GND" V 14440 12040 50  0000 R CNN
-F 2 "" H 14480 12210 50  0001 C CNN
-F 3 "" H 14480 12210 50  0001 C CNN
-	1    14480 12210
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0102
-U 1 1 623E2718
-P 14480 12530
-F 0 "#PWR0102" H 14480 12280 50  0001 C CNN
-F 1 "GND" V 14440 12360 50  0000 R CNN
-F 2 "" H 14480 12530 50  0001 C CNN
-F 3 "" H 14480 12530 50  0001 C CNN
-	1    14480 12530
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0103
-U 1 1 623E29C0
-P 14480 12800
-F 0 "#PWR0103" H 14480 12550 50  0001 C CNN
-F 1 "GND" V 14440 12630 50  0000 R CNN
-F 2 "" H 14480 12800 50  0001 C CNN
-F 3 "" H 14480 12800 50  0001 C CNN
-	1    14480 12800
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0104
-U 1 1 623E2E2D
-P 14475 13110
-F 0 "#PWR0104" H 14475 12860 50  0001 C CNN
-F 1 "GND" V 14435 12940 50  0000 R CNN
-F 2 "" H 14475 13110 50  0001 C CNN
-F 3 "" H 14475 13110 50  0001 C CNN
-	1    14475 13110
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0105
-U 1 1 623E3469
-P 14480 13420
-F 0 "#PWR0105" H 14480 13170 50  0001 C CNN
-F 1 "GND" V 14440 13250 50  0000 R CNN
-F 2 "" H 14480 13420 50  0001 C CNN
-F 3 "" H 14480 13420 50  0001 C CNN
-	1    14480 13420
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0106
-U 1 1 623E36AC
-P 15480 13460
-F 0 "#PWR0106" H 15480 13210 50  0001 C CNN
-F 1 "GND" V 15440 13290 50  0000 R CNN
-F 2 "" H 15480 13460 50  0001 C CNN
-F 3 "" H 15480 13460 50  0001 C CNN
-	1    15480 13460
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0107
-U 1 1 623E3953
-P 15475 13150
-F 0 "#PWR0107" H 15475 12900 50  0001 C CNN
-F 1 "GND" V 15435 12980 50  0000 R CNN
-F 2 "" H 15475 13150 50  0001 C CNN
-F 3 "" H 15475 13150 50  0001 C CNN
-	1    15475 13150
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0108
-U 1 1 623E3B25
-P 15480 12840
-F 0 "#PWR0108" H 15480 12590 50  0001 C CNN
-F 1 "GND" V 15440 12670 50  0000 R CNN
-F 2 "" H 15480 12840 50  0001 C CNN
-F 3 "" H 15480 12840 50  0001 C CNN
-	1    15480 12840
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0109
-U 1 1 623E416F
-P 15480 12570
-F 0 "#PWR0109" H 15480 12320 50  0001 C CNN
-F 1 "GND" V 15440 12400 50  0000 R CNN
-F 2 "" H 15480 12570 50  0001 C CNN
-F 3 "" H 15480 12570 50  0001 C CNN
-	1    15480 12570
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0110
-U 1 1 623E430A
-P 15480 12250
-F 0 "#PWR0110" H 15480 12000 50  0001 C CNN
-F 1 "GND" V 15440 12080 50  0000 R CNN
-F 2 "" H 15480 12250 50  0001 C CNN
-F 3 "" H 15480 12250 50  0001 C CNN
-	1    15480 12250
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0111
-U 1 1 623E48A9
-P 16410 12230
-F 0 "#PWR0111" H 16410 11980 50  0001 C CNN
-F 1 "GND" V 16370 12060 50  0000 R CNN
-F 2 "" H 16410 12230 50  0001 C CNN
-F 3 "" H 16410 12230 50  0001 C CNN
-	1    16410 12230
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0112
-U 1 1 623E4A83
-P 16410 12550
-F 0 "#PWR0112" H 16410 12300 50  0001 C CNN
-F 1 "GND" V 16370 12380 50  0000 R CNN
-F 2 "" H 16410 12550 50  0001 C CNN
-F 3 "" H 16410 12550 50  0001 C CNN
-	1    16410 12550
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0114
-U 1 1 623E4F7B
-P 16405 13130
-F 0 "#PWR0114" H 16405 12880 50  0001 C CNN
-F 1 "GND" V 16365 12960 50  0000 R CNN
-F 2 "" H 16405 13130 50  0001 C CNN
-F 3 "" H 16405 13130 50  0001 C CNN
-	1    16405 13130
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0115
-U 1 1 623E54AB
-P 16410 13440
-F 0 "#PWR0115" H 16410 13190 50  0001 C CNN
-F 1 "GND" V 16370 13270 50  0000 R CNN
-F 2 "" H 16410 13440 50  0001 C CNN
-F 3 "" H 16410 13440 50  0001 C CNN
-	1    16410 13440
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0118
-U 1 1 623E5BD7
-P 17410 12860
-F 0 "#PWR0118" H 17410 12610 50  0001 C CNN
-F 1 "GND" V 17370 12690 50  0000 R CNN
-F 2 "" H 17410 12860 50  0001 C CNN
-F 3 "" H 17410 12860 50  0001 C CNN
-	1    17410 12860
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR0119
-U 1 1 623E5E8B
-P 17410 12590
-F 0 "#PWR0119" H 17410 12340 50  0001 C CNN
-F 1 "GND" V 17370 12420 50  0000 R CNN
-F 2 "" H 17410 12590 50  0001 C CNN
-F 3 "" H 17410 12590 50  0001 C CNN
-	1    17410 12590
-	0    1    1    0   
-$EndComp
-$Sheet
-S 0    16885 23385 7255
-U 61EC24E4
-F0 " MCU_Controller" 50
-F1 "MCU_Controller.sch" 50
-$EndSheet
-Wire Wire Line
-	6275 10875 6275 11505
-Wire Wire Line
-	5705 11505 6275 11505
-Connection ~ 6275 11505
-Wire Wire Line
-	6275 11505 6275 11820
-Wire Wire Line
-	5505 11705 5385 11705
-Wire Wire Line
-	5385 11705 5385 12195
-Wire Wire Line
-	5385 12195 7500 12195
-Wire Wire Line
-	7500 12195 7500 11660
-Connection ~ 7500 11660
-Text Label 6370 1335 3    50   ~ 0
-1
-Text Label 6270 1335 3    50   ~ 0
-2
-Text Label 6170 1335 3    50   ~ 0
-3
-Text Label 6070 1335 3    50   ~ 0
-4
-Text Label 5970 1335 3    50   ~ 0
-5
-Text Label 5870 1335 3    50   ~ 0
-6
-Text Label 5770 1335 3    50   ~ 0
-7
-Text Label 5670 1335 3    50   ~ 0
-8
-Text Label 5570 1335 3    50   ~ 0
-9
-Text Label 5470 1335 3    50   ~ 0
-10
-Text Label 5370 1335 3    50   ~ 0
-11
-Text Label 5270 1335 3    50   ~ 0
-12
-Text Label 5170 1335 3    50   ~ 0
-13
-Text Label 5070 1335 3    50   ~ 0
-14
-Text Label 4970 1335 3    50   ~ 0
-15
-Text Label 4870 1335 3    50   ~ 0
-16
-Text Label 4770 1335 3    50   ~ 0
-17
-Text Label 4670 1335 3    50   ~ 0
-18
-Text Label 4570 1335 3    50   ~ 0
-19
-Text Label 4470 1335 3    50   ~ 0
-20
-Text Label 4370 1335 3    50   ~ 0
-21
-Text Label 4270 1335 3    50   ~ 0
-22
-Text Label 4170 1335 3    50   ~ 0
-23
-Text Label 4070 1335 3    50   ~ 0
-24
-Text Label 3970 1335 3    50   ~ 0
-25
-Text Label 3870 1335 3    50   ~ 0
-26
-Text Label 3770 1335 3    50   ~ 0
-27
-Text Label 3670 1335 3    50   ~ 0
-28
-Text Label 3570 1335 3    50   ~ 0
-29
-Text Label 3470 1335 3    50   ~ 0
-30
-Text Label 3370 1335 3    50   ~ 0
-31
-Text GLabel 6375 1050 1    50   Input ~ 0
-1
-Text GLabel 6275 1050 1    50   Input ~ 0
-2
-Text GLabel 6175 1050 1    50   Input ~ 0
-3
-Text GLabel 6075 1050 1    50   Input ~ 0
-4
-Text GLabel 5975 1050 1    50   Input ~ 0
-5
-Text GLabel 5875 1050 1    50   Input ~ 0
-6
-Text GLabel 5775 1050 1    50   Input ~ 0
-7
-Text GLabel 5675 1050 1    50   Input ~ 0
-8
-Text GLabel 5575 1050 1    50   Input ~ 0
-9
-Text GLabel 5475 1050 1    50   Input ~ 0
-10
-Text GLabel 5375 1050 1    50   Input ~ 0
-11
-Text GLabel 5275 1050 1    50   Input ~ 0
-12
-Text GLabel 5175 1050 1    50   Input ~ 0
-13
-Text GLabel 5075 1050 1    50   Input ~ 0
-14
-Text GLabel 4975 1050 1    50   Input ~ 0
-15
-Text GLabel 4875 1050 1    50   Input ~ 0
-16
-Text GLabel 4775 1050 1    50   Input ~ 0
-17
-Text GLabel 4675 1050 1    50   Input ~ 0
-18
-Text GLabel 4575 1050 1    50   Input ~ 0
-19
-Text GLabel 4475 1050 1    50   Input ~ 0
-20
-Text GLabel 4375 1050 1    50   Input ~ 0
-21
-Text GLabel 4275 1050 1    50   Input ~ 0
-22
-Text GLabel 4175 1050 1    50   Input ~ 0
-23
-Text GLabel 4075 1050 1    50   Input ~ 0
-24
-Text GLabel 3975 1050 1    50   Input ~ 0
-25
-Text GLabel 3875 1050 1    50   Input ~ 0
-26
-Text GLabel 3775 1050 1    50   Input ~ 0
-27
-Text GLabel 3675 1050 1    50   Input ~ 0
-28
-Text GLabel 3575 1050 1    50   Input ~ 0
-29
-Text GLabel 3475 1050 1    50   Input ~ 0
-30
-Text GLabel 3375 1050 1    50   Input ~ 0
-31
-Wire Wire Line
-	6375 1050 6375 1335
-Wire Wire Line
-	6375 1335 6370 1335
-Wire Wire Line
-	6275 1335 6270 1335
-Wire Wire Line
-	6275 1050 6275 1335
-Wire Wire Line
-	6175 1050 6175 1335
-Wire Wire Line
-	6175 1335 6170 1335
-Wire Wire Line
-	6075 1050 6075 1335
-Wire Wire Line
-	6075 1335 6070 1335
-Wire Wire Line
-	5975 1050 5975 1335
-Wire Wire Line
-	5975 1335 5970 1335
-Wire Wire Line
-	5875 1050 5875 1335
-Wire Wire Line
-	5875 1335 5870 1335
-Wire Wire Line
-	5775 1050 5775 1335
-Wire Wire Line
-	5775 1335 5770 1335
-Wire Wire Line
-	5675 1050 5675 1335
-Wire Wire Line
-	5675 1335 5670 1335
-Wire Wire Line
-	5575 1050 5575 1335
-Wire Wire Line
-	5575 1335 5570 1335
-Wire Wire Line
-	5475 1050 5475 1335
-Wire Wire Line
-	5475 1335 5470 1335
-Wire Wire Line
-	5375 1050 5375 1335
-Wire Wire Line
-	5375 1335 5370 1335
-Wire Wire Line
-	5275 1050 5275 1335
-Wire Wire Line
-	5275 1335 5270 1335
-Wire Wire Line
-	5175 1050 5175 1335
-Wire Wire Line
-	5175 1335 5170 1335
-Wire Wire Line
-	5075 1050 5075 1335
-Wire Wire Line
-	5075 1335 5070 1335
-Wire Wire Line
-	4975 1050 4975 1335
-Wire Wire Line
-	4975 1335 4970 1335
-Wire Wire Line
-	4875 1050 4875 1335
-Wire Wire Line
-	4875 1335 4870 1335
-Wire Wire Line
-	4775 1050 4775 1335
-Wire Wire Line
-	4775 1335 4770 1335
-Wire Wire Line
-	4675 1050 4675 1335
-Wire Wire Line
-	4675 1335 4670 1335
-Wire Wire Line
-	4575 1050 4575 1335
-Wire Wire Line
-	4575 1335 4570 1335
-Wire Wire Line
-	4475 1050 4475 1335
-Wire Wire Line
-	4475 1335 4470 1335
-Wire Wire Line
-	4375 1050 4375 1335
-Wire Wire Line
-	4375 1335 4370 1335
-Wire Wire Line
-	4275 1335 4270 1335
-Wire Wire Line
-	4275 1050 4275 1335
-Wire Wire Line
-	4175 1050 4175 1335
-Wire Wire Line
-	4175 1335 4170 1335
-Wire Wire Line
-	4075 1050 4075 1335
-Wire Wire Line
-	4075 1335 4070 1335
-Wire Wire Line
-	3375 1050 3375 1335
-Wire Wire Line
-	3375 1335 3370 1335
-Wire Wire Line
-	3475 1050 3475 1335
-Wire Wire Line
-	3475 1335 3470 1335
-Wire Wire Line
-	3575 1050 3575 1335
-Wire Wire Line
-	3575 1335 3570 1335
-Wire Wire Line
-	3675 1050 3675 1335
-Wire Wire Line
-	3675 1335 3670 1335
-Wire Wire Line
-	3775 1050 3775 1335
-Wire Wire Line
-	3775 1335 3770 1335
-Wire Wire Line
-	3875 1050 3875 1335
-Wire Wire Line
-	3875 1335 3870 1335
-Wire Wire Line
-	3975 1050 3975 1335
-Wire Wire Line
-	3975 1335 3970 1335
-Text Notes 4105 1605 0    59   ~ 0
-From LOCAL Nets to GLOBAL Nets
-Wire Notes Line
-	6505 765  6505 1675
-Wire Notes Line
-	6505 1675 3135 1675
-Wire Notes Line
-	3135 765  3135 1675
-Wire Notes Line
-	3135 765  6505 765 
-NoConn ~ 9800 1150
-Text GLabel 5370 14705 1    59   Input ~ 0
-CAPSLOCK_LED
-Text GLabel 2370 15030 3    50   Input ~ 0
-1
-Text GLabel 2470 15030 3    50   Input ~ 0
-2
-Text GLabel 2570 15030 3    50   Input ~ 0
-3
-Text GLabel 2670 15030 3    50   Input ~ 0
-4
-Text GLabel 2770 15030 3    50   Input ~ 0
-5
-Text GLabel 2870 15030 3    50   Input ~ 0
-6
-Text GLabel 2970 15030 3    50   Input ~ 0
-7
-Text GLabel 3070 15030 3    50   Input ~ 0
-8
-Text GLabel 3170 15030 3    50   Input ~ 0
-9
-Text GLabel 3270 15030 3    50   Input ~ 0
-10
-Text GLabel 3370 15030 3    50   Input ~ 0
-11
-Text GLabel 3470 15030 3    50   Input ~ 0
-12
-Text GLabel 3570 15030 3    50   Input ~ 0
-13
-Text GLabel 3670 15030 3    50   Input ~ 0
-14
-Text GLabel 3770 15030 3    50   Input ~ 0
-15
-Text GLabel 3870 15030 3    50   Input ~ 0
-16
-Text GLabel 3970 15030 3    50   Input ~ 0
-17
-Text GLabel 4070 15030 3    50   Input ~ 0
-18
-Text GLabel 4170 15030 3    50   Input ~ 0
-19
-Text GLabel 4270 15030 3    50   Input ~ 0
-20
-Text GLabel 4370 15030 3    50   Input ~ 0
-21
-Text GLabel 4470 15030 3    50   Input ~ 0
-22
-Text GLabel 4570 15030 3    50   Input ~ 0
-23
-Text GLabel 4670 15030 3    50   Input ~ 0
-24
-Text GLabel 4770 15030 3    50   Input ~ 0
-25
-Text GLabel 4870 15030 3    50   Input ~ 0
-26
-Text GLabel 4970 15030 3    50   Input ~ 0
-27
-Text GLabel 5070 15030 3    50   Input ~ 0
-28
-Text GLabel 5170 15030 3    50   Input ~ 0
-29
-Text GLabel 5270 15030 3    50   Input ~ 0
-30
-Text GLabel 5370 15030 3    50   Input ~ 0
-31
-Text GLabel 3170 14705 1    59   Input ~ 0
-VCC_5V
-Wire Wire Line
-	3170 15030 3170 14705
-Wire Wire Line
-	5370 15030 5370 14705
-Text GLabel 3770 14985 1    50   Input ~ 0
-COL1
-Text GLabel 3870 14985 1    50   Input ~ 0
-COL2
-Text GLabel 3970 14985 1    50   Input ~ 0
-COL3
-Text GLabel 4070 14985 1    50   Input ~ 0
-COL4
-Text GLabel 4170 14985 1    50   Input ~ 0
-COL5
-Text GLabel 4270 14985 1    50   Input ~ 0
-COL6
-Text GLabel 4370 14985 1    50   Input ~ 0
-COL7
-Text GLabel 4470 14985 1    50   Input ~ 0
-COL8
-Text GLabel 3980 13845 1    50   Input ~ 0
-COL9
-Text GLabel 3880 13845 1    50   Input ~ 0
-COL10
-Text GLabel 3780 13845 1    50   Input ~ 0
-COL11
-Text GLabel 3680 13845 1    50   Input ~ 0
-COL12
-Text GLabel 3580 13845 1    50   Input ~ 0
-COL13
-Text GLabel 3480 13845 1    50   Input ~ 0
-COL14
-Text GLabel 3380 13845 1    50   Input ~ 0
-COL15
-Text GLabel 1130 13715 0    50   Input ~ 0
-ROW1
-Text GLabel 1130 13815 0    50   Input ~ 0
-ROW2
-Text GLabel 1130 13915 0    50   Input ~ 0
-ROW3
-Text GLabel 1130 14015 0    50   Input ~ 0
-ROW4
-Text GLabel 1130 14115 0    50   Input ~ 0
-ROW5
-Text GLabel 1130 14215 0    50   Input ~ 0
-ROW6
-Text GLabel 1130 14315 0    50   Input ~ 0
-ROW7
-Text GLabel 1130 14415 0    50   Input ~ 0
-ROW8
-Text GLabel 1130 14515 0    50   Input ~ 0
-ROW9
-Text GLabel 1130 14615 0    50   Input ~ 0
-ROW10
-Text GLabel 1130 14715 0    50   Input ~ 0
-ROW11
-Text GLabel 1130 14815 0    50   Input ~ 0
-ROW12
-Text GLabel 1130 14915 0    50   Input ~ 0
-ROW13
-Wire Wire Line
-	3770 14985 3770 15030
-Wire Wire Line
-	3870 14985 3870 15030
-Wire Wire Line
-	3970 14985 3970 15030
-Wire Wire Line
-	4070 14985 4070 15030
-Wire Wire Line
-	4170 14985 4170 15030
-Wire Wire Line
-	4270 14985 4270 15030
-Wire Wire Line
-	4370 14985 4370 15030
-Wire Wire Line
-	4470 14985 4470 15030
 $EndSCHEMATC
