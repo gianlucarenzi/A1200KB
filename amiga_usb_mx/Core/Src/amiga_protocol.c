@@ -679,6 +679,7 @@ static uint8_t ascii_to_scancode(uint8_t ascii);
 static void amikb_direction(kbd_dir dir);
 static uint8_t amiga_keycode_send(uint8_t keycode, int press);
 static void amiga_do_reset(void);
+static bool amiga_protocol_is_reset(void);
 
 static uint8_t scancode_to_amiga(uint8_t lkey)
 {
@@ -1188,17 +1189,51 @@ void amiga_protocol_send(keyevent_t event)
 
 
 // ****************************
-bool amiga_protocol_is_reset(void)
+static bool amiga_protocol_is_reset(void)
 {
-	/* If connected to a real Amiga Computers, the reset line can be
+	/* If connected to a real Amiga Computers, the RST Line (reset) can be
 	 * driven without our intervention. As long as the reset line stays
 	 * low for at least more than 400msec, a polling is enough to achieve
-	 * that.
+	 * that. Even the CLK line can be used as reset indicator, so we need
+	 * to check that too.
 	 */
-	bool is_low;
+	bool is_low_clk, is_low_rst;
+	bool is_reset = false;
 	DBG_N("Enter\r\n");
 	amikb_direction( DAT_INPUT );
-	is_low = HAL_GPIO_ReadPin(KB_AMIGA_GPIO_Port, KB_CLK_Pin) == GPIO_PIN_RESET ? true : false;
-	DBG_N("KBD_CLOCK is %s\r\n", is_low == false ? "LOW" : "HIGH");
-	return is_low;
+	is_low_clk = HAL_GPIO_ReadPin(KB_AMIGA_GPIO_Port, KB_CLK_Pin) == GPIO_PIN_RESET ? true : false;
+	is_low_rst = HAL_GPIO_ReadPin(KB_AMIGA_GPIO_Port, KB_RST_Pin) == GPIO_PIN_RESET ? true : false;
+	DBG_N("KBD_CLOCK is %s\r\n", is_low_clk == false ? "LOW" : "HIGH");
+	DBG_N("KBD_RESET is %s\r\n", is_low_rst == false ? "LOW" : "HIGH");
+	if ((is_low_clk == true) || (is_low_rst == true)) is_reset = true;
+	DBG_N("Exit with %s\r\n", is_reset ? "RESET ASSERTED" : "NOT IN RESET");
+	return is_reset;
+}
+
+/* This function is declared __weak somewhere. Now it is real. Called from keyboard_task()
+ */
+void hook_keyboard_loop(void)
+{
+	int reset_active_ms = AMIGA_RESET_TIMEOUT_MS;
+	/* Check for any RST assert from Amiga hardware */
+	if (amiga_protocol_is_reset())
+	{
+		/* need to check if there is a running nRESET!
+		 * It is a reset if it is more than 300ms!
+		 */
+		DBG_N("RESET count: %d\r\n", reset_active_ms);
+		reset_active_ms--;
+		if (reset_active_ms < 1)
+		{
+			DBG_E("AMIGA PROTOCOL RESET ASSERT. Restart Communication with the motherboard\n\r");
+			amiga_protocol_init();
+			reset_active_ms = AMIGA_RESET_TIMEOUT_MS;
+		}
+	}
+	else
+	{
+		DBG_N("NOT IN RESET\r\n");
+		/* If there is no nRESET asserted, reload the timer count */
+		reset_active_ms = AMIGA_RESET_TIMEOUT_MS;
+	}
 }

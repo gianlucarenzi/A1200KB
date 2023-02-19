@@ -20,6 +20,5 @@ extern void amiga_gpio_init(void);
 extern void amiga_protocol_init(void);
 extern void amiga_protocol_send(keyevent_t event);
 extern void amiga_protocol_reset(void);
-extern bool amiga_protocol_is_reset(void);
 
 #endif
