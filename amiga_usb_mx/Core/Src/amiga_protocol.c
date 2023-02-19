@@ -1163,6 +1163,12 @@ void amiga_protocol_send(keyevent_t event)
 			break;
 	}
 
+	/* 
+	 * We can reset the Amiga, using the classic 3 finger salute for
+	 * Amiga Computers CTRL-Amiga-Amiga or the more common CTRL-ALT-DEL
+	 * LALT or RALT does not matter. Even for CTRL it does not matter
+	 * if RCTRL or LCTRL
+	 */
 	if (ctrl_pressed && lgui_pressed && rgui_pressed)
 	{
 		amiga_do_reset();
