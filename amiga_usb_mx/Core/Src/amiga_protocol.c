@@ -262,7 +262,7 @@ static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
  	// --------------------------------------------------------------
  	// Keycodes from: https://wiki.amigaos.net/wiki/Keymap_Library
  	// --------------------------------------------------------------
-	{KEY_GRAVE_ACCENT_AND_TILDE, 0x00 }, // ~
+	{KEY_GRAVE_ACCENT_AND_TILDE, 0x00 }, // `~
 	{KEY_1_EXCLAMATION_MARK,     0x01 }, // 1!
 	{KEY_2_AT,                   0x02 }, // 2@
 	{KEY_3_NUMBER_SIGN,          0x03 }, // 3#
@@ -274,8 +274,8 @@ static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
 	{KEY_9_OPARENTHESIS,         0x09 }, // 9(
 	{KEY_0_CPARENTHESIS,         0x0A }, // 0)
 	{KEY_MINUS_UNDERSCORE,       0x0B }, // -_
-	{KEY_EQUAL_PLUS,             0x0C }, // +=
-	{KEY_BACKSLASH_VERTICAL_BAR, 0x0D }, // |
+	{KEY_EQUAL_PLUS,             0x0C }, // =+
+	{KEY_BACKSLASH_VERTICAL_BAR, 0x0D }, // \|
 	{KEY_INTERNATIONAL3,         0x0E }, // Intl 3 Yen
 	{KEY_KEYPAD_0_INSERT,        0x0F }, // NUM 0
 	{KEY_Q,                      0x10 }, // Q
@@ -303,8 +303,8 @@ static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
 	{KEY_J,                      0x26 }, // J
 	{KEY_K,                      0x27 }, // K
 	{KEY_L,                      0x28 }, // L
-	{KEY_SEMICOLON_COLON,        0x29 }, // :;
-	{KEY_SINGLE_AND_DOUBLE_QUOTE,0x2A }, // "'
+	{KEY_SEMICOLON_COLON,        0x29 }, // ;:
+	{KEY_SINGLE_AND_DOUBLE_QUOTE,0x2A }, // '"
 	{KEY_INTERNATIONAL1,         0x2B }, // undefined Intl 1
 	{KEY_INTERNATIONAL4,         0x2C }, // undefined Intl 4
 	{KEY_KEYPAD_4_LEFT_ARROW,    0x2D }, // NUM 4
@@ -318,9 +318,9 @@ static const uint8_t scancodeamiga[KEYCODE_TAB_SIZE][2] =
 	{KEY_B,                      0x35 }, // B
 	{KEY_N,                      0x36 }, // N
 	{KEY_M,                      0x37 }, // M
-	{KEY_COMMA_AND_LESS,         0x38 }, // <,
-	{KEY_DOT_GREATER,            0x39 }, // >.
-	{KEY_SLASH_QUESTION,         0x3A }, // ?/
+	{KEY_COMMA_AND_LESS,         0x38 }, // ,<
+	{KEY_DOT_GREATER,            0x39 }, // .>
+	{KEY_SLASH_QUESTION,         0x3A }, // /?
 	{KEY_INTERNATIONAL6,         0x3B }, // undefined Intl 6
 	{KEY_KEYPAD_DECIMAL_SEPARATOR_DELETE, 0x3C }, // KEYPAD '.'
 	{KEY_KEYPAD_7_HOME,          0x3D }, // NUM 7
