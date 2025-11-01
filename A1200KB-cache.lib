@@ -1,11 +1,11 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# AmigaComponents_MX-1.25U-MX_Alps_Hybrids
+# RetroBitLab_MX-1.25U-MX_Alps_Hybrids
 #
-DEF AmigaComponents_MX-1.25U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
+DEF RetroBitLab_MX-1.25U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
 F0 "MX" 0 125 60 H V C CNN
-F1 "AmigaComponents_MX-1.25U-MX_Alps_Hybrids" 0 50 20 H V C CNN
+F1 "RetroBitLab_MX-1.25U-MX_Alps_Hybrids" 0 50 20 H V C CNN
 F2 "" -25 -25 60 H I C CNN
 F3 "" -25 -25 60 H I C CNN
 DRAW
@@ -26,11 +26,11 @@ X LEDGND 4 25 -125 50 U 0 0 1 1 P
 ENDDRAW
 ENDDEF
 #
-# AmigaComponents_MX-1.5U-MX_Alps_Hybrids
+# RetroBitLab_MX-1.5U-MX_Alps_Hybrids
 #
-DEF AmigaComponents_MX-1.5U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
+DEF RetroBitLab_MX-1.5U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
 F0 "MX" 0 125 60 H V C CNN
-F1 "AmigaComponents_MX-1.5U-MX_Alps_Hybrids" 0 50 20 H V C CNN
+F1 "RetroBitLab_MX-1.5U-MX_Alps_Hybrids" 0 50 20 H V C CNN
 F2 "" -25 -25 60 H I C CNN
 F3 "" -25 -25 60 H I C CNN
 DRAW
@@ -51,11 +51,11 @@ X LEDGND 4 25 -125 50 U 0 0 1 1 P
 ENDDRAW
 ENDDEF
 #
-# AmigaComponents_MX-1.75U-MX_Alps_Hybrids
+# RetroBitLab_MX-1.75U-MX_Alps_Hybrids
 #
-DEF AmigaComponents_MX-1.75U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
+DEF RetroBitLab_MX-1.75U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
 F0 "MX" 0 125 60 H V C CNN
-F1 "AmigaComponents_MX-1.75U-MX_Alps_Hybrids" 0 50 20 H V C CNN
+F1 "RetroBitLab_MX-1.75U-MX_Alps_Hybrids" 0 50 20 H V C CNN
 F2 "" -25 -25 60 H I C CNN
 F3 "" -25 -25 60 H I C CNN
 DRAW
@@ -76,11 +76,11 @@ X LEDGND 4 25 -125 50 U 0 0 1 1 P
 ENDDRAW
 ENDDEF
 #
-# AmigaComponents_MX-1U-MX_Alps_Hybrids
+# RetroBitLab_MX-1U-MX_Alps_Hybrids
 #
-DEF AmigaComponents_MX-1U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
+DEF RetroBitLab_MX-1U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
 F0 "MX" 0 125 60 H V C CNN
-F1 "AmigaComponents_MX-1U-MX_Alps_Hybrids" 0 50 20 H V C CNN
+F1 "RetroBitLab_MX-1U-MX_Alps_Hybrids" 0 50 20 H V C CNN
 F2 "" -25 -25 60 H I C CNN
 F3 "" -25 -25 60 H I C CNN
 DRAW
@@ -101,11 +101,11 @@ X LEDGND 4 25 -125 50 U 0 0 1 1 P
 ENDDRAW
 ENDDEF
 #
-# AmigaComponents_MX-2.75U-MX_Alps_Hybrids
+# RetroBitLab_MX-2.75U-MX_Alps_Hybrids
 #
-DEF AmigaComponents_MX-2.75U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
+DEF RetroBitLab_MX-2.75U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
 F0 "MX" 0 125 60 H V C CNN
-F1 "AmigaComponents_MX-2.75U-MX_Alps_Hybrids" 0 50 20 H V C CNN
+F1 "RetroBitLab_MX-2.75U-MX_Alps_Hybrids" 0 50 20 H V C CNN
 F2 "" -25 -25 60 H I C CNN
 F3 "" -25 -25 60 H I C CNN
 DRAW
@@ -126,11 +126,11 @@ X LEDGND 4 25 -125 50 U 0 0 1 1 P
 ENDDRAW
 ENDDEF
 #
-# AmigaComponents_MX-2U-MX_Alps_Hybrids
+# RetroBitLab_MX-2U-MX_Alps_Hybrids
 #
-DEF AmigaComponents_MX-2U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
+DEF RetroBitLab_MX-2U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
 F0 "MX" 0 125 60 H V C CNN
-F1 "AmigaComponents_MX-2U-MX_Alps_Hybrids" 0 50 20 H V C CNN
+F1 "RetroBitLab_MX-2U-MX_Alps_Hybrids" 0 50 20 H V C CNN
 F2 "" -25 -25 60 H I C CNN
 F3 "" -25 -25 60 H I C CNN
 DRAW
@@ -151,11 +151,11 @@ X LEDGND 4 25 -125 50 U 0 0 1 1 P
 ENDDRAW
 ENDDEF
 #
-# AmigaComponents_MX-7U-MX_Alps_Hybrids
+# RetroBitLab_MX-7U-MX_Alps_Hybrids
 #
-DEF AmigaComponents_MX-7U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
+DEF RetroBitLab_MX-7U-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
 F0 "MX" 0 125 60 H V C CNN
-F1 "AmigaComponents_MX-7U-MX_Alps_Hybrids" 0 50 20 H V C CNN
+F1 "RetroBitLab_MX-7U-MX_Alps_Hybrids" 0 50 20 H V C CNN
 F2 "" -25 -25 60 H I C CNN
 F3 "" -25 -25 60 H I C CNN
 DRAW
@@ -176,11 +176,11 @@ X LEDGND 4 25 -125 50 U 0 0 1 1 P
 ENDDRAW
 ENDDEF
 #
-# AmigaComponents_MX-ISO-MX_Alps_Hybrids
+# RetroBitLab_MX-ISO-MX_Alps_Hybrids
 #
-DEF AmigaComponents_MX-ISO-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
+DEF RetroBitLab_MX-ISO-MX_Alps_Hybrids MX 0 40 Y Y 1 F N
 F0 "MX" 0 125 60 H V C CNN
-F1 "AmigaComponents_MX-ISO-MX_Alps_Hybrids" 0 50 20 H V C CNN
+F1 "RetroBitLab_MX-ISO-MX_Alps_Hybrids" 0 50 20 H V C CNN
 F2 "" -25 -25 60 H I C CNN
 F3 "" -25 -25 60 H I C CNN
 DRAW
