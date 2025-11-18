@@ -26,6 +26,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "keyboard.h"
+#include "keyboard_queues.h"
+#include "usb_keyboard_task.h"
+#include "led_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,6 +56,22 @@ const osThreadAttr_t keyboardTask_attributes = {
   .name = "keyboardTask",
   .stack_size = 1024 * 4,
   .priority = (osPriority_t) osPriorityNormal,
+};
+
+/* Definitions for usbKeyboardTask */
+osThreadId_t usbKeyboardTaskHandle;
+const osThreadAttr_t usbKeyboardTask_attributes = {
+  .name = "usbKeyboardTask",
+  .stack_size = 1024 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
+/* Definitions for ledManagerTask */
+osThreadId_t ledManagerTaskHandle;
+const osThreadAttr_t ledManagerTask_attributes = {
+  .name = "ledManagerTask",
+  .stack_size = 1024 * 2,
+  .priority = (osPriority_t) osPriorityLow,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -87,7 +106,8 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END RTOS_TIMERS */
 
   /* USER CODE BEGIN RTOS_QUEUES */
-  /* add queues, ... */
+  /* Initialize keyboard queues */
+  keyboard_queues_init();
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
@@ -95,7 +115,11 @@ void MX_FREERTOS_Init(void) {
   keyboardTaskHandle = osThreadNew(keyboardTask, NULL, &keyboardTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  /* add threads, ... */
+  /* Create USB keyboard task */
+  usbKeyboardTaskHandle = osThreadNew(usbKeyboardTask, NULL, &usbKeyboardTask_attributes);
+
+  /* Create LED manager task */
+  ledManagerTaskHandle = osThreadNew(ledManagerTask, NULL, &ledManagerTask_attributes);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
