@@ -65,12 +65,14 @@ void Error_Handler(void);
 #define COL15_GPIO_Port GPIOC
 #define COL0_Pin GPIO_PIN_0
 #define COL0_GPIO_Port GPIOC
-#define COL1_Pin GPIO_PIN_1
-#define COL1_GPIO_Port GPIOC
+#define BOOT_MODE_Pin GPIO_PIN_1
+#define BOOT_MODE_GPIO_Port GPIOC
 #define COL2_Pin GPIO_PIN_2
 #define COL2_GPIO_Port GPIOC
 #define COL3_Pin GPIO_PIN_3
 #define COL3_GPIO_Port GPIOC
+#define LED_ACT_Pin GPIO_PIN_0
+#define LED_ACT_GPIO_Port GPIOA
 #define DEBUG_TX_Pin GPIO_PIN_2
 #define DEBUG_TX_GPIO_Port GPIOA
 #define DEBUG_RX_Pin GPIO_PIN_3
@@ -119,6 +121,8 @@ void Error_Handler(void);
 #define COL11_GPIO_Port GPIOC
 #define COL12_Pin GPIO_PIN_12
 #define COL12_GPIO_Port GPIOC
+#define COL1_Pin GPIO_PIN_2
+#define COL1_GPIO_Port GPIOD
 #define ROW3_Pin GPIO_PIN_3
 #define ROW3_GPIO_Port GPIOB
 #define ROW4_Pin GPIO_PIN_4
@@ -133,6 +137,7 @@ void Error_Handler(void);
 #define ROW8_GPIO_Port GPIOB
 #define ROW9_Pin GPIO_PIN_9
 #define ROW9_GPIO_Port GPIOB
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

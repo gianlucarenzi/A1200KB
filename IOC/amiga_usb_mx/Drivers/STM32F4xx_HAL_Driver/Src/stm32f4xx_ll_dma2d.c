@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -123,7 +122,7 @@
   *          - SUCCESS: DMA2D registers are de-initialized
   *          - ERROR: DMA2D registers are not de-initialized
   */
-ErrorStatus LL_DMA2D_DeInit(DMA2D_TypeDef *DMA2Dx)
+ErrorStatus LL_DMA2D_DeInit(const DMA2D_TypeDef *DMA2Dx)
 {
   ErrorStatus status = SUCCESS;
 
@@ -400,7 +399,7 @@ void LL_DMA2D_ConfigOutputColor(DMA2D_TypeDef *DMA2Dx, LL_DMA2D_ColorTypeDef *DM
   *         @arg @ref LL_DMA2D_OUTPUT_MODE_ARGB4444
   * @retval Output Blue color value between Min_Data=0 and Max_Data=0xFF
   */
-uint32_t LL_DMA2D_GetOutputBlueColor(DMA2D_TypeDef *DMA2Dx, uint32_t ColorMode)
+uint32_t LL_DMA2D_GetOutputBlueColor(const DMA2D_TypeDef *DMA2Dx, uint32_t ColorMode)
 {
   uint32_t color;
 
@@ -444,7 +443,7 @@ uint32_t LL_DMA2D_GetOutputBlueColor(DMA2D_TypeDef *DMA2Dx, uint32_t ColorMode)
   *         @arg @ref LL_DMA2D_OUTPUT_MODE_ARGB4444
   * @retval Output Green color value between Min_Data=0 and Max_Data=0xFF
   */
-uint32_t LL_DMA2D_GetOutputGreenColor(DMA2D_TypeDef *DMA2Dx, uint32_t ColorMode)
+uint32_t LL_DMA2D_GetOutputGreenColor(const DMA2D_TypeDef *DMA2Dx, uint32_t ColorMode)
 {
   uint32_t color;
 
@@ -488,7 +487,7 @@ uint32_t LL_DMA2D_GetOutputGreenColor(DMA2D_TypeDef *DMA2Dx, uint32_t ColorMode)
   *         @arg @ref LL_DMA2D_OUTPUT_MODE_ARGB4444
   * @retval Output Red color value between Min_Data=0 and Max_Data=0xFF
   */
-uint32_t LL_DMA2D_GetOutputRedColor(DMA2D_TypeDef *DMA2Dx, uint32_t ColorMode)
+uint32_t LL_DMA2D_GetOutputRedColor(const DMA2D_TypeDef *DMA2Dx, uint32_t ColorMode)
 {
   uint32_t color;
 
@@ -532,7 +531,7 @@ uint32_t LL_DMA2D_GetOutputRedColor(DMA2D_TypeDef *DMA2Dx, uint32_t ColorMode)
   *         @arg @ref LL_DMA2D_OUTPUT_MODE_ARGB4444
   * @retval Output Alpha color value between Min_Data=0 and Max_Data=0xFF
   */
-uint32_t LL_DMA2D_GetOutputAlphaColor(DMA2D_TypeDef *DMA2Dx, uint32_t ColorMode)
+uint32_t LL_DMA2D_GetOutputAlphaColor(const DMA2D_TypeDef *DMA2Dx, uint32_t ColorMode)
 {
   uint32_t color;
 
@@ -593,6 +592,3 @@ void LL_DMA2D_ConfigSize(DMA2D_TypeDef *DMA2Dx, uint32_t NbrOfLines, uint32_t Nb
   */
 
 #endif /* USE_FULL_LL_DRIVER */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

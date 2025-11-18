@@ -65,6 +65,7 @@ static void MX_USART2_UART_Init(void);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -117,6 +118,7 @@ void SystemClock_Config(void)
   */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
+
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
@@ -132,6 +134,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -188,12 +191,19 @@ static void MX_USART2_UART_Init(void)
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+
+  /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(LED_ACT_GPIO_Port, LED_ACT_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, LED_POWER_Pin|KB_DAT_Pin|KB_CLK_Pin|KB_RST_Pin
@@ -206,16 +216,23 @@ static void MX_GPIO_Init(void)
                           |ROW9_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : COL13_Pin COL14_Pin COL15_Pin COL0_Pin
-                           COL1_Pin COL2_Pin COL3_Pin COL4_Pin
+                           BOOT_MODE_Pin COL2_Pin COL3_Pin COL4_Pin
                            COL5_Pin COL6_Pin COL7_Pin COL8_Pin
                            COL9_Pin COL10_Pin COL11_Pin COL12_Pin */
   GPIO_InitStruct.Pin = COL13_Pin|COL14_Pin|COL15_Pin|COL0_Pin
-                          |COL1_Pin|COL2_Pin|COL3_Pin|COL4_Pin
+                          |BOOT_MODE_Pin|COL2_Pin|COL3_Pin|COL4_Pin
                           |COL5_Pin|COL6_Pin|COL7_Pin|COL8_Pin
                           |COL9_Pin|COL10_Pin|COL11_Pin|COL12_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : LED_ACT_Pin */
+  GPIO_InitStruct.Pin = LED_ACT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(LED_ACT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LED_POWER_Pin KB_DAT_Pin KB_CLK_Pin KB_RST_Pin
                            LED_CAPS_LOCK_Pin LED_NUM_LOCK_Pin LED_SCROLL_LOCK_Pin */
@@ -239,6 +256,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : COL1_Pin */
+  GPIO_InitStruct.Pin = COL1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(COL1_GPIO_Port, &GPIO_InitStruct);
+
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
+
+  /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
@@ -259,8 +285,7 @@ void Error_Handler(void)
   }
   /* USER CODE END Error_Handler_Debug */
 }
-
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -276,4 +301,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
