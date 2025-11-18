@@ -32,10 +32,12 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "freertos.h"
+#include "stm32f4xx_hal_tim.h"
 
 /* External storage classes */
 extern USBD_HandleTypeDef hUsbDeviceFS;
 extern host_driver_t usbdriver;
+extern TIM_HandleTypeDef htim1;
 
 /* Internal functions */
 UART_HandleTypeDef huart2;  /* Non-static to allow access from serial_task.c */
@@ -229,6 +231,13 @@ int main(void)
 	while (1)
 	{
 	}
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if (htim->Instance == TIM1) {
+    HAL_IncTick();
+  }
 }
 
 #ifdef  USE_FULL_ASSERT
