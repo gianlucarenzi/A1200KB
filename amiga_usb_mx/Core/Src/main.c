@@ -37,7 +37,7 @@ extern USBD_HandleTypeDef hUsbDeviceFS;
 extern host_driver_t usbdriver;
 
 /* Internal functions */
-static UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart2;  /* Non-static to allow access from serial_task.c */
 static int debuglevel = DBG_INFO;
 
 #define KEYBOARD_INTERFACE "AMIGA COMMODORE COMPUTERS"

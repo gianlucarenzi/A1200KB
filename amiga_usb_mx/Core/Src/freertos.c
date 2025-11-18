@@ -29,6 +29,7 @@
 #include "keyboard_queues.h"
 #include "usb_keyboard_task.h"
 #include "led_task.h"
+#include "serial_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -74,6 +75,14 @@ const osThreadAttr_t ledManagerTask_attributes = {
   .priority = (osPriority_t) osPriorityLow,
 };
 
+/* Definitions for serialTask */
+osThreadId_t serialTaskHandle;
+const osThreadAttr_t serialTask_attributes = {
+  .name = "serialTask",
+  .stack_size = 1024 * 2,
+  .priority = (osPriority_t) osPriorityBelowNormal,
+};
+
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 
@@ -108,6 +117,9 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_QUEUES */
   /* Initialize keyboard queues */
   keyboard_queues_init();
+
+  /* Initialize serial queue */
+  serial_queue_init();
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
@@ -115,6 +127,9 @@ void MX_FREERTOS_Init(void) {
   keyboardTaskHandle = osThreadNew(keyboardTask, NULL, &keyboardTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
+  /* Create serial task (high priority to avoid message fragmentation) */
+  serialTaskHandle = osThreadNew(serialTask, NULL, &serialTask_attributes);
+
   /* Create USB keyboard task */
   usbKeyboardTaskHandle = osThreadNew(usbKeyboardTask, NULL, &usbKeyboardTask_attributes);
 

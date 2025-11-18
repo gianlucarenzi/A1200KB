@@ -57,6 +57,7 @@ C_SOURCES =  \
 	Core/Src/keyboard_queues.c \
 	Core/Src/usb_keyboard_task.c \
 	Core/Src/led_task.c \
+	Core/Src/serial_task.c \
 	Core/Src/keymap.c \
 	Core/Src/main.c \
 	Core/Src/matrix.c \

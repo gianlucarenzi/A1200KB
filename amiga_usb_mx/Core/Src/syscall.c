@@ -3,6 +3,7 @@
 #include "syscall.h"
 #include <stm32f4xx_hal.h> // per HAL_StatusTypeDef
 #include "debug.h"
+#include "serial_task.h"
 
 static t_syscall_status uart_initialize = SYSCALL_NOTREADY;
 static UART_HandleTypeDef *uart = NULL;
@@ -19,8 +20,6 @@ void _write_ready(t_syscall_status rdy, UART_HandleTypeDef *ptr)
 
 int _write(int file, char *data, int len)
 {
-	HAL_StatusTypeDef status = HAL_OK - 1;
-
 	if ((file != STDOUT_FILENO) && (file != STDERR_FILENO))
 	{
 		errno = EBADF;
@@ -29,15 +28,11 @@ int _write(int file, char *data, int len)
 
 	if (uart_initialize == SYSCALL_READY)
 	{
-		if (uart != NULL)
-		{
-			// arbitrary timeout 1000
-			status = HAL_UART_Transmit(uart, (uint8_t*)data, len, 1000);
-		}
+		/* Use serial task queue if available, otherwise direct UART write */
+		return serial_write(data, len);
 	}
 
-	// return # of bytes written - as best we can tell
-	return (status == HAL_OK ? len : 0);
+	return 0;
 }
 
 static uint32_t timertick_start_ms = 0;
