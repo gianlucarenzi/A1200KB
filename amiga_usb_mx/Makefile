@@ -51,6 +51,7 @@ C_SOURCES =  \
 	Core/Src/action_tapping.c \
 	Core/Src/action_util.c \
 	Core/Src/debug.c \
+	Core/Src/delay_us.c \
 	Core/Src/hook.c \
 	Core/Src/host.c \
 	Core/Src/keyboard.c \

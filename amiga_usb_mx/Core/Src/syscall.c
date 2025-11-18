@@ -4,6 +4,8 @@
 #include <stm32f4xx_hal.h> // per HAL_StatusTypeDef
 #include "debug.h"
 #include "serial_task.h"
+#include "delay_us.h"
+#include "cmsis_os2.h"
 
 static t_syscall_status uart_initialize = SYSCALL_NOTREADY;
 static UART_HandleTypeDef *uart = NULL;
@@ -42,29 +44,18 @@ void timer_start(void)
 	timertick_start_ms = HAL_GetTick();
 }
 
-// I hate this delay because they are clockspeed dependent!!!
-#define delayUS_ASM(us) do {\
-	asm volatile (	"MOV R0,%[loops]\n\t"\
-			"1: \n\t"\
-			"SUB R0, #1\n\t"\
-			"CMP R0, #0\n\t"\
-			"BNE 1b \n\t" : : [loops] "r" (16*us) : "memory"\
-		      );\
-} while(0)
-
-void udelay(uint32_t micros)
-{
-	DBG_N("Enter with: %lu\n", micros);
-	if (micros > 0)
-	{
-		/* Go to number of cycles for system */
-		DBG_N("MICROS: %lu\r\n", micros);
-		delayUS_ASM(micros);
-	}
-	DBG_N("Exit\r\n");
-}
-
+/**
+ * @brief Millisecond delay - uses osDelay if scheduler running, HAL_Delay otherwise
+ * @param millis: Delay in milliseconds
+ */
 void mdelay(uint32_t millis)
 {
-	HAL_Delay(millis);
+	if (osKernelGetState() == osKernelRunning)
+	{
+		osDelay(millis);
+	}
+	else
+	{
+		HAL_Delay(millis);
+	}
 }

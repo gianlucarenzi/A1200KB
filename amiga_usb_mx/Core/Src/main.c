@@ -28,6 +28,7 @@
 #include "host.h"
 #include "config.h"
 #include "amiga_protocol.h"
+#include "delay_us.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "freertos.h"
@@ -183,6 +184,9 @@ int main(void)
 
 	/* Configure the system clock */
 	SystemClock_Config();
+
+	/* Initialize DWT for microsecond delays (must be after SystemClock_Config) */
+	DelayUs_Init();
 
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
