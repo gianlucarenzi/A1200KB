@@ -5,9 +5,7 @@
 #include "host.h"
 #include "hook.h"
 #include "debug.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
+#include "cmsis_os2.h"
 
 static int debuglevel = DBG_INFO;
 
@@ -27,7 +25,7 @@ void usbKeyboardTask(void *argument)
 	for(;;)
 	{
 		/* Wait for key event from keyboard scanner (blocking wait) */
-		if (xQueueReceive(keyEventQueue, &event, portMAX_DELAY) == pdTRUE)
+		if (osMessageQueueGet(keyEventQueue, &event, NULL, osWaitForever) == osOK)
 		{
 			/* Process the key event through action system */
 			action_exec(event);
@@ -52,7 +50,7 @@ void usbKeyboardTask(void *argument)
 				/* Send LED command to LED manager task */
 				if (ledCommandQueue != NULL) {
 					led_command_t cmd = { .led_status = led_status };
-					xQueueSend(ledCommandQueue, &cmd, 0);
+					osMessageQueuePut(ledCommandQueue, &cmd, 0, 0);
 				}
 			}
 		}

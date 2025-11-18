@@ -1,13 +1,11 @@
 #include "serial_task.h"
 #include "syscall.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
+#include "cmsis_os2.h"
 #include <string.h>
 #include <stm32f4xx_hal.h>
 
 /* Queue handle */
-QueueHandle_t serialQueue = NULL;
+osMessageQueueId_t serialQueue = NULL;
 
 /* External UART handle from main.c */
 extern UART_HandleTypeDef huart2;
@@ -17,7 +15,7 @@ extern UART_HandleTypeDef huart2;
  */
 void serial_queue_init(void)
 {
-    serialQueue = xQueueCreate(SERIAL_QUEUE_SIZE, sizeof(serial_message_t));
+    serialQueue = osMessageQueueNew(SERIAL_QUEUE_SIZE, sizeof(serial_message_t), NULL);
 }
 
 /**
@@ -25,7 +23,7 @@ void serial_queue_init(void)
  */
 bool serial_is_scheduler_running(void)
 {
-    return (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING);
+    return (osKernelGetState() == osKernelRunning);
 }
 
 /**
@@ -57,7 +55,7 @@ int serial_write(const char *data, int len)
         msg.length = len;
 
         /* Try to send to queue (non-blocking) */
-        if (xQueueSend(serialQueue, &msg, 0) == pdTRUE)
+        if (osMessageQueuePut(serialQueue, &msg, 0, 0) == osOK)
         {
             return len;
         }
@@ -80,7 +78,7 @@ void serialTask(void *argument)
     for(;;)
     {
         /* Wait for message from queue (blocking) */
-        if (xQueueReceive(serialQueue, &msg, portMAX_DELAY) == pdTRUE)
+        if (osMessageQueueGet(serialQueue, &msg, NULL, osWaitForever) == osOK)
         {
             /* Transmit entire message atomically - no interruptions */
             HAL_UART_Transmit(&huart2, (uint8_t*)msg.message, msg.length, 1000);

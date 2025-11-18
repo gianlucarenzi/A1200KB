@@ -3,9 +3,7 @@
 #include "keyboard.h"
 #include "hook.h"
 #include "debug.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
+#include "cmsis_os2.h"
 
 static int debuglevel = DBG_INFO;
 
@@ -23,7 +21,7 @@ void ledManagerTask(void *argument)
 	for(;;)
 	{
 		/* Wait for LED command (blocking wait) */
-		if (xQueueReceive(ledCommandQueue, &cmd, portMAX_DELAY) == pdTRUE)
+		if (osMessageQueueGet(ledCommandQueue, &cmd, NULL, osWaitForever) == osOK)
 		{
 			/* Update hardware LEDs via hook */
 			hook_keyboard_leds_change(cmd.led_status);

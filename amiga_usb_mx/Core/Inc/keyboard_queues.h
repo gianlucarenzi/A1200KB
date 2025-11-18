@@ -1,8 +1,7 @@
 #ifndef __KEYBOARD_QUEUES_H_INCLUDED__
 #define __KEYBOARD_QUEUES_H_INCLUDED__
 
-#include "FreeRTOS.h"
-#include "queue.h"
+#include "cmsis_os2.h"
 #include "keyboard.h"
 #include <stdint.h>
 
@@ -16,8 +15,8 @@ typedef struct {
 } led_command_t;
 
 /* Queue handles (declared extern, defined in keyboard_queues.c) */
-extern QueueHandle_t keyEventQueue;
-extern QueueHandle_t ledCommandQueue;
+extern osMessageQueueId_t keyEventQueue;
+extern osMessageQueueId_t ledCommandQueue;
 
 /* Queue initialization function */
 void keyboard_queues_init(void);

@@ -31,9 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "host.h"
 #include "amiga_protocol.h"
 #include "keyboard_queues.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
+#include "cmsis_os2.h"
 
 static int debuglevel = DBG_INFO;
 
@@ -113,7 +111,7 @@ void keyboard_task(void)
 
 					/* Send event to USB task queue */
 					if (keyEventQueue != NULL) {
-						if (xQueueSend(keyEventQueue, &e, 0) == pdTRUE) {
+						if (osMessageQueuePut(keyEventQueue, &e, 0, 0) == osOK) {
 							event_sent = true;
 							// record a processed key
 							matrix_prev[r] ^= col_mask;
@@ -127,7 +125,7 @@ void keyboard_task(void)
 	/* Send TICK event if no real key event was sent */
 	if (!event_sent && keyEventQueue != NULL) {
 		keyevent_t tick_event = TICK;
-		xQueueSend(keyEventQueue, &tick_event, 0);
+		osMessageQueuePut(keyEventQueue, &tick_event, 0, 0);
 	}
 }
 

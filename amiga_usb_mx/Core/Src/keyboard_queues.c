@@ -1,8 +1,8 @@
 #include "keyboard_queues.h"
 
 /* Queue handles */
-QueueHandle_t keyEventQueue = NULL;
-QueueHandle_t ledCommandQueue = NULL;
+osMessageQueueId_t keyEventQueue = NULL;
+osMessageQueueId_t ledCommandQueue = NULL;
 
 /**
  * @brief Initialize all keyboard-related queues
@@ -10,8 +10,8 @@ QueueHandle_t ledCommandQueue = NULL;
 void keyboard_queues_init(void)
 {
     /* Create queue for key events from keyboard scanner to USB task */
-    keyEventQueue = xQueueCreate(KEY_EVENT_QUEUE_SIZE, sizeof(keyevent_t));
+    keyEventQueue = osMessageQueueNew(KEY_EVENT_QUEUE_SIZE, sizeof(keyevent_t), NULL);
 
     /* Create queue for LED commands from USB task to LED manager */
-    ledCommandQueue = xQueueCreate(LED_COMMAND_QUEUE_SIZE, sizeof(led_command_t));
+    ledCommandQueue = osMessageQueueNew(LED_COMMAND_QUEUE_SIZE, sizeof(led_command_t), NULL);
 }

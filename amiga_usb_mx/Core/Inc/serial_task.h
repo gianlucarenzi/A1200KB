@@ -1,9 +1,7 @@
 #ifndef __SERIAL_TASK_H_INCLUDED__
 #define __SERIAL_TASK_H_INCLUDED__
 
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
+#include "cmsis_os2.h"
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -18,7 +16,7 @@ typedef struct {
 } serial_message_t;
 
 /* Queue handle for serial messages */
-extern QueueHandle_t serialQueue;
+extern osMessageQueueId_t serialQueue;
 
 /**
  * @brief Initialize serial queue
