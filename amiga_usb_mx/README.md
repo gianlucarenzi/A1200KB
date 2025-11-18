@@ -22,18 +22,23 @@ Il diagramma seguente illustra il flusso di dati tra i principali componenti del
 
 ```mermaid
 graph TD
-    subgraph Firmware STM32
+    subgraph "Firmware STM32"
         direction LR
         KT[keyboardTask]
         UKT[usbKeyboardTask]
         LMT[ledManagerTask]
         ST[serialTask]
+        KEQ[("keyEventQueue")]
+        LCQ[("ledCommandQueue")]
+        SQ[("serialQueue")]
+        USB_CB["USB Callbacks"]
     end
 
     subgraph Hardware
         direction LR
         KM[Amiga Keyboard Matrix]
         LEDs[Keyboard LEDs]
+        UART_HW[UART TX]
     end
 
     subgraph Host
@@ -41,16 +46,21 @@ graph TD
         USB_HOST[Computer Host]
     end
 
-    KM -- Scansione Matrice --> KT
-    KT -- "keyEventQueue (Eventi Tasto)" --> UKT
-    UKT -- "Report HID USB" --> USB_HOST
-    USB_HOST -- "Comandi LED" --> LMT
-    LMT -- "ledCommandQueue (Stato LED)" --> LMT
-    LMT -- Controlla GPIO --> LEDs
-    KT -- "Messaggi di Debug" --> ST
-    UKT -- "Messaggi di Debug" --> ST
-    ST -- "Output Seriale" --> UART
+    KM -- "Scansione Matrice" --> KT
+    KT -- "keyevent_t" --> KEQ
+    KEQ --> UKT
+    UKT -- "Report HID" --> USB_CB
+    USB_CB -- "Dati USB" --> USB_HOST
 
+    USB_HOST -- "Comandi LED" --> USB_CB
+    USB_CB -- "led_command_t" --> LCQ
+    LCQ --> LMT
+    LMT -- "Controlla GPIO" --> LEDs
+
+    KT -- "Debug Msg" --> SQ
+    UKT -- "Debug Msg" --> SQ
+    SQ --> ST
+    ST --> UART_HW
 ```
 
 ## Gestione dei Task (FreeRTOS)
@@ -72,8 +82,8 @@ Questo task si occupa di tutto ciò che riguarda la comunicazione USB con il com
 ### 3. `ledManagerTask`
 Gestisce lo stato dei LED della tastiera (Caps Lock, Num Lock, Scroll Lock).
 - **Funzionamento**: Attende comandi sulla coda `ledCommandQueue`.
-- **Comunicazione USB**: Riceve dall'host USB i comandi per cambiare lo stato dei LED.
-- **Controllo GPIO**: Aggiorna lo stato dei pin GPIO collegati ai LED fisici sulla tastiera.
+- **Comunicazione USB**: Le callback del driver USB ricevono i comandi dall'host e li inseriscono nella coda `ledCommandQueue`.
+- **Controllo GPIO**: Il task legge dalla coda e aggiorna lo stato dei pin GPIO collegati ai LED fisici sulla tastiera.
 
 ### 4. `serialTask`
 Fornisce un meccanismo di logging e debug non bloccante.
@@ -96,10 +106,16 @@ graph TD
         KEQ[keyEventQueue]
         LCQ[ledCommandQueue]
     end
+    
+    subgraph "USB Callbacks"
+        USB_CB[USB Callbacks]
+    end
 
-    KT -- Inserisce keyevent_t --> KEQ
-    UKT -- Legge keyevent_t --> KEQ
-    LMT -- Legge led_command_t --> LCQ
+    KT -- "Inserisce" --> KEQ
+    KEQ -- "Legge" --> UKT
+    
+    USB_CB -- "Inserisce" --> LCQ
+    LCQ -- "Legge" --> LMT
 ```
 
 ### Strutture Dati delle Code
