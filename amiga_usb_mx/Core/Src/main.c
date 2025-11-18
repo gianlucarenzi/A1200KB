@@ -28,6 +28,9 @@
 #include "host.h"
 #include "config.h"
 #include "amiga_protocol.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "freertos.h"
 
 /* External storage classes */
 extern USBD_HandleTypeDef hUsbDeviceFS;
@@ -212,12 +215,15 @@ int main(void)
 
 	LED_ACT_ON();
 
-	/* The timertick of the keyboard_task() is about 1.14 msec something
-	 * below the 1Khz ticks. Let's operate at this speed.
-	 */
-	for(;;)
+	/* Initialize FreeRTOS */
+	MX_FREERTOS_Init();
+
+	/* Start scheduler */
+	osKernelStart();
+
+	/* We should never get here as control is now taken by the scheduler */
+	while (1)
 	{
-		keyboard_task();
 	}
 }
 
