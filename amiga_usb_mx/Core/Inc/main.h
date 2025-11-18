@@ -64,8 +64,10 @@ void Error_Handler(void);
 
 #define COL0_Pin GPIO_PIN_0
 #define COL0_GPIO_Port GPIOC
-#define COL1_Pin GPIO_PIN_1
-#define COL1_GPIO_Port GPIOC
+#define BOOT_MODE_Pin GPIO_PIN_1
+#define BOOT_MODE_GPIO_Port GPIOC
+#define COL1_Pin GPIO_PIN_2
+#define COL1_GPIO_Port GPIOD
 #define COL2_Pin GPIO_PIN_2
 #define COL2_GPIO_Port GPIOC
 #define COL3_Pin GPIO_PIN_3
