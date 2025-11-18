@@ -737,7 +737,7 @@ static void amikb_direction(kbd_dir dir)
 		default:
 		case DAT_OUTPUT:
 			GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-			GPIO_InitStruct.Pull = GPIO_NOPULL;
+			GPIO_InitStruct.Pull = GPIO_PULLUP;
 			break;
 	}
 	HAL_GPIO_Init(KB_AMIGA_GPIO_Port, &GPIO_InitStruct);
@@ -745,7 +745,7 @@ static void amikb_direction(kbd_dir dir)
 	/* Now configure KBD_RST_Pin as output */
 	GPIO_InitStruct.Pin = KB_RST_Pin;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(KB_AMIGA_GPIO_Port, &GPIO_InitStruct);
 
@@ -1085,7 +1085,7 @@ void amiga_gpio_init(void)
 	/*Configure GPIO pins : KB_CLK_Pin KB_DAT_Pin KB_RST_Pin */
 	GPIO_InitStruct.Pin = KB_CLK_Pin | KB_DAT_Pin | KB_RST_Pin;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(KB_AMIGA_GPIO_Port, &GPIO_InitStruct);
 
