@@ -1,5 +1,6 @@
 #include "ws2812.h"
 #include "stm32f4xx_hal.h"
+#include "main.h"
 
 // Timer and DMA handles
 TIM_HandleTypeDef htim2;
@@ -20,12 +21,12 @@ void ws2812_init(void) {
     // GPIO Initialization
     GPIO_InitTypeDef GPIO_InitStruct = {0};
     __HAL_RCC_GPIOA_CLK_ENABLE();
-    GPIO_InitStruct.Pin = GPIO_PIN_1;
+    GPIO_InitStruct.Pin = LED_RGB_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    HAL_GPIO_Init(LED_RGB_GPIO_Port, &GPIO_InitStruct);
 
     // TIM2 and DMA1 clock enable
     __HAL_RCC_TIM2_CLK_ENABLE();
