@@ -94,6 +94,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_LSCR KC_LOCKING_SCROLL
 #define KC_ERAS KC_ALT_ERASE
 #define KC_CLR  KC_CLEAR
+#define KC_PLPR KC_KP_LPAREN
+#define KC_PRPR KC_KP_RPAREN
+
 /* Japanese specific */
 #define KC_ZKHK KC_GRAVE
 #define KC_RO   KC_INT1
