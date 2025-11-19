@@ -7,7 +7,7 @@
 #include "action.h"
 
 #define KEYBOARD_COLUMNS 16
-#define KEYBOARD_ROWS    13
+#define KEYBOARD_ROWS    12
 
 extern const uint8_t keymaps[][KEYBOARD_ROWS][KEYBOARD_COLUMNS];
 extern gpioPort_t lut_row[ KEYBOARD_ROWS ];
