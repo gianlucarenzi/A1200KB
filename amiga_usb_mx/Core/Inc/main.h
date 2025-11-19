@@ -64,8 +64,6 @@ void Error_Handler(void);
 
 #define COL0_Pin GPIO_PIN_0
 #define COL0_GPIO_Port GPIOC
-#define BOOT_MODE_Pin GPIO_PIN_1
-#define BOOT_MODE_GPIO_Port GPIOC
 #define COL1_Pin GPIO_PIN_2
 #define COL1_GPIO_Port GPIOD
 #define COL2_Pin GPIO_PIN_2
@@ -96,6 +94,9 @@ void Error_Handler(void);
 #define COL14_GPIO_Port GPIOC
 #define COL15_Pin GPIO_PIN_15
 #define COL15_GPIO_Port GPIOC
+
+#define BOOT_MODE_Pin GPIO_PIN_1
+#define BOOT_MODE_GPIO_Port GPIOC
 
 #define DEBUG_TX_Pin GPIO_PIN_2
 #define DEBUG_TX_GPIO_Port GPIOA
