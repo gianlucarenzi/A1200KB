@@ -47,20 +47,6 @@ void Error_Handler(void);
 #define ROW4_GPIO_Port GPIOB
 #define ROW5_Pin GPIO_PIN_5
 #define ROW5_GPIO_Port GPIOB
-#define ROW6_Pin GPIO_PIN_6
-#define ROW6_GPIO_Port GPIOB
-#define ROW7_Pin GPIO_PIN_7
-#define ROW7_GPIO_Port GPIOB
-#define ROW8_Pin GPIO_PIN_8
-#define ROW8_GPIO_Port GPIOB
-#define ROW9_Pin GPIO_PIN_9
-#define ROW9_GPIO_Port GPIOB
-#define ROW10_Pin GPIO_PIN_10
-#define ROW10_GPIO_Port GPIOB
-#define ROW11_Pin GPIO_PIN_12
-#define ROW11_GPIO_Port GPIOB
-#define ROW12_Pin GPIO_PIN_13
-#define ROW12_GPIO_Port GPIOB
 
 #define COL0_Pin GPIO_PIN_0
 #define COL0_GPIO_Port GPIOC
@@ -94,6 +80,22 @@ void Error_Handler(void);
 #define COL14_GPIO_Port GPIOC
 #define COL15_Pin GPIO_PIN_15
 #define COL15_GPIO_Port GPIOC
+#define COL16_Pin GPIO_PIN_6
+#define COL16_GPIO_Port GPIOB
+#define COL17_Pin GPIO_PIN_7
+#define COL17_GPIO_Port GPIOB
+#define COL18_Pin GPIO_PIN_8
+#define COL18_GPIO_Port GPIOB
+#define COL19_Pin GPIO_PIN_9
+#define COL19_GPIO_Port GPIOB
+#define COL20_Pin GPIO_PIN_10
+#define COL20_GPIO_Port GPIOB
+#define COL21_Pin GPIO_PIN_12
+#define COL21_GPIO_Port GPIOB
+
+#define SPARE1_Pin GPIO_PIN_13
+#define SPARE1_GPIO_Port GPIOB
+
 
 #define BOOT_MODE_Pin GPIO_PIN_1
 #define BOOT_MODE_GPIO_Port GPIOC

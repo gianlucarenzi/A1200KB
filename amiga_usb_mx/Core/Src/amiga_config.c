@@ -54,32 +54,51 @@ static int debuglevel = DBG_INFO;
 	 * |--------------------------------------------------------------|    ,----+----+----.     `---------------|
 	 * | Shift | BL|  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|  Shift   |    |LFT |DOWN| RGT|     | 1 | 2 | 3 | E |
 	 * `--------------------------------------------------------------'    `--------------'     `------------ N |
-	 *     | LAlt| LGUI|   |       Space      |   | RGUI| RAlt |                                |   0   | . | T |
+	 *     | LAlt| LGUI| BL|       Space      |BL | RGUI| RAlt |                                |   0   | . | T |
 	 *     `---------------------------------------------------'                                `---------------'
 	 *
 	 * BL = spare blank keys (not used in Standard International Mode)
 	 * 
 	 */
 
-/* We have max 13 rows and 16 columns. So we need to arrange a different layout here */
+	/*
+	 *                                   PHYSICAL LAYOUT
+	 * 
+	 *     C0  C1   C2   C3   C4   C5   C6   C7   C8   C9  C10  C11  C12 C13 C14      C15 C16 C17             C18 C19 C20 C21
+	 *    ,---.----,------------------------,------------------------------------.    ,-----------.           ,---------------.
+	 * R0 |Esc| NC | F1 | F2 | F3 | F4 | F5 | F6 | F7 | F8 | F9 |F10 |NC |NC |NC |    |NC |NC |NC |           |NC |NC |NC |NC |
+	 *    `---.----'-------------------------------------------------------------.    `-----------'           `---------------'
+	 *    ,----------------------------------------------------------------------.    ,-----------,           ,---------------.
+	 * R1 |  `|  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 |  0 |  - |  =|  \|BS |    |DEL|NC |HLP|           | ( | ) | / | * |
+	 *    |----------------------------------------------------------------------|    `-----------'           |---------------| 
+	 * R2 |Tab|  Q |  W |  E |  R |  T |  Y |  U |  I |  O |  P | [  | ] |NC |RET|    |NC |NC |NC |           | 7 | 8 | 9 | - |
+	 *    |------------------------------------------------------------------+---|    |---+---+---|           `---------------| 
+	 * R3 |LCt|CAPS|  A |  S |  D |  F |  G |  H |  J |  K |  L |  ; |  '|IN1|NC |    |NC |UP |NC |           | 4 | 5 | 6 | + |  
+	 *    |----------------------------------------------------------------------|    ,---+---+---.           `---------------|
+	 * R4 |LSH|IN2 |  Z |  X |  C |  V |  B |  N |  M |  , |  . |  / |NC |NC |RSH|    |LFT|DWN|RGT|           | 1 | 2 | 3 |ENT|
+	 *    `----------------------------------------------------------------------'    `-----------'           `---------------|
+	 * R5 |NC |LAlt|LGUI|IN3 |NC  |NC  |SPC |NC  |NC  |NC  |NC  |NC  |IN4|RGU|RAl|    |NC |NC |NC |           | 0 |NC | . |NC |
+	 *    `----------------------------------------------------------------------'    `-----------'           `---------------'
+	 * 
+	 * 
+	 */
 const uint8_t keymaps[][KEYBOARD_ROWS][KEYBOARD_COLUMNS] = {
 	[0] = {
-		{ KC_ESC,    KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,    KC_F7, KC_F8, KC_F9,   KC_F10,  KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,   }, // ROW0
-		{ KC_NO,     KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,   }, // ROW1 ---> Logical Upper ROW0
-		{ KC_GRV,    KC_1,     KC_2,    KC_3,    KC_4,    KC_5,    KC_6,     KC_7,  KC_8,  KC_9,    KC_0,    KC_MINS,    KC_EQL,  KC_NO,   KC_BSLS, KC_DEL,  }, // ROW2
-		{ KC_NO,     KC_HELP,  KC_PLPR, KC_PRPR, KC_PSLS, KC_PAST, KC_NO,    KC_NO, KC_NO, KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,   }, // ROW3 ---> Logical ROW1
-		{ KC_KC_TAB, KC_Q,     KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,     KC_U,  KC_I,  KC_O,    KC_P,    KC_LBRC,    KC_RBRC, KC_NO,   KC_ENT,  KC_NO,   }, // ROW4
-		{ KC_NO,     KC_NO,    KC_P7,   KC_P8,   KC_P9,   KC_PMNS, KC_NO,    KC_NO, KC_NO, KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,   }, // ROW5 ---> Logical ROW2
-		{ KC_LCTL,   KC_CLCK,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,     KC_H,  KC_J,  KC_K,    KC_L,    KC_SCLN,    KC_QUOT, KC_INT1, KC_NO,   KC_NO,   }, // ROW6
-		{ KC_UP,     KC_NO,    KC_P4,   KC_P5,   KC_P6,   KC_PPLS, KC_NO,    KC_NO, KC_NO, KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,   }, // ROW7 ---> Logical ROW3
-		{ KC_LSFT,   KC_INT2,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_N,  KC_M,  KC_COMM, KC_DOT,  KC_SLSH,    KC_NO,   KC_NO,   KC_RSFT, KC_LEFT, }, // ROW8
-		{ KC_DOWN,   KC_RIGHT, KC_P1,   KC_P2,   KC_P3,   KC_PENT, KC_NO,    KC_NO, KC_NO, KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,   }, // ROW9 ---> Logical ROW4
-		{ KC_NO,     KC_LALT,  KC_LGUI, KC_NO,   KC_NO,   KC_NO,   KC_SPACE, KC_NO, KC_NO, KC_RGUI, KC_RALT, KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,   }, // ROW10
-		{ KC_NO,     KC_NO,    KC_P0,   KC_NO,   KC_PDOT, KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,   }, // ROW11 ---> Logical ROW5
+		{ KC_ESC,  KC_NO,   KC_F1,   KC_F2,     KC_F3,   KC_F4,   KC_F5,    KC_F6,   KC_F7,   KC_F8,   KC_F9,
+		  KC_F10,  KC_NO,   KC_NO,   KC_NO,     KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   }, // ROW0
+		{ KC_GRV,  KC_1,    KC_2,    KC_3,      KC_4,    KC_5,    KC_6,     KC_7,    KC_8,    KC_9,    KC_0,
+		  KC_MINS, KC_EQL,  KC_BSLS, KC_BSPACE, KC_DEL,  KC_NO,   KC_HELP,  KC_PLPR, KC_PRPR, KC_PSLS, KC_PAST, }, // ROW1
+		{ KC_TAB,  KC_Q,    KC_W,    KC_E,      KC_R,    KC_T,    KC_Y,     KC_U,    KC_I,    KC_O,    KC_P,
+		  KC_LBRC, KC_RBRC, KC_NO,   KC_ENT,    KC_NO,   KC_NO,   KC_NO,    KC_P7,   KC_P8,   KC_P9,   KC_PMNS, }, // ROW2
+		{ KC_LCTL, KC_CLCK, KC_A,    KC_S,      KC_D,    KC_F,    KC_G,     KC_H,    KC_J,    KC_K,    KC_L,
+		  KC_SCLN, KC_QUOT, KC_INT1, KC_NO,     KC_NO,   KC_UP,   KC_NO,    KC_P4,   KC_P5,   KC_P6,   KC_PPLS, }, // ROW3
+		{ KC_LSFT, KC_INT2, KC_Z,    KC_X,      KC_C,    KC_V,    KC_B,     KC_N,    KC_M,    KC_COMM, KC_DOT,
+		  KC_SLSH, KC_NO,   KC_NO,   KC_RSFT,   KC_LEFT, KC_DOWN, KC_RIGHT, KC_P1,   KC_P2,   KC_P3,   KC_PENT, }, // ROW4
+		{ KC_NO,   KC_LALT, KC_LGUI, KC_INT3,   KC_NO,   KC_NO,   KC_SPACE, KC_NO,   KC_NO,   KC_NO,   KC_NO,
+		  KC_NO,   KC_INT4, KC_RGUI, KC_RALT,   KC_NO,   KC_NO,   KC_NO,    KC_P0,   KC_NO,   KC_PDOT, KC_NO,   }, // ROW5
 	},
 };
 
-/* We are configuring ALL ROWS and ALL COLUMNS anyway */.
 gpioPort_t lut_row[ KEYBOARD_ROWS ] = {
 	{ .port = ROW0_GPIO_Port,  .pin = ROW0_Pin },
 	{ .port = ROW1_GPIO_Port,  .pin = ROW1_Pin },
@@ -87,13 +106,6 @@ gpioPort_t lut_row[ KEYBOARD_ROWS ] = {
 	{ .port = ROW3_GPIO_Port,  .pin = ROW3_Pin },
 	{ .port = ROW4_GPIO_Port,  .pin = ROW4_Pin },
 	{ .port = ROW5_GPIO_Port,  .pin = ROW5_Pin },
-	{ .port = ROW6_GPIO_Port,  .pin = ROW6_Pin },
-	{ .port = ROW7_GPIO_Port,  .pin = ROW7_Pin },
-	{ .port = ROW8_GPIO_Port,  .pin = ROW8_Pin },
-	{ .port = ROW9_GPIO_Port,  .pin = ROW9_Pin },
-	{ .port = ROW10_GPIO_Port, .pin = ROW10_Pin },
-	{ .port = ROW11_GPIO_Port, .pin = ROW11_Pin },
-	{ .port = ROW12_GPIO_Port, .pin = ROW12_Pin },
 };
 
 gpioPort_t lut_col[ KEYBOARD_COLUMNS ] = {
@@ -113,6 +125,12 @@ gpioPort_t lut_col[ KEYBOARD_COLUMNS ] = {
 	{ .port = COL13_GPIO_Port, .pin = COL13_Pin },
 	{ .port = COL14_GPIO_Port, .pin = COL14_Pin },
 	{ .port = COL15_GPIO_Port, .pin = COL15_Pin },
+	{ .port = COL16_GPIO_Port, .pin = COL16_Pin },
+	{ .port = COL17_GPIO_Port, .pin = COL17_Pin },
+	{ .port = COL18_GPIO_Port, .pin = COL18_Pin },
+	{ .port = COL19_GPIO_Port, .pin = COL19_Pin },
+	{ .port = COL20_GPIO_Port, .pin = COL20_Pin },
+	{ .port = COL21_GPIO_Port, .pin = COL21_Pin },
 };
 
 static uint8_t leds = 0;
