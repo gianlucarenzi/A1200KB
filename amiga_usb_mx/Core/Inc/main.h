@@ -132,6 +132,12 @@ void Error_Handler(void);
 /* All leds must be defined in the same port! */
 #define LEDS_GPIO_Port GPIOA
 
+/**
+ * LED RGB PA1 PWM & DMA
+ **/
+#define LED_RGB_Pin GPIO_PIN_1
+#define LED_RGB_GPIO_Port GPIOA
+
 extern void led_toggle(void);
 
 /* All leds are active high */
