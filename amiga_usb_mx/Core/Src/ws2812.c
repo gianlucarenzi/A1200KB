@@ -7,7 +7,7 @@ TIM_HandleTypeDef htim2;
 DMA_HandleTypeDef hdma_tim2_ch2;
 
 // WS2812B timing constants
-#define WS2812B_FREQ     800000
+#define WS2812B_FREQ       KHZ(800)
 #define PULSE_0_HIGH_RATIO 0.32f // 0.4us / 1.25us
 #define PULSE_1_HIGH_RATIO 0.64f // 0.8us / 1.25us
 

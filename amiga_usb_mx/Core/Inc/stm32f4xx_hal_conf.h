@@ -471,6 +471,10 @@
  #include "stm32f4xx_hal_mmc.h"
 #endif /* HAL_MMC_MODULE_ENABLED */
 
+#define HZ(a)    (a)
+#define KHZ(a)   (HZ(a)*1000L)
+#define MHZ(a)   (HZ(a)*1000000L)
+
 /* Exported macro ------------------------------------------------------------*/
 #ifdef  USE_FULL_ASSERT
 /**
