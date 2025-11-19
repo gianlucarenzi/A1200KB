@@ -56,6 +56,7 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void OTG_FS_IRQHandler(void);
+void DMA1_Stream6_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 #define TIMER_DIFF(a, b, max)   ((max == UINT8_MAX) ? ((uint8_t)((a)-(b))) : ( \

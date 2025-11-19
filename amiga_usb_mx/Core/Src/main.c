@@ -33,6 +33,7 @@
 #include "task.h"
 #include "freertos.h"
 #include "stm32f4xx_hal_tim.h"
+#include "ws2812.h"
 
 /* External storage classes */
 extern USBD_HandleTypeDef hUsbDeviceFS;
@@ -221,6 +222,8 @@ int main(void)
 	amiga_protocol_init();
 
 	LED_ACT_ON();
+
+	ws2812_init();
 
 	/* Initialize FreeRTOS */
 	MX_FREERTOS_Init();

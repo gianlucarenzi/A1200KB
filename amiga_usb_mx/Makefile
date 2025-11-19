@@ -69,6 +69,7 @@ C_SOURCES =  \
 	Core/Src/stm32f4xx_hal_msp.c \
 	Core/Src/stm32f4xx_hal_timebase_tim.c \
 	Core/Src/system_stm32f4xx.c \
+	Core/Src/ws2812.c \
 	Core/Src/freertos.c
 
 C_SOURCES += \
