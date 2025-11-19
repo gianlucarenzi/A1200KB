@@ -6,12 +6,13 @@
 TIM_HandleTypeDef htim2;
 DMA_HandleTypeDef hdma_tim2_ch2;
 
-// WS2812B timing constants (for 84MHz timer clock)
-#define TIMER_CLOCK_FREQ 84000000
+// WS2812B timing constants
 #define WS2812B_FREQ     800000
-#define TIMER_PERIOD     (TIMER_CLOCK_FREQ / WS2812B_FREQ)
-#define PULSE_0_HIGH     34  // (105 * 0.4 / 1.25)
-#define PULSE_1_HIGH     67  // (105 * 0.8 / 1.25)
+#define PULSE_0_HIGH_RATIO 0.32f // 0.4us / 1.25us
+#define PULSE_1_HIGH_RATIO 0.64f // 0.8us / 1.25us
+
+uint16_t pulse_0_high;
+uint16_t pulse_1_high;
 
 // DMA buffer size
 #define DMA_BUFFER_SIZE  (24 + 50) // 24 bits for color, 50 for reset
@@ -33,13 +34,30 @@ void ws2812_init(void) {
     __HAL_RCC_DMA1_CLK_ENABLE();
 
     // TIM2 configuration
+    RCC_ClkInitTypeDef rcc_clk_init;
+    uint32_t pFLatency;
+    HAL_RCC_GetClockConfig(&rcc_clk_init, &pFLatency);
+
+    uint32_t pclk1 = HAL_RCC_GetPCLK1Freq();
+    uint32_t timer_clock_freq;
+
+    if (rcc_clk_init.APB1CLKDivider == RCC_HCLK_DIV1) {
+        timer_clock_freq = pclk1;
+    } else {
+        timer_clock_freq = pclk1 * 2;
+    }
+
     htim2.Instance = TIM2;
     htim2.Init.Prescaler = 0;
     htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-    htim2.Init.Period = TIMER_PERIOD - 1;
+    htim2.Init.Period = (timer_clock_freq / WS2812B_FREQ) - 1;
     htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
     HAL_TIM_PWM_Init(&htim2);
+
+    // Calculate pulse high values based on the dynamic timer period
+    pulse_0_high = (uint16_t)(((float)htim2.Init.Period + 1) * PULSE_0_HIGH_RATIO);
+    pulse_1_high = (uint16_t)(((float)htim2.Init.Period + 1) * PULSE_1_HIGH_RATIO);
 
     TIM_OC_InitTypeDef sConfigOC = {0};
     sConfigOC.OCMode = TIM_OCMODE_PWM1;
@@ -70,9 +88,9 @@ void ws2812_init(void) {
 void led_rgb(uint32_t color) {
     for (int i = 23; i >= 0; i--) {
         if ((color >> i) & 1) {
-            dma_buffer[23-i] = PULSE_1_HIGH;
+            dma_buffer[23-i] = pulse_1_high;
         } else {
-            dma_buffer[23-i] = PULSE_0_HIGH;
+            dma_buffer[23-i] = pulse_0_high;
         }
     }
     for (int i = 24; i < DMA_BUFFER_SIZE; i++) {
