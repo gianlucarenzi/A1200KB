@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "usbd_hid.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -33,6 +33,55 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+// --- Definizioni per la Matrice della Tastiera ---
+#define MATRIX_ROWS 6
+#define MATRIX_COLS 22
+
+// Stato dei tasti
+typedef enum {
+    KEY_RELEASED = 0,
+    KEY_PRESSED = 1
+} KeyState;
+
+// Struttura per gli eventi dei tasti da inviare via coda
+typedef struct {
+    uint8_t scancode;
+    KeyState state;
+} KeyEvent_t;
+
+// --- Definizioni per il Report HID ---
+#define KEY_MOD_LCTRL  0x01
+#define KEY_MOD_LSHIFT 0x02
+#define KEY_MOD_LALT   0x04
+#define KEY_MOD_LGUI   0x08
+#define KEY_MOD_RCTRL  0x10
+#define KEY_MOD_RSHIFT 0x20
+#define KEY_MOD_RALT   0x40
+#define KEY_MOD_RGUI   0x80
+
+typedef struct {
+    uint8_t modifiers;
+    uint8_t reserved;
+    uint8_t keys[6];
+} HID_KeyboardReport_t;
+
+// --- Nuove Definizioni per la Gestione LED ---
+typedef enum {
+    LED_NUM_LOCK = 0,
+    LED_CAPS_LOCK = 1,
+    LED_SCROLL_LOCK = 2
+} LedType_t;
+
+typedef enum {
+    LED_OFF = 0,
+    LED_ON = 1
+} LedState_t;
+
+typedef struct {
+    LedType_t  led;
+    LedState_t state;
+} LedCommand_t;
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -43,26 +92,181 @@
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart2;
 
-/* Definitions for mainTask */
-osThreadId_t mainTaskHandle;
-const osThreadAttr_t mainTask_attributes = {
-  .name = "mainTask",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
-/* Definitions for logTask */
-osThreadId_t logTaskHandle;
-const osThreadAttr_t logTask_attributes = {
-  .name = "logTask",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityLow,
-};
-/* Definitions for logQueue */
-osMessageQueueId_t logQueueHandle;
-const osMessageQueueAttr_t logQueue_attributes = {
-  .name = "logQueue"
-};
 /* USER CODE BEGIN PV */
+
+extern USBD_HandleTypeDef hUsbDeviceFS;
+
+
+
+/* Logging variables */
+
+bool isFreeRTOSStarted = false;
+
+QueueHandle_t xLogQueue;
+
+
+
+/* Definitions for ScannerTask */
+
+osThreadId_t scannerTaskHandle;
+
+const osThreadAttr_t scannerTask_attributes = {
+
+  .name = "ScannerTask",
+
+  .stack_size = 256 * 4,
+
+  .priority = (osPriority_t) osPriorityNormal,
+
+};
+
+/* Definitions for UsbHidTask */
+
+osThreadId_t usbHidTaskHandle;
+
+const osThreadAttr_t usbHidTask_attributes = {
+
+  .name = "UsbHidTask",
+
+  .stack_size = 256 * 4,
+
+  .priority = (osPriority_t) osPriorityAboveNormal,
+
+};
+
+/* Definitions for ledManagerTask */
+
+osThreadId_t ledManagerTaskHandle;
+
+const osThreadAttr_t ledManagerTask_attributes = {
+
+  .name = "ledManagerTask",
+
+  .stack_size = 128 * 4,
+
+  .priority = (osPriority_t) osPriorityLow,
+
+};
+
+/* Definitions for logTask */
+
+osThreadId_t logTaskHandle; // Correct declaration
+
+const osThreadAttr_t logTask_attributes = {
+
+  .name = "logTask",
+
+  .stack_size = 256 * 4, // Adjust stack size if needed for UART operations
+
+  .priority = (osPriority_t) osPriorityLow,
+
+};
+
+/* Definitions for keyEventQueue */
+
+osMessageQueueId_t keyEventQueueHandle;
+
+const osMessageQueueAttr_t keyEventQueue_attributes = {
+
+  .name = "keyEventQueue"
+
+};
+
+/* Definitions for ledQueue */
+
+osMessageQueueId_t ledQueueHandle;
+
+const osMessageQueueAttr_t ledQueue_attributes = {
+
+  .name = "ledQueue"
+
+};
+
+
+
+
+
+// --- Pinout della Matrice ---
+
+GPIO_TypeDef* row_ports[MATRIX_ROWS] = {
+
+    ROW0_GPIO_Port, ROW1_GPIO_Port, ROW2_GPIO_Port, ROW3_GPIO_Port, ROW4_GPIO_Port, ROW5_GPIO_Port
+
+};
+
+uint16_t row_pins[MATRIX_ROWS] = {
+
+    ROW0_Pin, ROW1_Pin, ROW2_Pin, ROW3_Pin, ROW4_Pin, ROW5_Pin
+
+};
+
+GPIO_TypeDef* col_ports[MATRIX_COLS] = {
+
+    COL0_GPIO_Port, COL1_GPIO_Port, COL2_GPIO_Port, COL3_GPIO_Port, COL4_GPIO_Port, COL5_GPIO_Port,
+
+    COL6_GPIO_Port, COL7_GPIO_Port, COL8_GPIO_Port, COL9_GPIO_Port, COL10_GPIO_Port, COL11_GPIO_Port,
+
+    COL12_GPIO_Port, COL13_GPIO_Port, COL14_GPIO_Port, COL15_GPIO_Port, COL16_GPIO_Port, COL17_GPIO_Port,
+
+    COL18_GPIO_Port, COL19_GPIO_Port, COL20_GPIO_Port, COL21_GPIO_Port
+
+};
+
+uint16_t col_pins[MATRIX_COLS] = {
+
+    COL0_Pin, COL1_Pin, COL2_Pin, COL3_Pin, COL4_Pin, COL5_Pin,
+
+    COL6_Pin, COL7_Pin, COL8_Pin, COL9_Pin, COL10_Pin, COL11_Pin,
+
+    COL12_Pin, COL13_Pin, COL14_Pin, COL15_Pin, COL16_Pin, COL17_Pin,
+
+    COL18_Pin, COL19_Pin, COL20_Pin, COL21_Pin
+
+};
+
+
+
+// --- Look-Up Table (LUT) Scancode ---
+
+const uint8_t scancode_lut[MATRIX_ROWS][MATRIX_COLS] = {
+
+//  C0  C1  C2  C3  C4  C5  C6  C7  C8  C9 C10 C11 C12 C13 C14 C15 C16 C17 C18 C19 C20 C21
+
+  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // R0
+
+  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // R1
+
+  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // R2
+
+  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // R3
+
+  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // R4
+
+  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}  // R5
+
+};
+
+
+
+void logTask(void *argument) {
+
+    char received_string[LOG_MESSAGE_MAX_LEN];
+
+    for (;;) {
+
+        // Wait indefinitely for a log message to arrive
+
+        if (xQueueReceive(xLogQueue, received_string, portMAX_DELAY) == pdPASS) {
+
+            // Transmit the received log message over UART2
+
+            HAL_UART_Transmit(&huart2, (uint8_t *)received_string, strlen(received_string), HAL_MAX_DELAY);
+
+        }
+
+    }
+
+}
 
 /* USER CODE END PV */
 
@@ -70,11 +274,13 @@ const osMessageQueueAttr_t logQueue_attributes = {
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
-void StartMainTask(void *argument);
-void StartLogTask(void *argument);
+void ScannerTask(void *argument);
+void UsbHidTask(void *argument);
+void ledManager(void *argument);
+void USBD_HID_SetReport_Callback(uint8_t *report, uint16_t len);
 
 /* USER CODE BEGIN PFP */
-
+void logTask(void *argument);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -88,7 +294,6 @@ void StartLogTask(void *argument);
   */
 int main(void)
 {
-
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -112,6 +317,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -132,19 +338,19 @@ int main(void)
   /* USER CODE END RTOS_TIMERS */
 
   /* Create the queue(s) */
-  /* creation of logQueue */
-  logQueueHandle = osMessageQueueNew (16, sizeof(uint16_t), &logQueue_attributes);
+  keyEventQueueHandle = osMessageQueueNew (16, sizeof(KeyEvent_t), &keyEventQueue_attributes);
+  ledQueueHandle = osMessageQueueNew(4, sizeof(LedCommand_t), &ledQueue_attributes);
+  xLogQueue = xQueueCreate(LOG_QUEUE_LENGTH, LOG_MESSAGE_MAX_LEN); // Create log queue
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* creation of mainTask */
-  mainTaskHandle = osThreadNew(StartMainTask, NULL, &mainTask_attributes);
-
-  /* creation of logTask */
-  logTaskHandle = osThreadNew(StartLogTask, NULL, &logTask_attributes);
+  scannerTaskHandle = osThreadNew(ScannerTask, NULL, &scannerTask_attributes);
+  usbHidTaskHandle = osThreadNew(UsbHidTask, NULL, &usbHidTask_attributes);
+  ledManagerTaskHandle = osThreadNew(ledManager, NULL, &ledManagerTask_attributes);
+  logTaskHandle = osThreadNew(logTask, NULL, &logTask_attributes); // Create log task
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -154,11 +360,13 @@ int main(void)
   /* add events, ... */
   /* USER CODE END RTOS_EVENTS */
 
+  // Set FreeRTOS started flag
+  isFreeRTOSStarted = true;
+
   /* Start scheduler */
   osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -222,13 +430,9 @@ void SystemClock_Config(void)
   */
 static void MX_USART2_UART_Init(void)
 {
-
   /* USER CODE BEGIN USART2_Init 0 */
-
   /* USER CODE END USART2_Init 0 */
-
   /* USER CODE BEGIN USART2_Init 1 */
-
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
   huart2.Init.BaudRate = 115200;
@@ -243,9 +447,7 @@ static void MX_USART2_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
-
   /* USER CODE END USART2_Init 2 */
-
 }
 
 /**
@@ -257,7 +459,6 @@ static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   /* USER CODE BEGIN MX_GPIO_Init_1 */
-
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
@@ -273,7 +474,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, ROW0_Pin|ROW1_Pin|ROW2_Pin|ROW3_Pin
-                          |ROW4_Pin|ROW5_Pin, GPIO_PIN_RESET);
+                          |ROW4_Pin|ROW5_Pin, GPIO_PIN_SET); // Set rows high by default
 
   /*Configure GPIO pins : COL13_Pin COL14_Pin COL15_Pin COL0_Pin
                            BOOT_MODE_Pin COL2_Pin COL3_Pin COL4_Pin
@@ -292,7 +493,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = LED_ACT_Pin|LED_POWER_Pin|KB_DAT_Pin|KB_CLK_Pin
                           |KB_RST_Pin|LED_CAPS_LOCK_Pin|LED_NUM_LOCK_Pin|LED_SCROLL_LOCK_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -302,7 +503,7 @@ static void MX_GPIO_Init(void)
                           |ROW4_Pin|ROW5_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH; // High speed for faster scanning
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : COL20_Pin COL21_Pin COL16_Pin COL17_Pin
@@ -333,7 +534,142 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void ScannerTask(void *argument) {
+    KeyState matrix_state[MATRIX_ROWS][MATRIX_COLS] = {0};
+    KeyState matrix_state_prev[MATRIX_ROWS][MATRIX_COLS] = {0};
 
+    uint32_t last_scan_time = osKernelGetTickCount();
+
+    for (;;) {
+        // Scansiona la matrice
+        for (int r = 0; r < MATRIX_ROWS; r++) {
+            HAL_GPIO_WritePin(row_ports[r], row_pins[r], GPIO_PIN_RESET);
+            for(volatile int i=0; i<15; i++); // Delay ~1us
+            for (int c = 0; c < MATRIX_COLS; c++) {
+                if (HAL_GPIO_ReadPin(col_ports[c], col_pins[c]) == GPIO_PIN_RESET) {
+                    matrix_state[r][c] = KEY_PRESSED;
+                } else {
+                    matrix_state[r][c] = KEY_RELEASED;
+                }
+            }
+            HAL_GPIO_WritePin(row_ports[r], row_pins[r], GPIO_PIN_SET);
+        }
+
+        // Debouncing e rilevamento cambiamenti
+        for (int r = 0; r < MATRIX_ROWS; r++) {
+            for (int c = 0; c < MATRIX_COLS; c++) {
+                if (matrix_state[r][c] != matrix_state_prev[r][c]) {
+                    osDelay(20);
+                    HAL_GPIO_WritePin(row_ports[r], row_pins[r], GPIO_PIN_RESET);
+                    for(volatile int i=0; i<15; i++); // Delay
+                    KeyState confirmed_state = (HAL_GPIO_ReadPin(col_ports[c], col_pins[c]) == GPIO_PIN_RESET) ? KEY_PRESSED : KEY_RELEASED;
+                    HAL_GPIO_WritePin(row_ports[r], row_pins[r], GPIO_PIN_SET);
+
+                    if (confirmed_state == matrix_state[r][c]) {
+                        matrix_state_prev[r][c] = matrix_state[r][c];
+                        if (scancode_lut[r][c] != 0x00) {
+                            KeyEvent_t event = { .scancode = scancode_lut[r][c], .state = matrix_state[r][c] };
+                            osMessageQueuePut(keyEventQueueHandle, &event, 0U, osWaitForever);
+                        }
+                    }
+                }
+            }
+        }
+        last_scan_time += 5;
+        osDelay(last_scan_time - osKernelGetTickCount());
+    }
+}
+
+void UsbHidTask(void *argument) {
+    KeyEvent_t received_event;
+    HID_KeyboardReport_t hid_report = {0};
+
+    for (;;) {
+        osStatus_t status = osMessageQueueGet(keyEventQueueHandle, &received_event, NULL, osWaitForever);
+        if (status == osOK) {
+            uint8_t scancode = received_event.scancode;
+            if (scancode >= 0xE0 && scancode <= 0xE7) {
+                if (received_event.state == KEY_PRESSED) {
+                    hid_report.modifiers |= (1 << (scancode - 0xE0));
+                } else {
+                    hid_report.modifiers &= ~(1 << (scancode - 0xE0));
+                }
+            } else {
+                if (received_event.state == KEY_PRESSED) {
+                    for (int i = 0; i < 6; i++) {
+                        if (hid_report.keys[i] == 0x00) {
+                            hid_report.keys[i] = scancode;
+                            break;
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < 6; i++) {
+                        if (hid_report.keys[i] == scancode) {
+                            hid_report.keys[i] = 0x00;
+                        }
+                    }
+                }
+            }
+            USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&hid_report, sizeof(hid_report));
+            // Send empty report on key release to be safe
+            if(received_event.state == KEY_RELEASED) {
+				osDelay(10); // Debounce release
+				// Compact the key array
+				uint8_t write_idx = 0;
+				for(uint8_t read_idx = 0; read_idx < 6; read_idx++) {
+					if(hid_report.keys[read_idx] != 0x00) {
+						hid_report.keys[write_idx++] = hid_report.keys[read_idx];
+					}
+				}
+				for(uint8_t i = write_idx; i < 6; i++) {
+					hid_report.keys[i] = 0x00;
+				}
+				USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&hid_report, sizeof(hid_report));
+			}
+        }
+    }
+}
+
+void ledManager(void *argument) {
+    LedCommand_t cmd;
+    for (;;) {
+        osStatus_t status = osMessageQueueGet(ledQueueHandle, &cmd, NULL, osWaitForever);
+        if (status == osOK) {
+            GPIO_PinState pin_state = (cmd.state == LED_ON) ? GPIO_PIN_SET : GPIO_PIN_RESET;
+            switch (cmd.led) {
+                case LED_NUM_LOCK:
+                    HAL_GPIO_WritePin(LED_NUM_LOCK_GPIO_Port, LED_NUM_LOCK_Pin, pin_state);
+                    break;
+                case LED_CAPS_LOCK:
+                    HAL_GPIO_WritePin(LED_CAPS_LOCK_GPIO_Port, LED_CAPS_LOCK_Pin, pin_state);
+                    break;
+                case LED_SCROLL_LOCK:
+                    HAL_GPIO_WritePin(LED_SCROLL_LOCK_GPIO_Port, LED_SCROLL_LOCK_Pin, pin_state);
+                    break;
+            }
+        }
+    }
+}
+
+void USBD_HID_SetReport_Callback(uint8_t *report, uint16_t len) {
+    if (len > 0) {
+        uint8_t led_status = report[0];
+        static uint8_t last_led_status = 0;
+        if (((last_led_status ^ led_status) >> 0) & 1) { // Num Lock
+            LedCommand_t cmd = { .led = LED_NUM_LOCK, .state = (led_status & 1) ? LED_ON : LED_OFF };
+            osMessageQueuePut(ledQueueHandle, &cmd, 0U, 0U);
+        }
+        if (((last_led_status ^ led_status) >> 1) & 1) { // Caps Lock
+            LedCommand_t cmd = { .led = LED_CAPS_LOCK, .state = (led_status & 2) ? LED_ON : LED_OFF };
+            osMessageQueuePut(ledQueueHandle, &cmd, 0U, 0U);
+        }
+        if (((last_led_status ^ led_status) >> 2) & 1) { // Scroll Lock
+            LedCommand_t cmd = { .led = LED_SCROLL_LOCK, .state = (led_status & 4) ? LED_ON : LED_OFF };
+            osMessageQueuePut(ledQueueHandle, &cmd, 0U, 0U);
+        }
+        last_led_status = led_status;
+    }
+}
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartMainTask */
@@ -345,8 +681,6 @@ static void MX_GPIO_Init(void)
 /* USER CODE END Header_StartMainTask */
 void StartMainTask(void *argument)
 {
-  /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
   for(;;)
@@ -356,23 +690,7 @@ void StartMainTask(void *argument)
   /* USER CODE END 5 */
 }
 
-/* USER CODE BEGIN Header_StartLogTask */
-/**
-* @brief Function implementing the logTask thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_StartLogTask */
-void StartLogTask(void *argument)
-{
-  /* USER CODE BEGIN StartLogTask */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END StartLogTask */
-}
+
 
 /**
   * @brief  Period elapsed callback in non blocking mode
@@ -410,6 +728,7 @@ void Error_Handler(void)
   }
   /* USER CODE END Error_Handler_Debug */
 }
+
 #ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
