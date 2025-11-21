@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 #include "usbd_hid.h"
 #include "keyboard.h"
+#include "ws2812.h" // Include WS2812 driver
 
 // DWT_Delay_Init initializes the DWT_CYCCNT register for accurate delays.
 __attribute__((always_inline)) static inline void DWT_Delay_Init(void)
@@ -100,7 +101,8 @@ typedef struct {
 typedef enum {
     LED_NUM_LOCK = 0,
     LED_CAPS_LOCK = 1,
-    LED_SCROLL_LOCK = 2
+    LED_SCROLL_LOCK = 2,
+    LED_WS2812 = 3 // New type for WS2812
 } LedType_t;
 
 typedef enum {
@@ -108,10 +110,19 @@ typedef enum {
     LED_ON = 1
 } LedState_t;
 
+// Union to handle different LED command types
 typedef struct {
-    LedType_t  led;
-    LedState_t state;
-} LedCommand_t;
+    LedType_t type;
+    union {
+        struct {
+            LedType_t  led; // Re-use LedType_t for standard LEDs (Num, Caps, Scroll)
+            LedState_t state;
+        } std_led;
+        struct {
+            uint32_t rgb_color; // For WS2812 RGB color
+        } ws2812_led;
+    } data;
+} LedMessage_t;
 
 /* USER CODE END PD */
 
@@ -331,7 +342,22 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
+  WS2812_Init(); // Initialize WS2812 LEDs
+  // Simple test pattern for WS2812 using led_rgb function
+  led_rgb(0xFF0000); // LED 0 Red
+  HAL_Delay(1000); // Wait 1 second
+  led_rgb(0x00FF00); // LED 0 Green
+  HAL_Delay(1000);
+  led_rgb(0x0000FF); // LED 0 Blue
+  HAL_Delay(1000);
+  led_rgb(0x000000); // LED 0 Off
+  HAL_Delay(500);
 
+  // Example using the requested led_rgb function
+  led_rgb(0xFF00FF); // Magenta for LED 0
+  HAL_Delay(1000);
+  led_rgb(0x000000); // Off
+  HAL_Delay(500);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -351,7 +377,7 @@ int main(void)
 
   /* Create the queue(s) */
   keyEventQueueHandle = osMessageQueueNew (16, sizeof(KeyEvent_t), &keyEventQueue_attributes);
-  ledQueueHandle = osMessageQueueNew(4, sizeof(LedCommand_t), &ledQueue_attributes);
+  ledQueueHandle = osMessageQueueNew(4, sizeof(LedMessage_t), &ledQueue_attributes);
   xLogQueue = xQueueCreate(LOG_QUEUE_LENGTH, LOG_MESSAGE_MAX_LEN); // Create log queue
 
   /* USER CODE BEGIN RTOS_QUEUES */
@@ -546,6 +572,13 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void led_rgb(uint32_t RGB) {
+    LedMessage_t msg;
+    msg.type = LED_WS2812;
+    msg.data.ws2812_led.rgb_color = RGB;
+    osMessageQueuePut(ledQueueHandle, &msg, 0U, 0U); // Send to queue without blocking
+}
 void ScannerTask(void *argument) {
     DEBUG_PRINT(1, SCANNER_TASK_DEBUG_LEVEL, "ScannerTask: Entered.\r\n");
     KeyState matrix_state[MATRIX_ROWS][MATRIX_COLS] = {0};
@@ -655,25 +688,39 @@ void UsbHidTask(void *argument) {
 
 void ledManager(void *argument) {
     DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Entered.\r\n");
-    LedCommand_t cmd;
+    LedMessage_t msg; // Changed from LedCommand_t
     for (;;) {
-        osStatus_t status = osMessageQueueGet(ledQueueHandle, &cmd, NULL, osWaitForever);
+        osStatus_t status = osMessageQueueGet(ledQueueHandle, &msg, NULL, osWaitForever);
         if (status == osOK) {
-            DEBUG_PRINT(2, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Received command for LED %d, state %d\r\n", cmd.led, cmd.state);
-            GPIO_PinState pin_state = (cmd.state == LED_ON) ? GPIO_PIN_SET : GPIO_PIN_RESET;
-            switch (cmd.led) {
-                case LED_NUM_LOCK:
-                    HAL_GPIO_WritePin(LED_NUM_LOCK_GPIO_Port, LED_NUM_LOCK_Pin, pin_state);
-                    DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Num Lock LED set to %s\r\n", (cmd.state == LED_ON ? "ON" : "OFF"));
-                    break;
-                case LED_CAPS_LOCK:
-                    HAL_GPIO_WritePin(LED_CAPS_LOCK_GPIO_Port, LED_CAPS_LOCK_Pin, pin_state);
-                    DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Caps Lock LED set to %s\r\n", (cmd.state == LED_ON ? "ON" : "OFF"));
-                    break;
-                case LED_SCROLL_LOCK:
-                    HAL_GPIO_WritePin(LED_SCROLL_LOCK_GPIO_Port, LED_SCROLL_LOCK_Pin, pin_state);
-                    DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Scroll Lock LED set to %s\r\n", (cmd.state == LED_ON ? "ON" : "OFF"));
-                    break;
+            if (msg.type == LED_WS2812) {
+                // Handle WS2812 LED
+                uint8_t r = (msg.data.ws2812_led.rgb_color >> 16) & 0xFF;
+                uint8_t g = (msg.data.ws2812_led.rgb_color >> 8) & 0xFF;
+                uint8_t b = msg.data.ws2812_led.rgb_color & 0xFF;
+                WS2812_SetRGB(0, r, g, b); // Always LED 0 as per user's clarification
+                WS2812_Show();
+                DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: WS2812 LED set to RGB: 0x%06lX\r\n", msg.data.ws2812_led.rgb_color);
+            } else {
+                // Handle standard LEDs (Num, Caps, Scroll Lock)
+                DEBUG_PRINT(2, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Received command for LED %d, state %d\r\n", msg.data.std_led.led, msg.data.std_led.state);
+                GPIO_PinState pin_state = (msg.data.std_led.state == LED_ON) ? GPIO_PIN_SET : GPIO_PIN_RESET;
+                switch (msg.data.std_led.led) {
+                    case LED_NUM_LOCK:
+                        HAL_GPIO_WritePin(LED_NUM_LOCK_GPIO_Port, LED_NUM_LOCK_Pin, pin_state);
+                        DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Num Lock LED set to %s\r\n", (msg.data.std_led.state == LED_ON ? "ON" : "OFF"));
+                        break;
+                    case LED_CAPS_LOCK:
+                        HAL_GPIO_WritePin(LED_CAPS_LOCK_GPIO_Port, LED_CAPS_LOCK_Pin, pin_state);
+                        DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Caps Lock LED set to %s\r\n", (msg.data.std_led.state == LED_ON ? "ON" : "OFF"));
+                        break;
+                    case LED_SCROLL_LOCK:
+                        HAL_GPIO_WritePin(LED_SCROLL_LOCK_GPIO_Port, LED_SCROLL_LOCK_Pin, pin_state);
+                        DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Scroll Lock LED set to %s\r\n", (msg.data.std_led.state == LED_ON ? "ON" : "OFF"));
+                        break;
+                    case LED_WS2812: // Handle this case explicitly to clear warning
+                        // Do nothing, as WS2812 is handled by msg.type check
+                        break;
+                }
             }
         }
     }
@@ -685,16 +732,16 @@ void USBD_HID_SetReport_Callback(uint8_t *report, uint16_t len) {
         static uint8_t last_led_status = 0;
         DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "USBD_HID_SetReport_Callback: Received LED status: 0x%02X\r\n", led_status);
         if (((last_led_status ^ led_status) >> 0) & 1) { // Num Lock
-            LedCommand_t cmd = { .led = LED_NUM_LOCK, .state = (led_status & 1) ? LED_ON : LED_OFF };
-            osMessageQueuePut(ledQueueHandle, &cmd, 0U, 0U);
+            LedMessage_t msg = { .type = LED_NUM_LOCK, .data.std_led.led = LED_NUM_LOCK, .data.std_led.state = (led_status & 1) ? LED_ON : LED_OFF };
+            osMessageQueuePut(ledQueueHandle, &msg, 0U, 0U);
         }
         if (((last_led_status ^ led_status) >> 1) & 1) { // Caps Lock
-            LedCommand_t cmd = { .led = LED_CAPS_LOCK, .state = (led_status & 2) ? LED_ON : LED_OFF };
-            osMessageQueuePut(ledQueueHandle, &cmd, 0U, 0U);
+            LedMessage_t msg = { .type = LED_CAPS_LOCK, .data.std_led.led = LED_CAPS_LOCK, .data.std_led.state = (led_status & 2) ? LED_ON : LED_OFF };
+            osMessageQueuePut(ledQueueHandle, &msg, 0U, 0U);
         }
         if (((last_led_status ^ led_status) >> 2) & 1) { // Scroll Lock
-            LedCommand_t cmd = { .led = LED_SCROLL_LOCK, .state = (led_status & 4) ? LED_ON : LED_OFF };
-            osMessageQueuePut(ledQueueHandle, &cmd, 0U, 0U);
+            LedMessage_t msg = { .type = LED_SCROLL_LOCK, .data.std_led.led = LED_SCROLL_LOCK, .data.std_led.state = (led_status & 4) ? LED_ON : LED_OFF };
+            osMessageQueuePut(ledQueueHandle, &msg, 0U, 0U);
         }
         last_led_status = led_status;
     }

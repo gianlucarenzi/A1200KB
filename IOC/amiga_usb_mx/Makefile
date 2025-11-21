@@ -69,6 +69,7 @@ Core/Src/sysmem.c \
 Core/Src/syscalls.c \
 Core/Src/freertos.c \
 Core/Src/stm32f4xx_hal_timebase_tim.c \
+Core/Src/ws2812.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
 Middlewares/Third_Party/FreeRTOS/Source/croutine.c \
