@@ -28,6 +28,10 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include <stdbool.h> // For bool, true, false
+#include "FreeRTOS.h" // For FreeRTOS types like QueueHandle_t
+#include "queue.h"    // For xQueueCreate
+#include "cmsis_os.h" // For osThreadId_t, osMessageQueueId_t, etc.
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -53,7 +57,10 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+extern bool isFreeRTOSStarted;
+extern QueueHandle_t xLogQueue;
+extern osThreadId_t logTaskHandle;
+extern void logTask(void *argument);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -135,6 +142,10 @@ void Error_Handler(void);
 #define COL18_GPIO_Port GPIOB
 #define COL19_Pin GPIO_PIN_9
 #define COL19_GPIO_Port GPIOB
+
+// Logging Defines
+#define LOG_MESSAGE_MAX_LEN 128
+#define LOG_QUEUE_LENGTH    10
 
 /* USER CODE BEGIN Private defines */
 
