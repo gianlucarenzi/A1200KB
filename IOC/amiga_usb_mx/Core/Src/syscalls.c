@@ -29,9 +29,13 @@
 #include <time.h>
 #include <sys/time.h>
 #include <sys/times.h>
-
+#include "main.h" // For huart2, isFreeRTOSStarted, xLogQueue, and constants
+#include "cmsis_os.h" // For FreeRTOS API
 
 /* Variables */
+extern UART_HandleTypeDef huart2;
+extern bool isFreeRTOSStarted;
+extern QueueHandle_t xLogQueue;
 extern int __io_putchar(int ch) __attribute__((weak));
 extern int __io_getchar(void) __attribute__((weak));
 
@@ -80,12 +84,46 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
 __attribute__((weak)) int _write(int file, char *ptr, int len)
 {
   (void)file;
-  int DataIdx;
+  static char log_buffer[LOG_MESSAGE_MAX_LEN];
+  static uint16_t log_buffer_idx = 0;
+  BaseType_t xHigherPriorityTaskWoken = pdFALSE; // For FreeRTOS API calls from ISR context
 
-  for (DataIdx = 0; DataIdx < len; DataIdx++)
+  for (int DataIdx = 0; DataIdx < len; DataIdx++)
   {
-    __io_putchar(*ptr++);
+    char ch = *ptr++;
+
+    if (!isFreeRTOSStarted)
+    {
+      // FreeRTOS not started, print directly to UART
+      HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+    }
+    else
+    {
+      // FreeRTOS started, queue the character
+      if (log_buffer_idx < LOG_MESSAGE_MAX_LEN - 1) // Leave space for null terminator
+      {
+        log_buffer[log_buffer_idx++] = ch;
+      }
+
+      // If newline or buffer full, send the log message
+      if (ch == '\n' || log_buffer_idx >= LOG_MESSAGE_MAX_LEN - 1)
+      {
+        log_buffer[log_buffer_idx] = '\0'; // Null-terminate the string
+
+        // Check if called from an ISR
+        if (xPortIsInsideInterrupt()) {
+            xQueueSendFromISR(xLogQueue, log_buffer, &xHigherPriorityTaskWoken);
+        } else {
+            xQueueSend(xLogQueue, log_buffer, 0); // Non-blocking send
+        }
+        log_buffer_idx = 0; // Reset buffer index
+      }
+    }
   }
+
+  // If a higher priority task was woken during ISR context, yield
+  portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+
   return len;
 }
 
