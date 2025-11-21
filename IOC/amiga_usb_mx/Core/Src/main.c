@@ -24,6 +24,28 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "usbd_hid.h"
+
+// DWT_Delay_Init initializes the DWT_CYCCNT register for accurate delays.
+__attribute__((always_inline)) static inline void DWT_Delay_Init(void)
+{
+    CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk; // Enable DWT trace
+    DWT->CYCCNT = 0; // Reset DWT cycle counter
+    DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk; // Enable DWT cycle counter
+}
+
+// _usdelay provides a microsecond delay using the DWT cycle counter.
+__attribute__((always_inline)) static inline void _usdelay(uint32_t us)
+{
+    // Ensure DWT is initialized once before first use.
+    // This is a simple check; a more robust solution might use a flag.
+    if (!(CoreDebug->DEMCR & CoreDebug_DEMCR_TRCENA_Msk)) {
+        DWT_Delay_Init();
+    }
+
+    uint32_t cycles = (SystemCoreClock / 1000000U) * us;
+    uint32_t start_cycles = DWT->CYCCNT;
+    while((DWT->CYCCNT - start_cycles) < cycles);
+}
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,6 +80,16 @@ typedef struct {
 #define KEY_MOD_RSHIFT 0x20
 #define KEY_MOD_RALT   0x40
 #define KEY_MOD_RGUI   0x80
+
+// --- Definizioni Scancode Modificatori HID ---
+#define HID_SCANCODE_MOD_LCTRL  0xE0
+#define HID_SCANCODE_MOD_LSHIFT 0xE1
+#define HID_SCANCODE_MOD_LALT   0xE2
+#define HID_SCANCODE_MOD_LGUI   0xE3
+#define HID_SCANCODE_MOD_RCTRL  0xE4
+#define HID_SCANCODE_MOD_RSHIFT 0xE5
+#define HID_SCANCODE_MOD_RALT   0xE6
+#define HID_SCANCODE_MOD_RGUI   0xE7
 
 typedef struct {
     uint8_t modifiers;
@@ -230,22 +262,20 @@ uint16_t col_pins[MATRIX_COLS] = {
 
 const uint8_t scancode_lut[MATRIX_ROWS][MATRIX_COLS] = {
 
-//  C0  C1  C2  C3  C4  C5  C6  C7  C8  C9 C10 C11 C12 C13 C14 C15 C16 C17 C18 C19 C20 C21
-
-  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // R0
-
-  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // R1
-
-  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // R2
-
-  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // R3
-
-  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // R4
-
-  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}  // R5
-
+//  C0    C1    C2    C3    C4    C5    C6    C7    C8    C9   C10   C11   C12   C13   C14   C15   C16   C17   C18   C19   C20   C21
+// R0
+  {0x29, 0x00, 0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F, 0x40, 0x41, 0x42, 0x43, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+// R1
+  {0x35, 0x1E, 0x1F, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x2D, 0x2E, 0x31, 0x2A, 0x4C, 0x00, 0x75, 0x53, 0x47, 0x54, 0x55 },
+// R2
+  {0x2B, 0x14, 0x1A, 0x08, 0x15, 0x17, 0x1C, 0x18, 0x0C, 0x12, 0x13, 0x2F, 0x30, 0x00, 0x28, 0x00, 0x00, 0x00, 0x5F, 0x60, 0x61, 0x56 },
+// R3
+  {0xE0, 0x39, 0x04, 0x16, 0x07, 0x09, 0x0A, 0x0B, 0x0D, 0x0E, 0x0F, 0x33, 0x34, 0x87, 0x00, 0x00, 0x52, 0x00, 0x5C, 0x5D, 0x5E, 0x57 },
+// R4
+  {0xE1, 0x88, 0x1D, 0x1B, 0x06, 0x19, 0x05, 0x11, 0x10, 0x36, 0x37, 0x38, 0x00, 0x00, 0xE5, 0x50, 0x51, 0x4F, 0x59, 0x5A, 0x5B, 0x58 },
+// R5
+  {0x00, 0xE2, 0xE3, 0x89, 0x00, 0x00, 0x00, 0x00, 0x2C, 0x00, 0x00, 0x00, 0x8A, 0xE7, 0xE6, 0x00, 0x00, 0x00, 0x62, 0x00, 0x63, 0x00 },
 };
-
 
 
 void logTask(void *argument) {
@@ -535,6 +565,7 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void ScannerTask(void *argument) {
+    DEBUG_PRINT(1, SCANNER_TASK_DEBUG_LEVEL, "ScannerTask: Entered.\r\n");
     KeyState matrix_state[MATRIX_ROWS][MATRIX_COLS] = {0};
     KeyState matrix_state_prev[MATRIX_ROWS][MATRIX_COLS] = {0};
 
@@ -544,7 +575,7 @@ void ScannerTask(void *argument) {
         // Scansiona la matrice
         for (int r = 0; r < MATRIX_ROWS; r++) {
             HAL_GPIO_WritePin(row_ports[r], row_pins[r], GPIO_PIN_RESET);
-            for(volatile int i=0; i<15; i++); // Delay ~1us
+            _usdelay(1); // Delay ~1us
             for (int c = 0; c < MATRIX_COLS; c++) {
                 if (HAL_GPIO_ReadPin(col_ports[c], col_pins[c]) == GPIO_PIN_RESET) {
                     matrix_state[r][c] = KEY_PRESSED;
@@ -561,7 +592,7 @@ void ScannerTask(void *argument) {
                 if (matrix_state[r][c] != matrix_state_prev[r][c]) {
                     osDelay(20);
                     HAL_GPIO_WritePin(row_ports[r], row_pins[r], GPIO_PIN_RESET);
-                    for(volatile int i=0; i<15; i++); // Delay
+                    _usdelay(1); // Delay
                     KeyState confirmed_state = (HAL_GPIO_ReadPin(col_ports[c], col_pins[c]) == GPIO_PIN_RESET) ? KEY_PRESSED : KEY_RELEASED;
                     HAL_GPIO_WritePin(row_ports[r], row_pins[r], GPIO_PIN_SET);
 
@@ -570,6 +601,7 @@ void ScannerTask(void *argument) {
                         if (scancode_lut[r][c] != 0x00) {
                             KeyEvent_t event = { .scancode = scancode_lut[r][c], .state = matrix_state[r][c] };
                             osMessageQueuePut(keyEventQueueHandle, &event, 0U, osWaitForever);
+                            DEBUG_PRINT(1, SCANNER_TASK_DEBUG_LEVEL, "ScannerTask: Key R%d C%d (0x%02X) %s\r\n", r, c, event.scancode, (event.state == KEY_PRESSED ? "PRESSED" : "RELEASED"));
                         }
                     }
                 }
@@ -577,28 +609,34 @@ void ScannerTask(void *argument) {
         }
         last_scan_time += 5;
         osDelay(last_scan_time - osKernelGetTickCount());
+        DEBUG_PRINT(2, SCANNER_TASK_DEBUG_LEVEL, "ScannerTask: Scanning loop iteration.\r\n");
     }
 }
 
 void UsbHidTask(void *argument) {
+    DEBUG_PRINT(1, USBHID_TASK_DEBUG_LEVEL, "UsbHidTask: Entered.\r\n");
     KeyEvent_t received_event;
     HID_KeyboardReport_t hid_report = {0};
 
     for (;;) {
         osStatus_t status = osMessageQueueGet(keyEventQueueHandle, &received_event, NULL, osWaitForever);
         if (status == osOK) {
+            DEBUG_PRINT(2, USBHID_TASK_DEBUG_LEVEL, "UsbHidTask: Received event scancode=0x%02X, state=%s\r\n", received_event.scancode, (received_event.state == KEY_PRESSED ? "PRESSED" : "RELEASED"));
             uint8_t scancode = received_event.scancode;
-            if (scancode >= 0xE0 && scancode <= 0xE7) {
+            if (scancode >= HID_SCANCODE_MOD_LCTRL && scancode <= HID_SCANCODE_MOD_RGUI) {
                 if (received_event.state == KEY_PRESSED) {
-                    hid_report.modifiers |= (1 << (scancode - 0xE0));
+                    hid_report.modifiers |= (1 << (scancode - HID_SCANCODE_MOD_LCTRL));
+                    DEBUG_PRINT(2, USBHID_TASK_DEBUG_LEVEL, "UsbHidTask: Modifier 0x%02X PRESSED, new modifiers=0x%02X\r\n", scancode, hid_report.modifiers);
                 } else {
-                    hid_report.modifiers &= ~(1 << (scancode - 0xE0));
+                    hid_report.modifiers &= ~(1 << (scancode - HID_SCANCODE_MOD_LCTRL));
+                    DEBUG_PRINT(2, USBHID_TASK_DEBUG_LEVEL, "UsbHidTask: Modifier 0x%02X RELEASED, new modifiers=0x%02X\r\n", scancode, hid_report.modifiers);
                 }
             } else {
                 if (received_event.state == KEY_PRESSED) {
                     for (int i = 0; i < 6; i++) {
                         if (hid_report.keys[i] == 0x00) {
                             hid_report.keys[i] = scancode;
+                            DEBUG_PRINT(2, USBHID_TASK_DEBUG_LEVEL, "UsbHidTask: Key 0x%02X PRESSED, slot %d\r\n", scancode, i);
                             break;
                         }
                     }
@@ -606,11 +644,13 @@ void UsbHidTask(void *argument) {
                     for (int i = 0; i < 6; i++) {
                         if (hid_report.keys[i] == scancode) {
                             hid_report.keys[i] = 0x00;
+                            DEBUG_PRINT(2, USBHID_TASK_DEBUG_LEVEL, "UsbHidTask: Key 0x%02X RELEASED, slot %d\r\n", scancode, i);
                         }
                     }
                 }
             }
             USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&hid_report, sizeof(hid_report));
+            DEBUG_PRINT(1, USBHID_TASK_DEBUG_LEVEL, "UsbHidTask: Sent HID report. Modifiers=0x%02X, Keys={0x%02X, 0x%02X, ..., 0x%02X}\r\n", hid_report.modifiers, hid_report.keys[0], hid_report.keys[1], hid_report.keys[5]);
             // Send empty report on key release to be safe
             if(received_event.state == KEY_RELEASED) {
 				osDelay(10); // Debounce release
@@ -625,26 +665,32 @@ void UsbHidTask(void *argument) {
 					hid_report.keys[i] = 0x00;
 				}
 				USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&hid_report, sizeof(hid_report));
+				DEBUG_PRINT(1, USBHID_TASK_DEBUG_LEVEL, "UsbHidTask: Sent empty HID report after release. Modifiers=0x%02X, Keys={0x%02X, ..., 0x%02X}\r\n", hid_report.modifiers, hid_report.keys[0], hid_report.keys[5]);
 			}
         }
     }
 }
 
 void ledManager(void *argument) {
+    DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Entered.\r\n");
     LedCommand_t cmd;
     for (;;) {
         osStatus_t status = osMessageQueueGet(ledQueueHandle, &cmd, NULL, osWaitForever);
         if (status == osOK) {
+            DEBUG_PRINT(2, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Received command for LED %d, state %d\r\n", cmd.led, cmd.state);
             GPIO_PinState pin_state = (cmd.state == LED_ON) ? GPIO_PIN_SET : GPIO_PIN_RESET;
             switch (cmd.led) {
                 case LED_NUM_LOCK:
                     HAL_GPIO_WritePin(LED_NUM_LOCK_GPIO_Port, LED_NUM_LOCK_Pin, pin_state);
+                    DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Num Lock LED set to %s\r\n", (cmd.state == LED_ON ? "ON" : "OFF"));
                     break;
                 case LED_CAPS_LOCK:
                     HAL_GPIO_WritePin(LED_CAPS_LOCK_GPIO_Port, LED_CAPS_LOCK_Pin, pin_state);
+                    DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Caps Lock LED set to %s\r\n", (cmd.state == LED_ON ? "ON" : "OFF"));
                     break;
                 case LED_SCROLL_LOCK:
                     HAL_GPIO_WritePin(LED_SCROLL_LOCK_GPIO_Port, LED_SCROLL_LOCK_Pin, pin_state);
+                    DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "ledManager: Scroll Lock LED set to %s\r\n", (cmd.state == LED_ON ? "ON" : "OFF"));
                     break;
             }
         }
@@ -655,6 +701,7 @@ void USBD_HID_SetReport_Callback(uint8_t *report, uint16_t len) {
     if (len > 0) {
         uint8_t led_status = report[0];
         static uint8_t last_led_status = 0;
+        DEBUG_PRINT(1, LEDMANAGER_TASK_DEBUG_LEVEL, "USBD_HID_SetReport_Callback: Received LED status: 0x%02X\r\n", led_status);
         if (((last_led_status ^ led_status) >> 0) & 1) { // Num Lock
             LedCommand_t cmd = { .led = LED_NUM_LOCK, .state = (led_status & 1) ? LED_ON : LED_OFF };
             osMessageQueuePut(ledQueueHandle, &cmd, 0U, 0U);
