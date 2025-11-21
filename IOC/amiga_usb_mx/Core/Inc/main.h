@@ -148,7 +148,31 @@ extern void logTask(void *argument);
 #define LOG_QUEUE_LENGTH    10
 
 /* USER CODE BEGIN Private defines */
+// --- Debugging Macros ---
+#define GLOBAL_DEBUG_ENABLED 1 // Set to 1 to enable all debug, 0 to disable
 
+// Task-specific debug levels (0: off, 1: basic, 2: detailed)
+#define SCANNER_TASK_DEBUG_LEVEL    1
+#define USBHID_TASK_DEBUG_LEVEL     1
+#define LEDMANAGER_TASK_DEBUG_LEVEL 1
+
+#if GLOBAL_DEBUG_ENABLED
+    #include <stdio.h> // Required for snprintf
+
+    #define DEBUG_PRINT(LEVEL, TASK_LEVEL, format, ...) do { \
+        if (LEVEL <= TASK_LEVEL) { \
+            char log_buffer[LOG_MESSAGE_MAX_LEN]; \
+            int len = snprintf(log_buffer, LOG_MESSAGE_MAX_LEN, format, ##__VA_ARGS__); \
+            if (isFreeRTOSStarted && xLogQueue != NULL) { \
+                if (len > 0 && len < LOG_MESSAGE_MAX_LEN) { \
+                    xQueueSend(xLogQueue, log_buffer, 0); \
+                } \
+            } \
+        } \
+    } while(0)
+#else
+    #define DEBUG_PRINT(LEVEL, TASK_LEVEL, format, ...) do {} while(0)
+#endif
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
